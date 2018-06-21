@@ -1,7 +1,7 @@
 import React from "react";
-import Home from "./Home";
+import Home from "./Components/Home";
 import { createStackNavigator } from "react-navigation";
-import ReceiptCamera from "./ReceiptCamera";
+import ReceiptCamera from "./Components/ReceiptCamera";
 
 const Nav = createStackNavigator(
   {
@@ -11,7 +11,7 @@ const Nav = createStackNavigator(
         headerTitle: "Home"
       }
     },
-    Camera: {
+    ReceiptCamera: {
       screen: ReceiptCamera,
       navigationoptions: {
         headerTitle: "Camera"
