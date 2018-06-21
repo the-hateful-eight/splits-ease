@@ -5,7 +5,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Welcome to splits/EASE</Text>
+        <Text>Welcome to SPLITS/ease</Text>
         <Button title="Take a picture" onPress={() => this.props.navigation.navigate('Camera')} />
       </View>
     );
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
       justifyContent: "center"
     }
   });
-  
+
