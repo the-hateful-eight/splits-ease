@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import { Camera, Permissions } from 'expo';
+import { Camera, Permissions, FileSystem } from 'expo';
 
 export default class ReceiptCamera extends React.Component {
   state = {
@@ -13,10 +13,16 @@ export default class ReceiptCamera extends React.Component {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
+  componentDidMount() {
+    FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'photos').catch(e => {
+      console.log(e, 'Directory exists');
+    });
+  }
+  
   snap = async () => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync();
-      console.log(photo)
+      console.log("Photo! ", photo)
     }
   };
 
@@ -63,7 +69,7 @@ export default class ReceiptCamera extends React.Component {
                 onPress={() => this.snap()}>
                 <Text 
                   style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Take Pic{' '}</Text>
+                  {' '}Pic{' '}</Text>
               </TouchableOpacity>
             </View>
           </Camera>
