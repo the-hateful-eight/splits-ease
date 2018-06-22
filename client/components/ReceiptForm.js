@@ -3,13 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 
 export default class ReceiptForm extends React.Component {
-  // addField () {
-  //BUTTON PRESS SPLITS A LINE ITEM IF PEOPLE WANTED TO SPLIT AN ITEM
-  // }
-
-  // sendAll () {
-  //BUTTON PRESS SENDS THE BILL TO ALL PEOPLE SPECIFIED
-  // }
+  state = {
+    merchantName: '',
+    address: '',
+    phone: '',
+    date: ''
+  };
 
   render () {
     return (
@@ -28,7 +27,7 @@ export default class ReceiptForm extends React.Component {
           </View>
         </View>
         <View>
-          <Button title='Send All' />
+          <Button>Send All</Button>
         </View>
       </View>
     )
