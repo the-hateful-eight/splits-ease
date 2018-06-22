@@ -2,6 +2,7 @@ import React from 'react'
 import Home from './client/components/Home'
 import { createStackNavigator } from 'react-navigation'
 import ReceiptCamera from './client/components/ReceiptCamera'
+import ReceiptForm from './client/components/ReceiptForm'
 
 require('./secrets')
 
@@ -19,6 +20,12 @@ const Nav = createStackNavigator(
         headerTitle: 'Camera',
       },
     },
+    ReceiptForm: {
+      screen: ReceiptForm,
+      navigationoptions: {
+        headerTitle: 'ReceiptForm'
+      }
+    }
   },
   {
     initialRouteName: 'Home',
