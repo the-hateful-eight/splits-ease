@@ -6,6 +6,7 @@ export default class ReceiptCamera extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
+    photo: '',
   };
 
   async componentWillMount() {
@@ -24,6 +25,9 @@ export default class ReceiptCamera extends React.Component {
       let photo = await this.camera.takePictureAsync({
         base64: true
       });
+      this.setState({
+        
+      })
       console.log("Photo! ", photo)
     }
   };
