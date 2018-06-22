@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button } from "react-native";
+import OAuth from './OAuth'
 
 export default class Home extends React.Component {
   render() {
@@ -7,6 +8,7 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         <Text>Welcome to SPLITS/ease</Text>
         <Button title="Take a picture" onPress={() => this.props.navigation.navigate('Camera')} />
+        <OAuth />
       </View>
     );
   }
