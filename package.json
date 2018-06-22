@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "splits-ease",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -10,6 +10,7 @@
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "react-native-scripts start",
+    "start-server": "node ./server/index.js",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
@@ -20,9 +21,11 @@
   },
   "dependencies": {
     "expo": "^27.0.1",
+    "pg": "^7.4.3",
     "react": "16.3.1",
     "react-native": "~0.55.2",
     "react-navigation": "^2.4.1",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "sequelize": "^4.38.0"
   }
 }
