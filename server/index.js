@@ -8,7 +8,6 @@ const app = express()
 module.exports = app;
 
 require('../secrets.js')
-console.log(process.env)
 
 const createApp = () => {
   app.use(morgan('dev'))

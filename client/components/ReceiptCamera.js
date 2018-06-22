@@ -2,10 +2,11 @@ import React from "react";
 import { Text, View, TouchableOpacity, Button } from "react-native";
 import Expo, { Camera, Permissions, FileSystem } from "expo";
 import axios from "axios";
+import RNFetchBlob from "react-native-fetch-blob";
 const { manifest } = Expo.Constants;
 
 // const getBinary = base64Image => {
-//   const binaryImg = window.atob(base64Image);
+//   const binaryImg = atob(base64Image);
 //   const length = binaryImg.length;
 //   const ab = new ArrayBuffer(length);
 //   const ua = new Uint8Array(ab);
@@ -15,6 +16,27 @@ const { manifest } = Expo.Constants;
 
 //   return ab;
 // };
+
+const encodePhoto = photo => {
+  const fs = RNFetchBlob.fs;
+  let imagePath = null;
+  RNFetchBlob.config({
+    fileCache: true
+  })
+    .fetch("GET", photo)
+    // the image is now dowloaded to device's storage
+    .then(resp => {
+      // the image path you can use it directly with Image component
+      imagePath = resp.path();
+      return resp.readFile("base64");
+    })
+    .then(base64Data => {
+      // here's base64 encoded image
+      console.log(base64Data);
+      // remove the file from storage
+      fs.unlink(imagePath);
+    });
+  }
 
 export default class ReceiptCamera extends React.Component {
   state = {
@@ -42,16 +64,16 @@ export default class ReceiptCamera extends React.Component {
         base64: true
       });
       this.setState({});
-      // const encoded = getBinary(photo.base64);
-      const encoded = window.btoa(photo.base64)
+      const encoded = encodePhoto(photo);
+      console.log(encoded)
       const ip = manifest.packagerOpts.dev
         ? manifest.debuggerHost
             .split(`:`)
             .shift()
             .concat(`:1337`)
         : `localhost:1337`;
-      const parsed = await axios.post(`http://${ip}/api/transactions`, encoded);
-      console.log("Photo! ", parsed);
+      // const parsed = await axios.post(`http://${ip}/api/transactions`, encoded);
+      // console.log("Photo! ", parsed);
     }
   };
 
