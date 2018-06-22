@@ -13,7 +13,7 @@ const Nav = createStackNavigator(
         headerTitle: 'Home',
       },
     },
-    Camera: {
+    ReceiptCamera: {
       screen: ReceiptCamera,
       navigationoptions: {
         headerTitle: 'Camera',
