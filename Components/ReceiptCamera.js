@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Button } from 'react-native';
 import { Camera, Permissions, FileSystem } from 'expo';
 
 export default class ReceiptCamera extends React.Component {
@@ -18,10 +18,12 @@ export default class ReceiptCamera extends React.Component {
       console.log(e, 'Directory exists');
     });
   }
-  
+
   snap = async () => {
     if (this.camera) {
-      let photo = await this.camera.takePictureAsync();
+      let photo = await this.camera.takePictureAsync({
+        base64: true
+      });
       console.log("Photo! ", photo)
     }
   };
@@ -35,7 +37,11 @@ export default class ReceiptCamera extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={this.state.type}>
+          <Camera 
+          style={{ flex: 1 }} 
+          type={this.state.type}
+          ref={ref => (this.camera = ref)}
+          >
             <View
               style={{
                 flex: 1,
@@ -60,17 +66,9 @@ export default class ReceiptCamera extends React.Component {
                   {' '}Flip{' '}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
-                onPress={() => this.snap()}>
-                <Text 
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}Pic{' '}</Text>
-              </TouchableOpacity>
+              <Button title="Capture" 
+                     onPress={() => this.snap()}>
+              </Button>
             </View>
           </Camera>
         </View>
