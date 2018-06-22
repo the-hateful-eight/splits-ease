@@ -3,6 +3,8 @@ import Home from './client/components/Home'
 import { createStackNavigator } from 'react-navigation'
 import ReceiptCamera from './client/components/ReceiptCamera'
 
+require('./secrets')
+
 const Nav = createStackNavigator(
   {
     Home: {
