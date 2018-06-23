@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import { Provider } from 'react-redux'
 
-import store from './store'
+import store from './client/store'
 import Home from './client/components/Home'
 import ReceiptCamera from './client/components/ReceiptCamera'
 import ReceiptForm from './client/components/ReceiptForm'

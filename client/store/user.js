@@ -1,18 +1,18 @@
 import axios from 'axios'
 
-//actions 
-export const GOT_USERS = 'GOT_USERS'
-export const GOT_USER = 'GOT_USER'
-export const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
-export const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
+//Actions 
+const GOT_USERS = 'GOT_USERS'
+const GOT_USER = 'GOT_USER'
+const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
+const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
 
-//action creators
+//Action creators
 export const gotUserFriends = userFriends => ({
   type: GOT_USER_FRIENDS,
   userFriends
 })
 
-//thunks
+//Thunks
 export const getUserFriends = (userId) =>
   dispatch =>
     axios.get(`api/user/${userId}/friends`)
@@ -20,6 +20,7 @@ export const getUserFriends = (userId) =>
         dispatch(gotUserFriends(res.data)))
       .catch(err => console.log(err))
 
+//Initial State
 const initialState = {
   users: [],
   user: {},
@@ -27,7 +28,8 @@ const initialState = {
   userFriend: {},
 }
 
-const userReducer = (state = initialState, action) => {
+//Reducer
+export default function(state = initialState, action) {
   switch(action.type) {
     case GOT_USERS:
       return {
@@ -53,5 +55,3 @@ const userReducer = (state = initialState, action) => {
       return state;
   }
 }
-
-export default userReducer

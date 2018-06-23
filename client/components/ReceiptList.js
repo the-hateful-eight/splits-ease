@@ -1,28 +1,19 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
-class FriendsList extends React.Component{
-
-  renderFriends(){
-    if(this.props.friends.length){
-      let receipts = []
-    }
+export default class ReceiptList extends React.Component{
+  state = {
+    user: {},
+    receipts: []
   }
 
   render(){
     return(
-    <View>
-        Receipts should be here, yo! 
-    </View>
+      <View>
+          <Text>Receipts should be here, yo!</Text>
+      </View>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  getReceipts: () => {
-    return dispatch(getReceipts())
-  },
-})
 
-export default connect(null, mapDispatchToProps)(FriendsList)
