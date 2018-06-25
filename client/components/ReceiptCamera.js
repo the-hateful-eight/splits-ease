@@ -3,7 +3,6 @@ import { Text, View, TouchableOpacity, Button } from "react-native";
 import Expo, { Camera, Permissions, FileSystem } from "expo";
 import axios from "axios";
 const { manifest } = Expo.Constants;
-import ImageResizer from "react-native-image-resizer";
 
 export default class ReceiptCamera extends React.Component {
   state = {
@@ -24,19 +23,6 @@ export default class ReceiptCamera extends React.Component {
       console.log(e, "Directory exists");
     });
   }
-
-  // const getBinary = base64Image => {
-  //   window.btoa = require('Base64').btoa;
-  //   const binaryImg = window.btoa(base64Image);
-  //   const length = binaryImg.length;
-  //   const ab = new ArrayBuffer(length);
-  //   const ua = new Uint8Array(ab);
-  //   for (let i = 0; i < length; i++) {
-  //     ua[i] = binaryImg.charCodeAt(i);
-  //   }
-
-  //   return ab;
-  // };
 
   snap = async () => {
     if (this.camera) {
