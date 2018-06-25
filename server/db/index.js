@@ -1,13 +1,19 @@
 const db = require('./db')
 const User = require('./models/User')
-const Transaction = require('./models/Transaction')
+const Receipt = require('./models/Receipt')
 const Item = require('./models/Item')
+const Friend = require('./models/Friend')
 
 //associations
+Friend.belongsTo(User)
+User.hasMany(Friend)
+
+Receipt.belongsTo(User)
+User.hasMany(Receipt)
 
 module.exports = {
   db,
   User,
-  Transaction,
+  Receipt,
   Item
 }
