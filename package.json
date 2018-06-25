@@ -20,6 +20,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@google-cloud/vision": "^0.20.0",
     "expo": "^27.0.1",
     "pg": "^7.4.3",
     "react": "16.3.1",
@@ -28,6 +29,8 @@
     "react-navigation": "^2.4.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
     "sequelize": "^4.38.0"
   }
 }
