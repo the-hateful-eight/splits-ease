@@ -6,7 +6,7 @@ export default class OAuth extends React.Component {
 
   async signInWithGoogleAsync() {
     try {
-      console.log('try block', process.env.ANDROID_GOOGLE_CLIENT_ID)
+      console.log('try block', process)
       const result = await Expo.Google.logInAsync({
         androidClientId: process.env.ANDROID_GOOGLE_CLIENT_ID,
         iosClientId: process.env.IOS_GOOGLE_CLIENT_ID,
