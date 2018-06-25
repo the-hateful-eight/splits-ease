@@ -1,7 +1,13 @@
 import React from 'react'
-import Home from './client/components/Home'
 import { createStackNavigator } from 'react-navigation'
+import { Provider } from 'react-redux'
+
+import store from './client/store'
+import Home from './client/components/Home'
 import ReceiptCamera from './client/components/ReceiptCamera'
+import ReceiptForm from './client/components/ReceiptForm'
+import ReceiptList from './client/components/ReceiptList'
+
 
 require('./secrets')
 
@@ -13,12 +19,24 @@ const Nav = createStackNavigator(
         headerTitle: 'Home',
       },
     },
-    Camera: {
+    ReceiptCamera: {
       screen: ReceiptCamera,
       navigationoptions: {
         headerTitle: 'Camera',
       },
     },
+    ReceiptForm: {
+      screen: ReceiptForm,
+      navigationoptions: {
+        headerTitle: 'ReceiptForm'
+      }
+    },
+    ReceiptList: {
+      screen: ReceiptList,
+      navigationoptions: {
+        headerTitle: 'ReceiptList'
+      }
+    }
   },
   {
     initialRouteName: 'Home',
@@ -27,7 +45,10 @@ const Nav = createStackNavigator(
 
 export default class App extends React.Component {
   render() {
-    //Might need <Provider>
-    return <Nav />
+    return (
+      <Provider store={store}>
+        <Nav />
+      </Provider>
+    )
   }
 }
