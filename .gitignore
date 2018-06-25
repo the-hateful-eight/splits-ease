@@ -13,6 +13,7 @@
 .env.production.local
 googleAccountCredentials.json
 secrets.js
+parsed.txt
 
 npm-debug.log*
 yarn-debug.log*
