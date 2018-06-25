@@ -2,41 +2,8 @@ import React from "react";
 import { Text, View, TouchableOpacity, Button } from "react-native";
 import Expo, { Camera, Permissions, FileSystem } from "expo";
 import axios from "axios";
-import RNFetchBlob from "react-native-fetch-blob";
 const { manifest } = Expo.Constants;
-
-// const getBinary = base64Image => {
-//   const binaryImg = atob(base64Image);
-//   const length = binaryImg.length;
-//   const ab = new ArrayBuffer(length);
-//   const ua = new Uint8Array(ab);
-//   for (let i = 0; i < length; i++) {
-//     ua[i] = binaryImg.charCodeAt(i);
-//   }
-
-//   return ab;
-// };
-
-const encodePhoto = photo => {
-  const fs = RNFetchBlob.fs;
-  let imagePath = null;
-  RNFetchBlob.config({
-    fileCache: true
-  })
-    .fetch("GET", photo)
-    // the image is now dowloaded to device's storage
-    .then(resp => {
-      // the image path you can use it directly with Image component
-      imagePath = resp.path();
-      return resp.readFile("base64");
-    })
-    .then(base64Data => {
-      // here's base64 encoded image
-      console.log(base64Data);
-      // remove the file from storage
-      fs.unlink(imagePath);
-    });
-  }
+import ImageResizer from "react-native-image-resizer";
 
 export default class ReceiptCamera extends React.Component {
   state = {
@@ -58,22 +25,40 @@ export default class ReceiptCamera extends React.Component {
     });
   }
 
+  // const getBinary = base64Image => {
+  //   window.btoa = require('Base64').btoa;
+  //   const binaryImg = window.btoa(base64Image);
+  //   const length = binaryImg.length;
+  //   const ab = new ArrayBuffer(length);
+  //   const ua = new Uint8Array(ab);
+  //   for (let i = 0; i < length; i++) {
+  //     ua[i] = binaryImg.charCodeAt(i);
+  //   }
+
+  //   return ab;
+  // };
+
   snap = async () => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({
+        quality: 0.1,
         base64: true
       });
       this.setState({});
-      const encoded = encodePhoto(photo);
-      console.log(encoded)
       const ip = manifest.packagerOpts.dev
         ? manifest.debuggerHost
             .split(`:`)
             .shift()
             .concat(`:1337`)
         : `localhost:1337`;
-      // const parsed = await axios.post(`http://${ip}/api/transactions`, encoded);
-      // console.log("Photo! ", parsed);
+      try {
+        const parsed = await axios.post(`http://${ip}/api/transactions`, {
+          image: photo.base64
+        });
+        console.log("Photo! ", parsed);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 

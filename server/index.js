@@ -11,8 +11,8 @@ require('../secrets.js')
 
 const createApp = () => {
   app.use(morgan('dev'))
-  app.use(bodyParser.json())
-  app.use(bodyParser.urlencoded({ extended: true }))
+  app.use(bodyParser.json({limit: '50mb'}))
+  app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
   app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}, dude`))
   app.use('/api', require('./api'))
 };

@@ -8,6 +8,7 @@ export default class Home extends React.Component {
       <View style={styles.container}>
         <Text>Welcome to SPLITS/ease</Text>
         <Button title="Take a picture" onPress={() => this.props.navigation.navigate('ReceiptCamera')} />
+        <Button title="Receipt Form" onPress={() => this.props.navigation.navigate('ReceiptForm')} />
         <OAuth />
       </View>
     );
