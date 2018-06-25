@@ -30,8 +30,12 @@ export default class ReceiptCamera extends React.Component {
         quality: 0.1,
         base64: true,
       })
-      this.setState({})
-      const ip = manifest.packagerOpts.dev
+      this.setState({ photo })
+    }
+  }
+
+  analyze = async () => {
+    const ip = manifest.packagerOpts.dev
         ? manifest.debuggerHost
             .split(`:`)
             .shift()
@@ -46,7 +50,6 @@ export default class ReceiptCamera extends React.Component {
       } catch (err) {
         console.log(err)
       }
-    }
   }
 
   render() {
@@ -93,6 +96,7 @@ export default class ReceiptCamera extends React.Component {
                 </Text>
               </TouchableOpacity>
               <Button title="Capture" onPress={() => this.snap()} />
+              <Button title="Analyze" onPress={() => this.analyze()} />
             </View>
           </Camera>
         </View>
