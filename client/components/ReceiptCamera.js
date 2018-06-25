@@ -40,8 +40,9 @@ export default class ReceiptCamera extends React.Component {
       try {
         const parsed = await axios.post(`http://${ip}/api/receipts`, {
           image: photo.base64,
-        })
-        console.log('Photo! ', parsed)
+        }).then(res => res.data)
+        console.log(parsed)
+        console.log('Photo! ', parsed.textAnnotations[0].description)
       } catch (err) {
         console.log(err)
       }
