@@ -19,7 +19,7 @@ router.post("/", async (req, res, next) => {
   const buffer = Buffer.from(req.body.image, 'base64')
   try {
     const parsed = await client.documentTextDetection(buffer);
-    res.json(parsed);
+    res.json(parsed[0]);
   } catch (err) {
     console.error(err)
     next()
