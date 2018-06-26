@@ -27,7 +27,7 @@ export default class ReceiptCamera extends React.Component {
   snap = async () => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({
-        quality: 0.1,
+        quality: 0.4,
         base64: true,
       })
       console.log('PHOTO CAPTURED!!!')
@@ -52,8 +52,16 @@ export default class ReceiptCamera extends React.Component {
         const parsed = await axios.post(`http://${ip}/api/receipts`, {
           image: photo.base64,
         }).then(res => res.data)
-        console.log(parsed)
         console.log('Photo! ', parsed.textAnnotations[0].description)
+        let text = parsed.textAnnotations[0].description
+        text = text.replace(/\n/g, " ").replace(/[^.\w\s]/g, "")
+        let lines = text.split(/(\d+\.\d\d)/).slice(0, -1)
+        let items = []
+        for (let i = 0; i < lines.length; i = i + 2){
+          lines[i] = lines[i].trim().split(" ").slice(-5).join(" ")
+          items.push({item: lines[i], price: lines[i + 1]})
+        }
+        console.log(items)
       } catch (err) {
         console.log(err)
       }
