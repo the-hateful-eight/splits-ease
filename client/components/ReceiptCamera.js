@@ -1,8 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import Expo, { Camera, Permissions, FileSystem } from 'expo'
+import { setItems } from '../store/items'
+import { connect } from 'react-redux'
 
-export default class ReceiptCamera extends React.Component {
+class ReceiptCamera extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
@@ -25,7 +27,7 @@ export default class ReceiptCamera extends React.Component {
   snap = async () => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({
-        quality: 0.1,
+        quality: 0.4,
         base64: true,
       })
       console.log('PHOTO CAPTURED!!!')
@@ -71,3 +73,9 @@ const styles = StyleSheet.create({
     height: 50
   }
 })
+
+const mapDispatchToProps = dispatch => ({
+  setItems: items => dispatch(setItems(items))
+})
+
+export default connect(null, mapDispatchToProps)(ReceiptCamera)

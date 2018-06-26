@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 
 import store from './client/store'
 import Home from './client/components/Home'
+import Login from './client/components/Login'
 import ReceiptCamera from './client/components/ReceiptCamera'
 import ReceiptForm from './client/components/ReceiptForm'
 import ReceiptList from './client/components/ReceiptList'
@@ -13,6 +14,9 @@ require('./secrets')
 
 const Nav = createStackNavigator(
   {
+    Login: {
+      screen: Login
+    },
     Home: {
       screen: Home,
       navigationoptions: {
@@ -45,7 +49,7 @@ const Nav = createStackNavigator(
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
   }
 )
 
