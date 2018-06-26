@@ -1,10 +1,6 @@
 const router = require('express').Router()
-<<<<<<< HEAD
 const User = require('../db/models')
 const Friend = require('../db/models')
-=======
-const Item = require('../db')
->>>>>>> master
 
 module.exports = router
 
