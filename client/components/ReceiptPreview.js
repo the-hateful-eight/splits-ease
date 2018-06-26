@@ -40,7 +40,7 @@ class ReceiptPreview extends React.Component {
         let items = []
         for (let i = 0; i < lines.length; i = i + 2){
           lines[i] = lines[i].trim().split(" ").slice(-5).join(" ")
-          items.push({id: i+1, item: lines[i], price: lines[i + 1]})
+          items.push({id: i, item: lines[i], price: lines[i + 1]})
         }
         console.log(items)
         this.props.setItems(items)

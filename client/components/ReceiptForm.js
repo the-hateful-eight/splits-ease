@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import { connect } from 'react-redux';
 import assignItem from '../store/items'
@@ -17,27 +17,19 @@ class ReceiptForm extends React.Component {
     const data = this.state.data
     return (
       <View style={styles.container}>
+      <ScrollView>
       {data.map(item => {
         return (
-          <Text key={item.id}>{item.item} : {item.price}</Text>
+          <View key={item.id} style={styles.lineItem}>
+          <Text id={item.id}>{item.item} : {item.price}</Text>
+          <Button style={styles.addItemBtn} title='+' />
+          </View>
         )
       })}
-        <View style={styles.merchantText}>
-          <Text>NAME OF MERCHANT HERE</Text>
-          <Text>MERCHANT ADDRESS HERE</Text>
-          <Text>MERCHANT PHONE HERE</Text>
-          <Text>DATE</Text>
-          <View>
-            <View style={styles.input}>
-              <Button style={styles.addItemBtn} title='+' />
-              <FormLabel>LINE ITEM NAME - AMOUNT</FormLabel>
-            </View>
-            <FormInput />
-          </View>
-        </View>
         <View>
-          <Button>Send All</Button>
+          <Button style={styles.sendAllBtn} title='Send All'/>
         </View>
+      </ScrollView>
       </View>
     )
   }
@@ -55,13 +47,17 @@ const styles = StyleSheet.create({
   },
   lineItem: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   input: {
     flexDirection: 'row'
   },
   addItemBtn: {
     width: 50
+  },
+  sendAllBtn: {
+    width: 100
   }
 });
 
