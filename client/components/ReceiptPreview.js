@@ -31,8 +31,9 @@ export default class ReceiptPreview extends React.Component {
         const parsed = await axios.post(`http://${ip}/api/receipts`, {
           image: photo,
         }).then(res => res.data)
-        console.log(parsed)
-        console.log('Photo! ', parsed.textAnnotations[0].description)
+        const receiptData = parsed.textAnnotations[0].description
+        console.log('data', receiptData)
+        this.props.navigation.navigate('ReceiptForm', {data: receiptData})
       } catch (err) {
         console.log(err)
       }

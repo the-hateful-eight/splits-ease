@@ -4,13 +4,15 @@ import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-nativ
 
 export default class ReceiptForm extends React.Component {
   state = {
-    merchantName: '',
-    address: '',
-    phone: '',
-    date: ''
+    data : ''
   };
 
+  componentDidMount () {
+    this.setState({data: this.props.navigation.state.params.data})
+  }
+
   render () {
+    console.log('THE DATA IS HERE', this.state.data)
     return (
       <View style={styles.container}>
         <View style={styles.merchantText}>

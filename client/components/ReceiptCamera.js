@@ -59,7 +59,6 @@ class ReceiptCamera extends React.Component {
               }}
             >
               <Button style={styles.button} title="Capture" onPress={() => this.snap()} />
-              <Button style={styles.button} title="Analyze" onPress={() => this.analyze()} />
             </View>
           </Camera>
         </View>
