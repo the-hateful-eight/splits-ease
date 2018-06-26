@@ -1,18 +1,27 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
+import { connect } from 'react-redux';
+import assignItem from '../store/items'
 
-export default class ReceiptForm extends React.Component {
+class ReceiptForm extends React.Component {
   state = {
-    merchantName: '',
-    address: '',
-    phone: '',
-    date: ''
+    data: []
   };
 
+  componentDidMount () {
+    this.setState({data: this.props.navigation.state.params.data})
+  }
+
   render () {
+    const data = this.state.data
     return (
       <View style={styles.container}>
+      {data.map(item => {
+        return (
+          <Text key={item.id}>{item.item} : {item.price}</Text>
+        )
+      })}
         <View style={styles.merchantText}>
           <Text>NAME OF MERCHANT HERE</Text>
           <Text>MERCHANT ADDRESS HERE</Text>
@@ -56,3 +65,8 @@ const styles = StyleSheet.create({
   }
 });
 
+const mapDispatchToProps = dispatch => ({
+  assignItem: (id, receipient) => dispatch(assignItem(id, receipient))
+})
+
+export default connect(null, mapDispatchToProps)(ReceiptForm)
