@@ -7,7 +7,7 @@ import Home from './client/components/Home'
 import ReceiptCamera from './client/components/ReceiptCamera'
 import ReceiptForm from './client/components/ReceiptForm'
 import ReceiptList from './client/components/ReceiptList'
-
+import ReceiptPreview from './client/components/ReceiptPreview'
 
 require('./secrets')
 
@@ -35,6 +35,12 @@ const Nav = createStackNavigator(
       screen: ReceiptList,
       navigationoptions: {
         headerTitle: 'ReceiptList'
+      }
+    },
+    ReceiptPreview: {
+      screen: ReceiptPreview,
+      navigationoptions: {
+        headerTitle: 'ReceiptPreview'
       }
     }
   },

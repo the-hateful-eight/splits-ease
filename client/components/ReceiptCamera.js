@@ -1,8 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import Expo, { Camera, Permissions, FileSystem } from 'expo'
-import axios from 'axios'
-const { manifest } = Expo.Constants
 
 export default class ReceiptCamera extends React.Component {
   state = {
@@ -32,31 +30,7 @@ export default class ReceiptCamera extends React.Component {
       })
       console.log('PHOTO CAPTURED!!!')
       this.setState({ photo })
-    }
-  }
-
-  analyze = async () => {
-    const photo = this.state.photo
-    if (!photo.base64){
-      return (
-        <Text>NO PHOTO TO ANALYZE!!!</Text>
-      )
-    } else {
-    const ip = manifest.packagerOpts.dev
-        ? manifest.debuggerHost
-            .split(`:`)
-            .shift()
-            .concat(`:1337`)
-        : `localhost:1337`
-      try {
-        const parsed = await axios.post(`http://${ip}/api/receipts`, {
-          image: photo.base64,
-        }).then(res => res.data)
-        console.log(parsed)
-        console.log('Photo! ', parsed.textAnnotations[0].description)
-      } catch (err) {
-        console.log(err)
-      }
+      this.props.navigation.navigate('ReceiptPreview', {image: this.state.photo.base64})
     }
   }
 
