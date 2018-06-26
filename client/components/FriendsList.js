@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View } from 'react-native'
+import { getUserFriends } from '../store'
 
 class FriendsList extends React.Component{
 
   renderFriends(){
-    if(this.props.friends.length){
-      let friends = []
+    const friends = this.props.userFriends
+    if(friends.length){
+      for (let i = 0; i < friends.length; i++) {
+        return friends[i]
+      }
     }
+  }
+
+  componentDidMount(){
+    this.props.getUserFriends()
   }
 
   render(){
@@ -21,7 +29,7 @@ class FriendsList extends React.Component{
 
 const mapDispatchToProps = dispatch => ({
   getFriends: () => {
-    return dispatch(getFriends())
+    return dispatch(getUserFriends())
   },
 })
 
