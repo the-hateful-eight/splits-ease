@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, TouchableOpacity, Button } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import Expo, { Camera, Permissions, FileSystem } from 'expo'
 import axios from 'axios'
 const { manifest } = Expo.Constants
@@ -8,7 +8,7 @@ export default class ReceiptCamera extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
-    photo: '',
+    photo: {},
   }
 
   async UNSAFE_componentWillMount() {
@@ -30,8 +30,19 @@ export default class ReceiptCamera extends React.Component {
         quality: 0.1,
         base64: true,
       })
-      this.setState({})
-      const ip = manifest.packagerOpts.dev
+      console.log('PHOTO CAPTURED!!!')
+      this.setState({ photo })
+    }
+  }
+
+  analyze = async () => {
+    const photo = this.state.photo
+    if (!photo.base64){
+      return (
+        <Text>NO PHOTO TO ANALYZE!!!</Text>
+      )
+    } else {
+    const ip = manifest.packagerOpts.dev
         ? manifest.debuggerHost
             .split(`:`)
             .shift()
@@ -65,34 +76,14 @@ export default class ReceiptCamera extends React.Component {
           >
             <View
               style={{
-                flex: 1,
+                // flex: 1,
+                justifyContent: 'flex-end',
                 backgroundColor: 'transparent',
-                flexDirection: 'row',
+                flexDirection: 'row'
               }}
             >
-              <TouchableOpacity
-                style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
-                  alignItems: 'center',
-                }}
-                onPress={() => {
-                  this.setState({
-                    type:
-                      this.state.type === Camera.Constants.Type.back
-                        ? Camera.Constants.Type.front
-                        : Camera.Constants.Type.back,
-                  })
-                }}
-              >
-                <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}
-                >
-                  {' '}
-                  Flip{' '}
-                </Text>
-              </TouchableOpacity>
-              <Button title="Capture" onPress={() => this.snap()} />
+              <Button style={styles.button} title="Capture" onPress={() => this.snap()} />
+              <Button style={styles.button} title="Analyze" onPress={() => this.analyze()} />
             </View>
           </Camera>
         </View>
@@ -100,3 +91,9 @@ export default class ReceiptCamera extends React.Component {
     }
   }
 }
+
+const styles = StyleSheet.create({
+  button: {
+    height: 50
+  }
+})
