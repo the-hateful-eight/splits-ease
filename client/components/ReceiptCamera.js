@@ -2,9 +2,11 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import Expo, { Camera, Permissions, FileSystem } from 'expo'
 import axios from 'axios'
+import { setItems } from '../store/items'
+import { connect } from 'react-redux'
 const { manifest } = Expo.Constants
 
-export default class ReceiptCamera extends React.Component {
+class ReceiptCamera extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
@@ -62,6 +64,7 @@ export default class ReceiptCamera extends React.Component {
           items.push({item: lines[i], price: lines[i + 1]})
         }
         console.log(items)
+        this.props.setItems(items)
       } catch (err) {
         console.log(err)
       }
@@ -105,3 +108,9 @@ const styles = StyleSheet.create({
     height: 50
   }
 })
+
+const mapDispatchToProps = dispatch => ({
+  setItems: items => dispatch(setItems(items))
+})
+
+export default connect(null, mapDispatchToProps)(ReceiptCamera)

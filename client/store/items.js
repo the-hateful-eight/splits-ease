@@ -20,19 +20,19 @@ const unassociateItem = index => ({
 
 export const setItems = items => {
   return dispatch => {
-    setReceiptItems(items);
+    dispatch(setReceiptItems(items));
   };
 };
 
 export const assignItem = (index, recipient) => {
   return dispatch => {
-    associateItem(index, recipient);
+    dispatch(associateItem(index, recipient));
   };
 };
 
 export const unassignItem = index => {
   return dispatch => {
-    unassociateItem(index);
+    dispatch(unassociateItem(index));
   };
 };
 
