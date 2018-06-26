@@ -2,9 +2,11 @@ import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native-elements'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { setItems } from '../store/items'
 const { manifest } = Expo.Constants
 
-export default class ReceiptPreview extends React.Component {
+class ReceiptPreview extends React.Component {
   state = {
     allowEdit: false,
     image: ''
@@ -31,8 +33,17 @@ export default class ReceiptPreview extends React.Component {
         const parsed = await axios.post(`http://${ip}/api/receipts`, {
           image: photo,
         }).then(res => res.data)
-        console.log(parsed)
         console.log('Photo! ', parsed.textAnnotations[0].description)
+        let text = parsed.textAnnotations[0].description
+        text = text.replace(/\n/g, " ").replace(/[^.\w\s]/g, "")
+        let lines = text.split(/(\d+\.\d\d)/).slice(0, -1)
+        let items = []
+        for (let i = 0; i < lines.length; i = i + 2){
+          lines[i] = lines[i].trim().split(" ").slice(-5).join(" ")
+          items.push({item: lines[i], price: lines[i + 1]})
+        }
+        console.log(items)
+        this.props.setItems(items)
       } catch (err) {
         console.log(err)
       }
@@ -56,3 +67,9 @@ const styles = StyleSheet.create({
     width: 360
   }
 });
+
+const mapDispatchToProps = dispatch => ({
+  setItems: items => dispatch(setItems(items))
+});
+
+export default connect(null, mapDispatchToProps)(ReceiptPreview)
