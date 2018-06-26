@@ -11,6 +11,9 @@ User.hasMany(Friend)
 Receipt.belongsTo(User)
 User.hasMany(Receipt)
 
+Item.belongsTo(Receipt)
+Receipt.hasMany(Item)
+
 module.exports = {
   db,
   User,
