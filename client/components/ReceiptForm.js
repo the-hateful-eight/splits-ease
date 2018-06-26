@@ -21,7 +21,7 @@ class ReceiptForm extends React.Component {
       {data.map(item => {
         return (
           <View key={item.id} style={styles.lineItem}>
-          <Text id={item.id}>{item.item} : {item.price}</Text>
+          <Text style={styles.merchantText} id={item.id}>{item.item} : {item.price}</Text>
           <Button style={styles.addItemBtn} title='+' />
           </View>
         )
@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly'
   },
   merchantText: {
-    alignItems: 'center'
+    justifyContent: 'flex-start'
   },
   lineItem: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   addItemBtn: {
-    width: 50
+    width: 50,
+    justifyContent: 'flex-end'
   },
   sendAllBtn: {
     width: 100
