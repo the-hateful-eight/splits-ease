@@ -1,32 +1,31 @@
-const router = require('express').Router()
-const User = require('../db/models')
-const Friend = require('../db/models')
+const router = require("express").Router();
+const { User, Friend } = require("../db");
 
-module.exports = router
+module.exports = router;
 
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
-    const users = await User.findAll()
-    res.json(users)
+    const users = await User.findAll();
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-router.get('/:id', async (req, res, next)=>{
+router.get("/:id", async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id)
-    res.json(user)
+    const user = await User.findById(req.params.id);
+    res.json(user);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
-router.get('/:id/friends', async (req, res, next)=>{
-  try{
-    const friends = await Friend.findAll({where: {userId: req.params.id}})
-    res.json(friends)
+router.get("/:id/friends", async (req, res, next) => {
+  try {
+    const friends = await Friend.findAll({ where: { userId: req.params.id } });
+    res.json(friends);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
