@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { logout } from '../store'
 
 const Home = props => {
-  const { logoutPress } = props
+  // const { logoutPress } = props
 
   const styles = StyleSheet.create({
     container: {
@@ -29,7 +29,7 @@ const Home = props => {
         title="Receipt List"
         onPress={() => props.navigation.navigate('ReceiptList')}
       />
-      <Button title="Logout" onClick={logoutPress} />
+      {/* <Button title="Logout" onClick={this.props.logoutPress} /> */}
     </View>
   )
 }
