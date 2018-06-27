@@ -18,5 +18,6 @@ module.exports = {
   db,
   User,
   Receipt,
-  Item
+  Item,
+  Friend
 }

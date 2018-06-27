@@ -1,10 +1,11 @@
-const db = require('../server/db/db')
+
 const {
+  db,
   Friend,
   Item,
   Receipt,
   User
-} = require('../server/db/models')
+} = require('../db')
 
 const users = [
   {
@@ -84,9 +85,9 @@ async function seed() {
   console.log('db synced!')
 
   const createdUsers = await User.bulkCreate(users, { returning: true })
-  const createdFriends = await Friend.bulkCreate(friends, {returning: true})
-  const createdReceipts = await Receipt.bulkCreate(receipts, {returning: true})
-  const createdItems = await Friend.bulkCreate(items, {returning: true})
+  const createdFriends = await Friend.bulkCreate(friends, { returning: true })
+  const createdReceipts = await Receipt.bulkCreate(receipts, { returning: true })
+  const createdItems = await Item.bulkCreate(items, {returning: true})
 
   await Promise.all([
     createdFriends[0].setUser(createdUsers[0]),
