@@ -14,7 +14,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "jest",
+    "seed": "node server/scripts/seed.js"
   },
   "jest": {
     "preset": "jest-expo"
@@ -22,6 +23,7 @@
   "dependencies": {
     "@google-cloud/vision": "^0.20.0",
     "expo": "^27.0.1",
+    "node": "^10.5.0",
     "pg": "^7.4.3",
     "react": "16.3.1",
     "react-native": "~0.55.2",

@@ -7,11 +7,7 @@ const Receipt = db.define('receipt', {
     allowNull: false,
   },
   venderAddress: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    allowNull: true,
-  },
-  receiptImage: {
-    type: Sequelize.TEXT,
+    type: Sequelize.Sequelize.STRING,
     allowNull: true,
   },
 })
