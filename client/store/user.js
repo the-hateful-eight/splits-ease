@@ -1,40 +1,59 @@
 import axios from 'axios'
 
+//Initial State
+const initialState = {
+  user: {},
+  userFriends: [],
+  userFriend: {},
+}
+
 //Actions
-const GOT_USERS = 'GOT_USERS'
 const GOT_USER = 'GOT_USER'
 const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
 const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
 
 //Action creators
-export const gotUserFriends = userFriends => ({
+const gotMe = user => ({
+  type: GOT_USER,
+  user
+})
+
+const gotUserFriends = userFriends => ({
   type: GOT_USER_FRIENDS,
   userFriends,
 })
 
 //Thunks
+export const getMe = () => dispatch =>
+  axios
+    .get('/auth/me')
+    .then(res => res.data)
+    .then(user => dispatch(gotMe(user)))
+    .catch(err => console.log(err))
+
+export const login = (formData) => dispatch => {
+  axios
+    .put('/auth/login', formData)
+    .then(res => res.data)
+    .then(user => dispatch(gotMe(user)))
+    .catch(err => console.log(err))
+}
+
+export const logout = () => dispatch => {
+  return axios.delete('/auth/logout')
+    .then(() => dispatch(gotMe(initialState.user)))
+    .catch(err => console.log(err))
+}
+
 export const getUserFriends = userId => dispatch =>
   axios
     .get(`api/user/${userId}/friends`)
     .then(res => dispatch(gotUserFriends(res.data)))
     .catch(err => console.log(err))
 
-//Initial State
-const initialState = {
-  users: [],
-  user: {},
-  userFriends: [],
-  userFriend: {},
-}
-
 //Reducer
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GOT_USERS:
-      return {
-        ...state,
-        users: action.users,
-      }
     case GOT_USER:
       return {
         ...state,
