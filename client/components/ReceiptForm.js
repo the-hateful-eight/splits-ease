@@ -24,6 +24,24 @@ const dummyData = [
   }
 ];
 
+const dummyFriends = [
+  {
+    name: 'Bob',
+    email: 'bob@email.com',
+    phone: null
+  },
+  {
+    name: 'Jim',
+    email: null,
+    phone: '555-555-1234'
+  },
+  {
+    name: 'Sarah',
+    email: 'sarah@email.com',
+    phone: '555-555-6789'
+  },
+]
+
 class ReceiptForm extends React.Component {
   state = {
     data: []
@@ -42,7 +60,7 @@ class ReceiptForm extends React.Component {
       {data.map(item => {
         return (
           <View key={item.id} style={styles.lineItem}>
-            <ScrollView horizontal={true} >
+            <ScrollView key={item.id} horizontal={true} >
               <FormInput key={item.id} style={styles.merchantText} id={item.id} inputStyle={styles.input}>
               {item.item}
               </FormInput>
@@ -50,7 +68,7 @@ class ReceiptForm extends React.Component {
           <FormInput key={item.id} style={styles.merchantText} id={item.id} containerStyle={styles.input}>
           {item.price}
           </FormInput>
-          <ModalDropdown defaultValue='Add Friend' style={styles.friendBtn} textStyle={{textAlign: 'center'}} dropdownStyle={{width: 70}} options={['option 1', 'option 2']} />
+          <ModalDropdown defaultValue='Add Friend' style={styles.friendBtn} textStyle={{textAlign: 'center'}} dropdownStyle={styles.dropDownStyle} options={['option 1', ...dummyFriends.map(friend => friend.name)]} />
           </View>
         )
       })}
@@ -97,11 +115,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 70,
     borderColor: 'black'
+  },
+  dropDownStyle: {
+    width: 70,
+    backgroundColor: '#b3e6ff'
   }
 });
+
+const mapStateToProps = state => ({
+  friends: state.user.UserFriends
+})
 
 const mapDispatchToProps = dispatch => ({
   assignItem: (id, receipient) => dispatch(assignItem(id, receipient))
 })
 
-export default connect(null, mapDispatchToProps)(ReceiptForm)
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiptForm)
