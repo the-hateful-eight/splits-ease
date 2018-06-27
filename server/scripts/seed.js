@@ -1,5 +1,6 @@
-const db = require('../db')
+
 const {
+  db,
   Friend,
   Item,
   Receipt,
@@ -84,8 +85,8 @@ async function seed() {
   console.log('db synced!')
 
   const createdUsers = await User.bulkCreate(users, { returning: true })
-  const createdFriends = await Friend.bulkCreate(friends, {returning: true})
-  const createdReceipts = await Receipt.bulkCreate(receipts, {returning: true})
+  const createdFriends = await Friend.bulkCreate(friends, { returning: true })
+  const createdReceipts = await Receipt.bulkCreate(receipts, { returning: true })
   const createdItems = await Item.bulkCreate(items, {returning: true})
 
   await Promise.all([
