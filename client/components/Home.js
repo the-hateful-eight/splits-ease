@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
-import { connect } from 'http2'
+import { connect } from 'react-redux'
 import { logout } from '../store'
 
 const Home = props => {
