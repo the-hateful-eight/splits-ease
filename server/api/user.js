@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../db");
-const { Friend } = require("../db");
+const { User, Friend } = require("../db");
 
 module.exports = router;
 
