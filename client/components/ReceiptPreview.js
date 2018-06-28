@@ -71,7 +71,8 @@ class ReceiptPreview extends React.Component {
         }
         let items = [];
         let i = 0;
-        Object.values(lines).forEach(line => {
+        Object.keys(lines).sort().forEach(yPos => {
+          let line = lines[yPos]
           let item = line.join(" ");
           item = item
             .replace(" . ", ".")
