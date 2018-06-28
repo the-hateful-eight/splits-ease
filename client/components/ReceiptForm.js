@@ -30,8 +30,8 @@ class ReceiptForm extends React.Component {
   };
 
   componentDidMount () {
-    // this.setState({data: this.props.navigation.state.params.data})
-    this.setState({data: dummyData})
+    this.setState({data: this.props.navigation.state.params.data})
+    // this.setState({data: dummyData})
   }
 
   render () {
