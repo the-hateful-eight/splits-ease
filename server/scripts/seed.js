@@ -9,7 +9,7 @@ const {
 
 const users = [
   {
-    email: 'cody@email.com',
+    email: 'Cody@email.com',
     password: '123'
   },
   {

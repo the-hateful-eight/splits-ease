@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Image, Text, KeyboardAvoidingView } from 'react-native'
 import { SocialIcon, FormLabel, FormInput, FormValidationMessage, Button, Divider } from 'react-native-elements'
+import { connect } from 'react-redux'
+import { login } from '../store/user'
 
-export default class Login extends Component {
+class Login extends Component {
     constructor() {
         super()
         this.state = {
@@ -13,12 +15,12 @@ export default class Login extends Component {
     }
 
     handleLogin() {
-        // const user = {
-        //     email: this.state.email,
-        //     password: this.state.password
-        // }
-        // this.props.getUser(user)
-        this.props.navigation.navigate('Home')
+        const user = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        this.props.login(user)
+        this.props.navigation.navigate('Home', this.state)
     }
 
     // handleCreateAccount() {
@@ -42,18 +44,15 @@ export default class Login extends Component {
         }
     }
 
-    Login() {
-
-    }
 
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <FormLabel>email</FormLabel>
-                <FormInput onChangeText={console.log('yo')} />
+                <FormInput onChangeText={email => this.setState({email})} />
                 <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
                 <FormLabel>password</FormLabel>
-                <FormInput onChangeText={console.log('yo')} />
+                <FormInput onChangeText={password => this.setState({password})} />
                 <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
                 <Button style={styles.button}
                     raised
@@ -83,3 +82,11 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 })
+
+const mapDTP = dispatch => {
+    return {
+        login: (user) => dispatch(login(user))
+    }
+}
+
+export default connect(null, mapDTP)(Login)
