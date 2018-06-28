@@ -34,18 +34,9 @@ class ReceiptPreview extends React.Component {
           })
           .then(res => res.data);
         console.log("Photo! ", parsed.textAnnotations[0].description);
-        // let text = parsed.textAnnotations[0].description
-        // text = text.replace(/\n/g, " ").replace(/[^.\w\s]/g, "")
-        // let lines = text.split(/(\d+\.\d\d)/).slice(0, -1)
-        // let items = []
-        // for (let i = 0; i < lines.length; i = i + 2){
-        //   lines[i] = lines[i].trim().split(" ").slice(-5).join(" ")
-        //   items.push({id: i, item: lines[i], price: lines[i + 1]})
-        // }
-        // console.log(items)
         const positions = parsed.textAnnotations.slice(1);
         let lines = {};
-        let topLeft, TopRight, left, lineDetected, text, box;
+        let bottomLeft, bottomRight, left, lineDetected, text, box;
         for (let i = 0; i < positions.length - 2; i++) {
           box = positions[i];
           lineDetected = false;
@@ -54,27 +45,29 @@ class ReceiptPreview extends React.Component {
             positions[i + 1].description === "." &&
             !isNaN(positions[i + 2].description)
           ) {
-            topLeft = box.boundingPoly.vertices[0];
-            topRight = positions[i + 2].boundingPoly.vertices[1];
+            bottomLeft = box.boundingPoly.vertices[3];
+            bottomRight = positions[i + 2].boundingPoly.vertices[2];
             text =
               box.description +
               positions[i + 1].description +
               positions[i + 2].description;
             i += 2;
           } else {
-            [topLeft, topRight] = box.boundingPoly.vertices.slice(0, 2);
+            [bottomRight, bottomLeft] = box.boundingPoly.vertices.slice(2);
             text = box.description;
           }
           left =
-            topLeft.y +
-            (topLeft.x / (topRight.x - topLeft.x)) * (topLeft.y - topRight.y);
+            bottomLeft.y +
+            (bottomLeft.x / (bottomRight.x - bottomLeft.x)) *
+              (bottomLeft.y - bottomRight.y);
           Object.keys(lines).forEach(line => {
-            if (Math.abs(left - line) <= 100) {
+            if (Math.abs(left - line) <= 100 && !lineDetected) {
               lines[line].push(text);
               lineDetected = true;
             }
           });
           if (!lineDetected) lines[left] = [text];
+          console.log(left, text);
         }
         let items = [];
         let i = 0;
@@ -84,10 +77,14 @@ class ReceiptPreview extends React.Component {
             .replace(" . ", ".")
             .replace(/[^.\w\s]/g, "")
             .trim();
-          item = item.split(/(\d+\.\d\d(?:[^\d]|$))/);
+          item = item.split(/(\d+\.\d\d(?:[^\d%]|$))/);
           console.log(item);
           if (item.length > 1) {
-            items.push({ id: i++, item: item[0], price: item[1] });
+            if (item[0]) {
+              items.push({ id: i++, item: item[0], price: item[1] });
+            } else {
+              items.push({ id: i++, item: item[2], price: item[1] });
+            }
           }
         });
         this.props.setItems(items);
