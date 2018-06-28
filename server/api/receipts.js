@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const Receipt = require('../db')
+const { Receipt } = require('../db')
 const vision = require('@google-cloud/vision')
 
 const client = new vision.ImageAnnotatorClient()

@@ -22,7 +22,9 @@
   },
   "dependencies": {
     "@google-cloud/vision": "^0.20.0",
+    "axios": "^0.18.0",
     "expo": "^27.0.1",
+    "express": "^4.16.3",
     "node": "^10.5.0",
     "pg": "^7.4.3",
     "react": "16.3.1",

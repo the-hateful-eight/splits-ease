@@ -1,4 +1,9 @@
 import axios from 'axios'
+import Expo from "expo";
+const { manifest } = Expo.Constants;
+const ip = manifest.packagerOpts.dev
+  ? manifest.debuggerHost.split(`:`).shift().concat(`:1337`)
+  : `localhost:1337`
 
 //Initial State
 const initialState = {
@@ -32,18 +37,21 @@ const createdUser = user => ({
 //Thunks
 export const getMe = () => dispatch =>
   axios
-    .get('/auth/me')
+    .get('/api/me')
     .then(res => res.data)
     .then(user => dispatch(gotMe(user)))
     .catch(err => console.log(err))
 
-export const login = (formData) => dispatch => {
-  axios
-    .put('/auth/login', formData)
-    .then(res => res.data)
-    .then(user => dispatch(gotMe(user)))
-    .catch(err => console.log(err))
-}
+export const login = (userInfo) => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.post(`http://${ip}/api/user`, userInfo);
+      dispatch(gotMe(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 export const logout = () => dispatch => {
   return axios.delete('/auth/logout')
@@ -58,7 +66,7 @@ export const getUserFriends = userId => dispatch =>
     .catch(err => console.log(err))
 
 //Reducer
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GOT_USER:
       return {
