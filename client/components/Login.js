@@ -3,8 +3,8 @@ import { StyleSheet, View, Image, Text, KeyboardAvoidingView } from 'react-nativ
 import { SocialIcon, FormLabel, FormInput, FormValidationMessage, Button, Divider } from 'react-native-elements'
 
 export default class Login extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             email: '',
             password: ''
@@ -55,13 +55,13 @@ export default class Login extends Component {
                 <FormLabel>password</FormLabel>
                 <FormInput onChangeText={console.log('yo')} />
                 <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
-                <Button style={styles.button}
+                <Button buttonStyle={styles.logInBtn}
                     raised
                     icon={{ name: 'cached' }}
                     title='Login'
                     onPress={this.handleLogin}
                 />
-                <Text style={styles.createAccount} onPress={()=>console.log('yo')}>Create Account</Text>
+                <Button title="Create Account" buttonStyle={styles.createAccount} onPress={() => this.props.navigation.navigate('CreateUserForm')} />
                 <SocialIcon
                     title='Sign In With Google'
                     button
@@ -74,12 +74,15 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
+    logInBtn: {
+        backgroundColor: 'gray'
+    },
     container: {
         flex: 1,
         backgroundColor: 'white'
     },
     createAccount: {
-        color: 'blue',
-        textAlign: 'center'
+        backgroundColor: 'blue'
+        // textAlign: 'center'
     }
 })

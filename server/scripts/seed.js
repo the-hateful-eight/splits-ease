@@ -9,10 +9,13 @@ const {
 
 const users = [
   {
+    name: 'Cody',
     email: 'cody@email.com',
+    phone: '123-456-7890',
     password: '123'
   },
   {
+    name: 'Jason',
     email: 'jason@email.com',
     password: '456'
   },
