@@ -99,21 +99,11 @@ class ReceiptPreview extends React.Component {
   render() {
     let src = { uri: "data:image/png;base64," + this.state.image };
     return (
-<<<<<<< HEAD
       <View style={styles.container}>
       <Image source={src} style={styles.img} resizeMode='center'/>
       <View style={styles.bottomView}>
         <Button buttonStyle={styles.button} title="Analyze" onPress={() => this.analyze()} />
       </View>
-=======
-      <View>
-        <Button
-          style={styles.button}
-          title="Analyze"
-          onPress={() => this.analyze()}
-        />
-        <Image source={src} style={styles.img} resizeMode="center" />
->>>>>>> master
       </View>
     );
   }
