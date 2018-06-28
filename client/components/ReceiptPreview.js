@@ -45,35 +45,50 @@ class ReceiptPreview extends React.Component {
         // console.log(items)
         const positions = parsed.textAnnotations.slice(1);
         let lines = {};
-        positions.map(box => {
-          let vertices = box.boundingPoly.vertices;
-          let left =
-            vertices[0].y +
-            (vertices[0].x / (vertices[1].x - vertices[0].x)) *
-              (vertices[0].y - vertices[1].y);
-          let lineDetected = false;
+        let topLeft, TopRight, left, lineDetected, text, box;
+        for (let i = 0; i < positions.length - 2; i++) {
+          box = positions[i];
+          lineDetected = false;
+          if (
+            !isNaN(box.description) &&
+            positions[i + 1].description === "." &&
+            !isNaN(positions[i + 2].description)
+          ) {
+            topLeft = box.boundingPoly.vertices[0];
+            topRight = positions[i + 2].boundingPoly.vertices[1];
+            text =
+              box.description +
+              positions[i + 1].description +
+              positions[i + 2].description;
+            i += 2;
+          } else {
+            [topLeft, topRight] = box.boundingPoly.vertices.slice(0, 2);
+            text = box.description;
+          }
+          left =
+            topLeft.y +
+            (topLeft.x / (topRight.x - topLeft.x)) * (topLeft.y - topRight.y);
           Object.keys(lines).forEach(line => {
             if (Math.abs(left - line) <= 100) {
-              lines[line].push(box.description);
+              lines[line].push(text);
               lineDetected = true;
             }
           });
-          if (!lineDetected) lines[left] = [box.description];
-        });
-        // console.log(Object.values(lines))
+          if (!lineDetected) lines[left] = [text];
+        }
         let items = [];
         let i = 0;
         Object.values(lines).forEach(line => {
           let item = line.join(" ");
-          console.log(item)
           item = item
             .replace(" . ", ".")
             .replace(/[^.\w\s]/g, "")
-            .trim()
-          console.log(item)
-          item = item.split(/(\d+\.\d\d)[^\d]|(\d+\.\d\d$)/);
+            .trim();
+          item = item.split(/(\d+\.\d\d(?:[^\d]|$))/);
           console.log(item);
-          if (item.length > 1) items.push({id: i++, item: item[0], price: item[1] });
+          if (item.length > 1) {
+            items.push({ id: i++, item: item[0], price: item[1] });
+          }
         });
         this.props.setItems(items);
         this.props.navigation.navigate("ReceiptForm", { data: items });
