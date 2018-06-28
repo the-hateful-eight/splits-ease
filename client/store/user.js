@@ -11,6 +11,7 @@ const initialState = {
 const GOT_USER = 'GOT_USER'
 const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
 const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
+const CREATED_USER = 'CREATED_USER'
 
 //Action creators
 const gotMe = user => ({
@@ -21,6 +22,11 @@ const gotMe = user => ({
 const gotUserFriends = userFriends => ({
   type: GOT_USER_FRIENDS,
   userFriends,
+})
+
+const createdUser = user => ({
+  type: CREATED_USER,
+  user
 })
 
 //Thunks

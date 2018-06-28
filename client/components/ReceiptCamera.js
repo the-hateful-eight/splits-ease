@@ -51,14 +51,9 @@ class ReceiptCamera extends React.Component {
             ref={ref => (this.camera = ref)}
           >
             <View
-              style={{
-                // flex: 1,
-                justifyContent: 'flex-end',
-                backgroundColor: 'transparent',
-                flexDirection: 'row'
-              }}
+              style={styles.bottomView}
             >
-              <Button style={styles.button} title="Capture" onPress={() => this.snap()} />
+              <Button buttonStyle={styles.captureBtn} title="Capture" onPress={() => this.snap()} />
             </View>
           </Camera>
         </View>
@@ -68,8 +63,17 @@ class ReceiptCamera extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  button: {
-    height: 50
+  bottomView: {
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 100,
+    position: 'absolute'
+  },
+  captureBtn: {
+    backgroundColor: 'blue',
+    width: '100%'
   }
 })
 
