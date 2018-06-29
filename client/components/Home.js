@@ -6,7 +6,7 @@ import { login } from '../store/user'
 
 class Home extends Component {
   componentDidMount() {
-    console.log(this.props)
+    console.log('PROPS',this.props)
   }
 
   render() {
@@ -40,17 +40,24 @@ const styles = StyleSheet.create({
   },
 })
 
+const mapStateToProps = state => {
+  console.log('STATE IS',state)
+  return {
+    user: state.user
+  }
+}
+
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logoutPress: () => {
       dispatch(logout()).then(() => {
-        ownProps.history.push('/')
+        ownProps.navigation.navigate('Home')
       })
     }
   }
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Home)

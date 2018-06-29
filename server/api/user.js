@@ -1,51 +1,52 @@
-const router = require("express").Router();
-const { User, Friend } = require("../db");
+const router = require('express').Router()
+const { User, Friend } = require('../db')
 
-module.exports = router;
+module.exports = router
 
-router.post('/', async (req, res, next) => {
+router.put('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: {
-          email: req.body.email,
-          password: req.body.password
-      }
-    });
-    if (!user) {
-      res.status(401).send('Wrong username and/or password')
+        email: req.body.email,
+        password: req.body.password,
+      },
+    })
+    console.log('here')
+    if (user) {
+      res.send(user)
+    } else {
+      const err = new Error('Wrong email and/or password')
+      err.status = 401
+      next(err)
     }
-    else {
-      res.json(user);
-    }
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
 
-
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll();
-    res.json(users);
+    const users = await User.findAll()
+    res.json(users)
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
 
-router.get("/:id", async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id);
-    res.json(user);
+    const user = await User.findById(req.params.id)
+    res.json(user)
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
 
-router.get("/:id/friends", async (req, res, next) => {
+router.get('/:id/friends', async (req, res, next) => {
   try {
-    const friends = await Friend.findAll({ where: { userId: req.params.id } });
-    res.json(friends);
+    const friends = await Friend.findAll({ where: { userId: req.params.id } })
+    res.json(friends)
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})

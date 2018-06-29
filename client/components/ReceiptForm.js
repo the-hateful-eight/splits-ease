@@ -4,35 +4,36 @@ import {
   Button,
   FormLabel,
   FormInput,
-  FormValidationMessage
-} from "react-native-elements";
-import { connect } from "react-redux";
-import assignItem from "../store/items";
-import ModalDropdown from "react-native-modal-dropdown";
+  FormValidationMessage,
+} from 'react-native-elements'
+import { connect } from 'react-redux'
+import assignItem from '../store/items'
+import getUserFriends from '../store/user'
+import ModalDropdown from 'react-native-modal-dropdown'
 
-// const dummyData = [
-//   {
-//     item: "burger",
-//     price: "$1.50"
-//   },
-//   {
-//     item: "ramen",
-//     price: "$13.00"
-//   },
-//   {
-//     item: "Mountain Dew",
-//     price: "$1.50"
-//   },
-//   {
-//     item: "falafel",
-//     price: "$6.00"
-//   }
-// ];
+const dummyData = [
+  {
+    item: 'burger',
+    price: '$1.50',
+  },
+  {
+    item: 'ramen',
+    price: '$13.00',
+  },
+  {
+    item: 'Mountain Dew',
+    price: '$1.50',
+  },
+  {
+    item: 'falafel',
+    price: '$6.00',
+  },
+]
 
 class ReceiptForm extends React.Component {
   state = {
-    data: []
-  };
+    data: [],
+  }
 
   componentDidMount() {
       this.setState({ data: this.props.navigation.state.params.data })
@@ -67,12 +68,12 @@ class ReceiptForm extends React.Component {
                 <ModalDropdown
                   defaultValue="Add Friend"
                   style={styles.friendBtn}
-                  textStyle={{ textAlign: "center" }}
+                  textStyle={{ textAlign: 'center' }}
                   dropdownStyle={{ width: 70 }}
-                  options={["option 1", "option 2"]}
+                  options={['option 1', 'option 2']}
                 />
               </View>
-            );
+            )
           })}
           <View>
             <Button style={styles.sendAllBtn} title="Send All" />
@@ -102,14 +103,14 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius: 2,
     width: 100,
-    height: 30
+    height: 30,
   },
   addItemBtn: {
     width: 50,
-    justifyContent: "flex-end"
+    justifyContent: 'flex-end',
   },
   sendAllBtn: {
-    width: 100
+    width: 100,
   },
   friendBtn: {
     backgroundColor: "#b3e6ff",
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     width: 70,
     borderColor: "black"
   }
-});
+})
 
 const mapDispatchToProps = dispatch => ({
   assignItem: (id, receipient) => dispatch(assignItem(id, receipient))
