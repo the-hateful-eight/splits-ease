@@ -11,25 +11,6 @@ import assignItem from '../store/items'
 import getUserFriends from '../store/user'
 import ModalDropdown from 'react-native-modal-dropdown'
 
-const dummyData = [
-  {
-    item: 'burger',
-    price: '$1.50',
-  },
-  {
-    item: 'ramen',
-    price: '$13.00',
-  },
-  {
-    item: 'Mountain Dew',
-    price: '$1.50',
-  },
-  {
-    item: 'falafel',
-    price: '$6.00',
-  },
-]
-
 class ReceiptForm extends React.Component {
   state = {
     data: [],
