@@ -50,10 +50,10 @@ class Login extends Component {
                     />
                 </View>
                 <FormLabel>email</FormLabel>
-                <FormInput onChangeText={email => this.setState({ email })} />
+                <FormInput autoCapitalize='none' onChangeText={email => this.setState({ email })} />
                 <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
                 <FormLabel>password</FormLabel>
-                <FormInput onChangeText={password => this.setState({ password })} />
+                <FormInput autoCapitalize='none' onChangeText={password => this.setState({ password })} />
                 <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
                 <Button buttonStyle={styles.logInBtn}
                     raised

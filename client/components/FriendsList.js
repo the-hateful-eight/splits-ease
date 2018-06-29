@@ -1,31 +1,59 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
+import { Button } from 'react-native-elements'
 import { getUserFriends } from '../store'
+import { FriendCard } from './FriendCard'
 
 class FriendsList extends React.Component{
 
-  renderFriends(){
-    const friends = this.props.userFriends
-    if(friends.length){
-      for (let i = 0; i < friends.length; i++) {
-        return friends[i]
-      }
-    }
-  }
-
-  componentDidMount(){
-    this.props.getUserFriends()
-  }
-
   render(){
+    const userFriends = this.props.navigation.state.params.friends
     return(
-    <View>
-      Hello Friends!{this.renderFriends()}
+    <View style={styles.container}>
+      {userFriends.map(friend => {
+        return (
+          <View  key={friend.id}>
+            <FriendCard
+                        id={friend.id}
+                        name={friend.name}
+                        phone={friend.phone}
+                        email={friend.email}
+            />
+            <Button title="Edit" />
+            <Button title="Delete" />
+          </View>
+        )
+      })}
+      <View style={styles.bottomView}>
+        <Button title="Add Friend" buttonStyle={styles.addBtn}/>
+      </View>
     </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  bottomView: {
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 100,
+    position: 'absolute'
+  },
+  addBtn: {
+    backgroundColor: 'red',
+    width: '100%'
+  }
+})
+
+const mapStateToProps = state => ({
+  friends: state.user.userFriends
+})
 
 const mapDispatchToProps = dispatch => ({
   getFriends: () => {
@@ -33,4 +61,4 @@ const mapDispatchToProps = dispatch => ({
   },
 })
 
-export default connect(null, mapDispatchToProps)(FriendsList)
+export default connect(mapStateToProps, mapDispatchToProps)(FriendsList)

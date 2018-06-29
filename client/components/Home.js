@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { logout } from '../store'
-import { login } from '../store/user'
+import { getUserFriends, login } from '../store/user'
 
 class Home extends Component {
 
+  componentDidMount () {
+    this.props.getFriends(this.props.user.user.id)
+  }
+
   render() {
+    console.log('FRIENDS ARE HERE', this.props.user.userFriends)
     return (
       <View style={styles.container}>
         <Text>Welcome to SPLITS/ease, {this.props.user.user.name}</Text>
@@ -15,8 +20,8 @@ class Home extends Component {
           onPress={() => this.props.navigation.navigate('ReceiptCamera')}
         />
         <Button
-          title="Receipt Form"
-          onPress={() => this.props.navigation.navigate('ReceiptForm')}
+          title="Friends List"
+          onPress={() => this.props.navigation.navigate('FriendsList', {friends: this.props.user.userFriends})}
         />
         <Button
           title="Receipt List"
@@ -50,6 +55,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(logout()).then(() => {
         ownProps.navigation.navigate('Home')
       })
+    },
+    getFriends: (id) => {
+      dispatch(getUserFriends(id))
     }
   }
 }
