@@ -20,10 +20,6 @@ class Login extends Component {
             password: this.state.password
         }
         this.props.login(user)
-<<<<<<< HEAD
-=======
-        this.props.navigation.navigate('Home', { kevin: 'kevdude' })
->>>>>>> master
     }
 
     async signInWithGoogleAsync() {
@@ -87,8 +83,6 @@ const styles = StyleSheet.create({
     },
     createAccount: {
         backgroundColor: 'blue'
-<<<<<<< HEAD
-=======
         // textAlign: 'center'
     },
     logo: {
@@ -100,7 +94,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 80,
         paddingBottom: 20
->>>>>>> master
     }
 })
 
