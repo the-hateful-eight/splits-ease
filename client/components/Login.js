@@ -20,6 +20,10 @@ class Login extends Component {
             password: this.state.password
         }
         this.props.login(user)
+<<<<<<< HEAD
+=======
+        this.props.navigation.navigate('Home', { kevin: 'kevdude' })
+>>>>>>> master
     }
 
     async signInWithGoogleAsync() {
@@ -43,11 +47,17 @@ class Login extends Component {
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                <View style={styles.logoContainer}>
+                    <Image
+                        style={styles.logo}
+                        source={require('../../assets/splits-ease-logo.png')}
+                    />
+                </View>
                 <FormLabel>email</FormLabel>
-                <FormInput onChangeText={email => this.setState({email})} />
+                <FormInput onChangeText={email => this.setState({ email })} />
                 <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
                 <FormLabel>password</FormLabel>
-                <FormInput onChangeText={password => this.setState({password})} />
+                <FormInput onChangeText={password => this.setState({ password })} />
                 <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
                 <Button buttonStyle={styles.logInBtn}
                     raised
@@ -77,6 +87,20 @@ const styles = StyleSheet.create({
     },
     createAccount: {
         backgroundColor: 'blue'
+<<<<<<< HEAD
+=======
+        // textAlign: 'center'
+    },
+    logo: {
+        width: 300,
+        height: 120
+    },
+    logoContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 80,
+        paddingBottom: 20
+>>>>>>> master
     }
 })
 
