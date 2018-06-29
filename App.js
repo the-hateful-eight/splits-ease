@@ -11,6 +11,7 @@ import ReceiptForm from './client/components/ReceiptForm'
 import ReceiptList from './client/components/ReceiptList'
 import ReceiptPreview from './client/components/ReceiptPreview'
 import CreateUserForm from './client/components/CreateUserForm'
+import FriendsList from './client/components/FriendsList'
 
 require('./secrets')
 
