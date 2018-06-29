@@ -8,7 +8,7 @@ import { FriendCard } from './FriendCard'
 class FriendsList extends React.Component{
 
   render(){
-    const userFriends = this.props.navigation.state.params.friends
+    const userFriends = this.props.friends
     return(
     <View style={styles.container}>
       {userFriends.map(friend => {

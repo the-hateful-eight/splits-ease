@@ -1,17 +1,20 @@
 import React from 'react'
 import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import { Button, FormLabel, FormInput } from 'react-native-elements'
+import { connect } from 'react-redux'
+import { addFriend } from '../store/user'
 
-export default class AddFriend extends React.Component {
+class AddFriend extends React.Component {
   state = {
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    userId: this.props.id
   }
 
-  // handleSubmit = () => {
-
-  // }
+  handleSubmit = () => {
+    this.props.addFriend(this.state, this.props.id)
+  }
 
   render () {
     return (
@@ -47,3 +50,16 @@ const styles = StyleSheet.create({
     position: 'absolute'
   }
 })
+
+const mapStateToProps = state => ({
+  id: state.user.user.id
+})
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  addFriend: (friend, id) => dispatch(addFriend(friend, id))
+    .then((res) => {
+      if (res){ownProps.navigation.navigate('FriendsList')}
+    })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddFriend)
