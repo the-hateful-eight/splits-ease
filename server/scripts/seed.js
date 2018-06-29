@@ -126,7 +126,7 @@ if (module === require.main) {
       console.error(err)
       process.exitCode = 1
     })
-    .finally(() => {
+    .then(() => {
       console.log('closing db connection')
       db.close()
       console.log('db connection closed')

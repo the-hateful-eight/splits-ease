@@ -1,8 +1,11 @@
 import axios from 'axios'
-import Expo from "expo";
-const { manifest } = Expo.Constants;
+import Expo from 'expo'
+const { manifest } = Expo.Constants
 const ip = manifest.packagerOpts.dev
-  ? manifest.debuggerHost.split(`:`).shift().concat(`:1337`)
+  ? manifest.debuggerHost
+      .split(`:`)
+      .shift()
+      .concat(`:1337`)
   : `localhost:1337`
 
 //Initial State
@@ -21,7 +24,7 @@ const CREATED_USER = 'CREATED_USER'
 //Action creators
 const gotMe = user => ({
   type: GOT_USER,
-  user
+  user,
 })
 
 const gotUserFriends = userFriends => ({
@@ -31,33 +34,34 @@ const gotUserFriends = userFriends => ({
 
 const createdUser = user => ({
   type: CREATED_USER,
-  user
+  user,
 })
 
 //Thunks
-export const getMe = () => dispatch =>
-  axios
-    .get('/api/me')
-    .then(res => res.data)
-    .then(user => dispatch(gotMe(user)))
-    .catch(err => console.log(err))
+// export const getMe = () => dispatch =>
+//   axios
+//     .get('/api/me')
+//     .then(res => res.data)
+//     .then(user => dispatch(gotMe(user)))
+//     .catch(err => console.log(err))
 
-export const login = (userInfo) => {
+export const login = userInfo => {
   return async dispatch => {
     try {
-      const { data } = await axios.post(`http://${ip}/api/user`, userInfo);
-      dispatch(gotMe(data));
+      const { data } = await axios.put(`http://${ip}/api/user/login`, userInfo)
+      return dispatch(gotMe(data))
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
-};
-
-export const logout = () => dispatch => {
-  return axios.delete('/auth/logout')
-    .then(() => dispatch(gotMe(initialState.user)))
-    .catch(err => console.log(err))
+  }
 }
+
+// export const logout = () => dispatch => {
+//   return axios
+//     .delete('/auth/logout')
+//     .then(() => dispatch(gotMe(initialState.user)))
+//     .catch(err => console.log(err))
+// }
 
 export const getUserFriends = userId => dispatch =>
   axios
@@ -66,7 +70,7 @@ export const getUserFriends = userId => dispatch =>
     .catch(err => console.log(err))
 
 //Reducer
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_USER:
       return {
