@@ -22,6 +22,14 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.post('/', async (req, res, next) => {
+  try {
+    await User.findOrCreate(req.body)
+  } catch (err) {
+    next(err)
+  }
+})
+
 
 router.get("/", async (req, res, next) => {
   try {

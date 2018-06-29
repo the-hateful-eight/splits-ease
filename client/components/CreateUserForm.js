@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, FormLabel, FormInput } from 'react-native-elements'
 import { connect } from 'react-redux'
+import { createUser } from '../store/user'
 
 class CreateUserForm extends React.Component {
   state = {
@@ -9,6 +10,12 @@ class CreateUserForm extends React.Component {
     email: '',
     password: '',
     phone: ''
+  }
+
+  handleSubmit = () => {
+    console.log(this.state)
+    this.props.createUser(this.state)
+    this.props.navigation.navigate('Home')
   }
 
   render () {
@@ -23,18 +30,12 @@ class CreateUserForm extends React.Component {
       <FormLabel>Phone</FormLabel>
       <FormInput onChangeText={phone => this.setState({ phone })}/>
       <View style={styles.bottomView}>
-      <Button buttonStyle={styles.submitBtn} title='Submit' onPress={() => console.log('this is state', this.state)} />
+      <Button buttonStyle={styles.submitBtn} title='Submit' onPress={() => this.handleSubmit()} />
       </View>
     </View>
     )
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-
-})
-
-export default connect(null, mapDispatchToProps)(CreateUserForm)
 
 const styles = StyleSheet.create({
   container: {
@@ -53,3 +54,9 @@ const styles = StyleSheet.create({
     position: 'absolute'
   }
 })
+
+const mapDispatchToProps = dispatch => ({
+  createUser: (user) => dispatch(createUser(user))
+})
+
+export default connect(null, mapDispatchToProps)(CreateUserForm)

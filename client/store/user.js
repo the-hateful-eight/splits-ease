@@ -59,11 +59,20 @@ export const logout = () => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const getUserFriends = userId => dispatch =>
+export const getUserFriends = userId => dispatch => {
   axios
     .get(`api/user/${userId}/friends`)
     .then(res => dispatch(gotUserFriends(res.data)))
     .catch(err => console.log(err))
+}
+
+export const createUser = user => dispatch => {
+  axios
+    .post(`api/user`, user)
+    .then(res => dispatch(createdUser(res.data)))
+    .catch(err => console.log(err))
+}
+
 
 //Reducer
 export default function (state = initialState, action) {
@@ -82,6 +91,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         userFriend: action.userFriend,
+      }
+    case CREATED_USER:
+      return {
+        ...state,
+        user: action.user
       }
     default:
       return state
