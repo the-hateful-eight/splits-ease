@@ -9,10 +9,6 @@ class Home extends Component {
     console.log('PROPS',this.props)
   }
 
-  renderName(){
-    console.log('USER IS',this.props.user.user.name)
-  }
-
   render() {
     return (
       <View style={styles.container}>
