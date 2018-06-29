@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 const SET_ITEMS = "SET_ITEMS";
 const ASSOCIATE_ITEM = "ASSOCIATE_ITEM";
 const UNASSOCIATE_ITEM = "UNASSOCIATE_ITEM";
@@ -36,20 +34,6 @@ export const unassignItem = index => {
   return dispatch => {
     dispatch(unassociateItem(index));
   };
-};
-
-export const sendReceipt = async () => {
-  user = {
-    name: "Matthew",
-    email: "mcontract27@gmail.com",
-    phone: "(914) 787-009"
-  };
-  const receipt = [
-    { item: "Eggs", price: "0.99", belongsTo: user },
-    { item: "Milk", price: "3.50", belongsTo: user },
-    { item: "Chicken", price: "6.99" }
-  ];
-  await axios.post('/api/receipts/send', receipt)
 };
 
 export default function(state = [], action) {
