@@ -70,12 +70,15 @@ export const getUserFriends = userId => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const createUser = user => dispatch => {
-  console.log('THUNK FIRED!!')
-  axios
-    .post('/api/user', user)
-    .then(res => dispatch(createdUser(res.data)))
-    .catch(err => console.log(err))
+export const createUser = user => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.post(`http://${ip}/api/user`, user)
+      return dispatch(gotMe(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import { Button, FormLabel, FormInput } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { createUser } from '../store/user'
@@ -13,25 +13,24 @@ class CreateUserForm extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log(this.state)
     this.props.createUser(this.state)
   }
 
   render () {
     return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior='padding' style={styles.container}>
       <FormLabel>Name</FormLabel>
-      <FormInput onChangeText={name => this.setState({ name })} />
+      <FormInput autoCorrect={false} onChangeText={name => this.setState({ name })} />
       <FormLabel>Email</FormLabel>
-      <FormInput onChangeText={email => this.setState({ email })}/>
+      <FormInput autoCorrect={false} onChangeText={email => this.setState({ email })}/>
       <FormLabel>Password</FormLabel>
-      <FormInput onChangeText={password => this.setState({ password })}/>
+      <FormInput autoCorrect={false} onChangeText={password => this.setState({ password })}/>
       <FormLabel>Phone</FormLabel>
-      <FormInput onChangeText={phone => this.setState({ phone })}/>
+      <FormInput autoCorrect={false} onChangeText={phone => this.setState({ phone })}/>
       <View style={styles.bottomView}>
       <Button buttonStyle={styles.submitBtn} title='Submit' onPress={() => this.handleSubmit()} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
     )
   }
 }
@@ -54,8 +53,11 @@ const styles = StyleSheet.create({
   }
 })
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   createUser: (user) => dispatch(createUser(user))
+    .then((res) => {
+      if (res){ownProps.navigation.navigate('Home')}
+    })
 })
 
 export default connect(null, mapDispatchToProps)(CreateUserForm)
