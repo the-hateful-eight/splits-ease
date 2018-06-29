@@ -15,15 +15,15 @@ class CreateUserForm extends React.Component {
     return (
     <View style={styles.container}>
       <FormLabel>Name</FormLabel>
-      <FormInput />
+      <FormInput onChangeText={name => this.setState({ name })} />
       <FormLabel>Email</FormLabel>
-      <FormInput />
+      <FormInput onChangeText={email => this.setState({ email })}/>
       <FormLabel>Password</FormLabel>
-      <FormInput />
+      <FormInput onChangeText={password => this.setState({ password })}/>
       <FormLabel>Phone</FormLabel>
-      <FormInput />
+      <FormInput onChangeText={phone => this.setState({ phone })}/>
       <View style={styles.bottomView}>
-      <Button buttonStyle={styles.submitBtn} title='Submit' onClick={console.log('yay')} />
+      <Button buttonStyle={styles.submitBtn} title='Submit' onPress={() => console.log('this is state', this.state)} />
       </View>
     </View>
     )

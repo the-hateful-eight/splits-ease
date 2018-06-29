@@ -5,9 +5,9 @@ import { logout } from '../store'
 import { login } from '../store/user'
 
 class Home extends Component {
-  componentDidMount() {
-    console.log(this.props)
-  }
+  // componentDidMount() {
+  //   console.log(this.props)
+  // }
 
   render() {
     return (
