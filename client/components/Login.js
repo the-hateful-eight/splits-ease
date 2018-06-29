@@ -20,12 +20,7 @@ class Login extends Component {
             password: this.state.password
         }
         this.props.login(user)
-        this.props.navigation.navigate('Home', { kevin: 'kevdude' })
     }
-
-    // handleCreateAccount() {
-    //     this.props.navigation.navigate('CreateAccount')
-    // }
 
     async signInWithGoogleAsync() {
         try {
@@ -39,7 +34,7 @@ class Login extends Component {
             } else {
                 return { cancelled: true }
             }
-        } catch (e) {
+        } catch (error) {
             return { error: true }
         }
     }
@@ -102,10 +97,13 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapDTP = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         login: (user) => dispatch(login(user))
+            .then((res) => {
+                if(res){ownProps.navigation.navigate('Home', this.state)}
+            })
     }
 }
 
-export default connect(null, mapDTP)(Login)
+export default connect(null, mapDispatchToProps)(Login)

@@ -15,7 +15,6 @@ class CreateUserForm extends React.Component {
   handleSubmit = () => {
     console.log(this.state)
     this.props.createUser(this.state)
-    this.props.navigation.navigate('Home')
   }
 
   render () {

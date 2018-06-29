@@ -5,14 +5,11 @@ import { logout } from '../store'
 import { login } from '../store/user'
 
 class Home extends Component {
-  // componentDidMount() {
-  //   console.log(this.props)
-  // }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Welcome to SPLITS/ease</Text>
+        <Text>Welcome to SPLITS/ease, {this.props.user.user.name}</Text>
         <Button
           title="Take a picture"
           onPress={() => this.props.navigation.navigate('ReceiptCamera')}
@@ -40,17 +37,24 @@ const styles = StyleSheet.create({
   },
 })
 
+const mapStateToProps = state => {
+  console.log('STATE IS',state)
+  return {
+    user: state.user
+  }
+}
+
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logoutPress: () => {
       dispatch(logout()).then(() => {
-        ownProps.history.push('/')
+        ownProps.navigation.navigate('Home')
       })
     }
   }
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Home)
