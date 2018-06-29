@@ -20,13 +20,13 @@ class CreateUserForm extends React.Component {
     return (
     <KeyboardAvoidingView behavior='padding' style={styles.container}>
       <FormLabel>Name</FormLabel>
-      <FormInput autoCorrect={false} onChangeText={name => this.setState({ name })} />
+      <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={name => this.setState({ name })} />
       <FormLabel>Email</FormLabel>
-      <FormInput autoCorrect={false} onChangeText={email => this.setState({ email })}/>
+      <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={email => this.setState({ email })}/>
       <FormLabel>Password</FormLabel>
-      <FormInput autoCorrect={false} onChangeText={password => this.setState({ password })}/>
+      <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={password => this.setState({ password })}/>
       <FormLabel>Phone</FormLabel>
-      <FormInput autoCorrect={false} onChangeText={phone => this.setState({ phone })}/>
+      <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={phone => this.setState({ phone })}/>
       <View style={styles.bottomView}>
       <Button buttonStyle={styles.submitBtn} title='Submit' onPress={() => this.handleSubmit()} />
       </View>

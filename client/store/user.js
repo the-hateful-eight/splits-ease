@@ -63,11 +63,19 @@ export const login = userInfo => {
 //     .catch(err => console.log(err))
 // }
 
-export const getUserFriends = userId => dispatch => {
-  axios
-    .get(`/api/user/${userId}/friends`)
-    .then(res => dispatch(gotUserFriends(res.data)))
-    .catch(err => console.log(err))
+export const getUserFriends = id => {
+  return async dispatch => {
+  // axios
+  //   .get(`/api/user/${userId}/friends`)
+  //   .then(res => dispatch(gotUserFriends(res.data)))
+  //   .catch(err => console.log(err))
+    try {
+      const { data } = await axios.get(`http://${ip}/api/user/${id}/friends`)
+      return dispatch(gotUserFriends(data))
+    } catch(err) {
+      console.log(err)
+    }
+  }
 }
 
 export const createUser = user => {
