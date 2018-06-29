@@ -26,7 +26,7 @@ class FriendsList extends React.Component{
         )
       })}
       <View style={styles.bottomView}>
-        <Button title="Add Friend" buttonStyle={styles.addBtn}/>
+        <Button title="Add Friend" buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')}/>
       </View>
     </View>
     )
