@@ -97,8 +97,6 @@ const styles = StyleSheet.create({
     }
 })
 
-
-
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         login: (user) => dispatch(login(user))

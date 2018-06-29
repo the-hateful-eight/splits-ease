@@ -3,6 +3,38 @@ const { User, Friend } = require('../db')
 
 module.exports = router
 
+router.post('/', async (req, res, next) => {
+  try {
+    const user = await User.findOrCreate({
+      where: {
+        email: req.body.email
+      },
+      defaults: req.body
+   })
+    if (user[1]) {
+      res.json(user[0])
+    } else {
+      const err = new Error('User already exists!')
+      err.status = 401
+      next(err)
+    }
+  // try {
+  //   const user = await User.create(req.body)
+  //   res.json(user)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/', async (req, res, next) => {
+  try {
+    const users = await User.findAll()
+    res.json(users)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.put('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({
@@ -19,15 +51,6 @@ router.put('/login', async (req, res, next) => {
       err.status = 401
       next(err)
     }
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.get('/', async (req, res, next) => {
-  try {
-    const users = await User.findAll()
-    res.json(users)
   } catch (err) {
     next(err)
   }

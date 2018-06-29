@@ -1,7 +1,8 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
 import { Button, FormLabel, FormInput } from 'react-native-elements'
 import { connect } from 'react-redux'
+import { createUser } from '../store/user'
 
 class CreateUserForm extends React.Component {
   state = {
@@ -11,30 +12,28 @@ class CreateUserForm extends React.Component {
     phone: ''
   }
 
+  handleSubmit = () => {
+    this.props.createUser(this.state)
+  }
+
   render () {
     return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior='padding' style={styles.container}>
       <FormLabel>Name</FormLabel>
-      <FormInput />
+      <FormInput autoCorrect={false} onChangeText={name => this.setState({ name })} />
       <FormLabel>Email</FormLabel>
-      <FormInput />
+      <FormInput autoCorrect={false} onChangeText={email => this.setState({ email })}/>
       <FormLabel>Password</FormLabel>
-      <FormInput />
+      <FormInput autoCorrect={false} onChangeText={password => this.setState({ password })}/>
       <FormLabel>Phone</FormLabel>
-      <FormInput />
+      <FormInput autoCorrect={false} onChangeText={phone => this.setState({ phone })}/>
       <View style={styles.bottomView}>
-      <Button buttonStyle={styles.submitBtn} title='Submit' onClick={console.log('yay')} />
+      <Button buttonStyle={styles.submitBtn} title='Submit' onPress={() => this.handleSubmit()} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
     )
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-
-})
-
-export default connect(null, mapDispatchToProps)(CreateUserForm)
 
 const styles = StyleSheet.create({
   container: {
@@ -53,3 +52,12 @@ const styles = StyleSheet.create({
     position: 'absolute'
   }
 })
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  createUser: (user) => dispatch(createUser(user))
+    .then((res) => {
+      if (res){ownProps.navigation.navigate('Home')}
+    })
+})
+
+export default connect(null, mapDispatchToProps)(CreateUserForm)
