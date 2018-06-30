@@ -77,7 +77,6 @@ export const getUserFriends = id => {
   //   .catch(err => console.log(err))
     try {
       const { data } = await axios.get(`http://${ip}/api/user/${id}/friends`)
-      console.log('GETTING USER FRIENDS', data)
       return dispatch(gotUserFriends(data))
     } catch(err) {
       console.log(err)
