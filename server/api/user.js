@@ -56,10 +56,10 @@ router.put('/login', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id/friends', async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id)
-    res.json(user)
+    const friends = await Friend.findAll({ where: { userId: req.params.id } })
+    res.json(friends)
   } catch (err) {
     next(err)
   }
@@ -85,6 +85,7 @@ router.post('/:id/friends', async (req, res, next) => {
   }
 })
 
+<<<<<<< HEAD
 router.get('/:id/friends', async (req, res, next) => {
   try {
     const friends = await Friend.findAll({ where: { userId: req.params.id } })
@@ -134,3 +135,6 @@ router.delete('/:id/friends', async (req, res, next) => {
     next(err)
   }
 })
+=======
+
+>>>>>>> master

@@ -39,7 +39,6 @@ class Login extends Component {
         }
     }
 
-
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
     },
     createAccount: {
         backgroundColor: 'blue'
-        // textAlign: 'center'
     },
     logo: {
         width: 300,
@@ -101,7 +99,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         login: (user) => dispatch(login(user))
             .then((res) => {
-                if(res){ownProps.navigation.navigate('Home', this.state)}
+                if(res){ownProps.navigation.navigate('Home')}
             })
     }
 }

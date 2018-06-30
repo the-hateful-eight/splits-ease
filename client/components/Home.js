@@ -2,19 +2,18 @@ import React, { Component } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { logout } from '../store'
-import { getUserFriends, login } from '../store/user'
+import { getUserFriends } from '../store/user'
 
 class Home extends Component {
 
   componentDidMount () {
-    this.props.getFriends(this.props.user.user.id)
+    this.props.getUserFriends(this.props.user.id)
   }
 
   render() {
-    console.log('FRIENDS ARE HERE', this.props.user.userFriends)
     return (
       <View style={styles.container}>
-        <Text>Welcome to SPLITS/ease, {this.props.user.user.name}</Text>
+        <Text>Welcome to SPLITS/ease, {this.props.user.name}</Text>
         <Button
           title="Take a picture"
           onPress={() => this.props.navigation.navigate('ReceiptCamera')}
@@ -43,20 +42,21 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  console.log('STATE IS',state)
   return {
-    user: state.user
+    user: state.user.user,
+    userFriends: state.user.userFriends
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logoutPress: () => {
-      dispatch(logout()).then(() => {
+      dispatch(logout())
+      .then(() => {
         ownProps.navigation.navigate('Home')
       })
     },
-    getFriends: (id) => {
+    getUserFriends: (id) => {
       dispatch(getUserFriends(id))
     }
   }
