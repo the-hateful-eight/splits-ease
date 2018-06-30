@@ -21,6 +21,8 @@ const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
 const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
 const CREATED_USER = 'CREATED_USER'
 const ADD_FRIEND = 'ADD_FRIEND'
+const EDIT_FRIEND = 'EDIT_FRIEND'
+const DELETE_FRIEND = 'DELETE_FRIEND'
 
 //Action creators
 const gotMe = user => ({
@@ -41,6 +43,16 @@ const createdUser = user => ({
 const addedFriend = friend => ({
   type: ADD_FRIEND,
   friend
+})
+
+const editedFriend = friend => ({
+  type: EDIT_FRIEND,
+  friend
+})
+
+const deletedFriend = friendId => ({
+  type: DELETE_FRIEND,
+  friendId
 })
 
 //Thunks
@@ -106,6 +118,29 @@ export const addFriend = (friend, id) => {
   }
 }
 
+export const deleteFriend = (id, friendId) => {
+  return async dispatch => {
+    try {
+      console.log('HITTING THE DELETE THUNK!!')
+      await axios.delete((`http://${ip}/api/user/${id}/friends`, friendId))
+      dispatch(deletedFriend(id, friendId))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+// export const editFriend = (friend) => {
+//   return async dispatch => {
+//     try {
+//       const { data } = await axios.put(`http://${ip}/api/user/${id}/friends`, friend)
+//       return dispatch(editedFriend(data))
+//     } catch (err) {
+//       console.log(err)
+//     }
+//   }
+// }
+
 //Reducer
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -133,6 +168,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         userFriends: [...state.userFriends, action.friend]
+      }
+    case DELETE_FRIEND:
+      return {
+        ...state,
+        userFriends: [...state.userFriends.filter(friend => {
+          if (friend.id !== action.friendId){
+            return friend
+          }
+        })]
       }
     default:
       return state

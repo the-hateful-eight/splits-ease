@@ -93,3 +93,45 @@ router.get('/:id/friends', async (req, res, next) => {
     next(err)
   }
 })
+
+// router.put('/:id/friends', async (req, res, next) => {
+//   try {
+//     const friend = await Friend.destroy({
+//       where: {
+//         ...
+//       }
+//     })
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
+// router.put('/:id/friends', async (req, res, next) => {
+//   try {
+//     const friend = await Friend.update(
+//       req.body,
+//       { where: {
+//         name: req.body.name
+//       },
+//       returning: true
+//     })
+//     console.log(friend)
+//     // res.json(friend)
+//   } catch(err) {
+//     console.log(err)
+//   }
+// })
+
+router.delete('/:id/friends', async (req, res, next) => {
+  try {
+    console.log('HITTING THE DELETE ROUTE!!')
+    await Friend.destroy({
+      where: {
+        id: req.body.friendId
+      }
+    })
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})

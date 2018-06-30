@@ -2,13 +2,18 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
-import { getUserFriends } from '../store'
+import { deleteFriend } from '../store/user'
 import { FriendCard } from './FriendCard'
 
 class FriendsList extends React.Component{
+
+  handleDelete = (userId, friendId) => {
+    this.props.deleteFriend(userId, friendId)
+  }
+
   render(){
     const userFriends = this.props.friends
-    return(
+    return (
     <View style={styles.container}>
       <ScrollView>
           {userFriends.map(friend => {
@@ -21,7 +26,7 @@ class FriendsList extends React.Component{
                             email={friend.email}
                 />
                 <Button title="Edit" />
-                <Button title="Delete" />
+                <Button title="Delete" onPress={() => this.handleDelete(this.props.userId, friend.id)}/>
               </View>
             )
           })}
@@ -53,13 +58,14 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-  friends: state.user.userFriends
+  friends: state.user.userFriends,
+  userId: state.user.user.id
 })
 
 const mapDispatchToProps = dispatch => ({
-  getFriends: () => {
-    return dispatch(getUserFriends())
-  },
+  deleteFriend: (userId, friendId) => {
+    return dispatch(deleteFriend(userId, friendId))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FriendsList)
