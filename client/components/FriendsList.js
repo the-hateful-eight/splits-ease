@@ -46,8 +46,8 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
     width: '100%',
     height: 100,
     position: 'absolute'
