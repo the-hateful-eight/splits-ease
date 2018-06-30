@@ -63,11 +63,21 @@ export const login = userInfo => {
 //     .catch(err => console.log(err))
 // }
 
-export const getUserFriends = userId => dispatch =>
-  axios
-    .get(`api/user/${userId}/friends`)
-    .then(res => dispatch(gotUserFriends(res.data)))
-    .catch(err => console.log(err))
+export const getUserFriends = userId => {
+  return async dispatch => {
+    try{
+      const { data } = await axios.get(`http://${ip}/api/user/${userId}/friends`)
+      // await console.log('DATA for FRIENDS is', data)
+      return dispatch(gotUserFriends(data))
+    }catch(err){
+      console.log(err)
+    }
+  }
+}
+  // axios
+  //   .get(`api/user/${userId}/friends`)
+  //   .then(res => dispatch(gotUserFriends(res.data)))
+  //   .catch(err => console.log(err))
 
 //Reducer
 export default function(state = initialState, action) {

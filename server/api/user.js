@@ -33,6 +33,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:id/friends', async (req, res, next) => {
+  try {
+    const friends = await Friend.findAll({ where: { userId: req.params.id } })
+    await console.log('FRIENDS ARE', friends)
+    res.json(friends)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id)
@@ -42,11 +52,4 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.get('/:id/friends', async (req, res, next) => {
-  try {
-    const friends = await Friend.findAll({ where: { userId: req.params.id } })
-    res.json(friends)
-  } catch (err) {
-    next(err)
-  }
-})
+

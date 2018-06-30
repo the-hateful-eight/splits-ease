@@ -105,6 +105,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             .then((res) => {
                 if(res){ownProps.navigation.navigate('Home', this.state)}
             })
+            .then(console.log('STATE in MDTP IS', this.state))
     }
 }
 

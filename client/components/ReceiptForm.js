@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import React from 'react'
+import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import {
   Button,
   FormLabel,
@@ -8,7 +8,7 @@ import {
 } from 'react-native-elements'
 import { connect } from 'react-redux'
 import assignItem from '../store/items'
-import getUserFriends from '../store/user'
+import { getUserFriends } from '../store/user'
 import ModalDropdown from 'react-native-modal-dropdown'
 
 const dummyData = [
@@ -33,14 +33,26 @@ const dummyData = [
 class ReceiptForm extends React.Component {
   state = {
     data: [],
+    friends: []
   }
 
+  renderFriends() {
+    console.log('PROPS IN RENDER ARE',this.props)
+  }
+
+  // UNSAFE_componentWillMount() {
+  //   console.log('PROPS USER IS',this.props.user.id)
+  //   this.props.getUserFriends(this.props.user.id)
+  // }
+
   componentDidMount() {
-      this.setState({ data: this.props.navigation.state.params.data })
+    this.setState({ data: this.props.navigation.state.params.data })
+    console.log('PROPS USER IS',this.props.user.id)
+    this.props.getUserFriends(this.props.user.id)
   }
 
   render() {
-    const data = this.state.data;
+    const data = this.state.data
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -70,7 +82,7 @@ class ReceiptForm extends React.Component {
                   style={styles.friendBtn}
                   textStyle={{ textAlign: 'center' }}
                   dropdownStyle={{ width: 70 }}
-                  options={['option 1', 'option 2']}
+                  options={this.renderFriends()}
                 />
               </View>
             )
@@ -80,27 +92,26 @@ class ReceiptForm extends React.Component {
           </View>
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-evenly"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   merchantText: {
-    justifyContent: "flex-start"
+    justifyContent: 'flex-start',
   },
   lineItem: {
-    // flex: 1,
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   input: {
-    borderColor: "black",
+    borderColor: 'black',
     borderRadius: 2,
     width: 100,
     height: 30,
@@ -113,19 +124,28 @@ const styles = StyleSheet.create({
     width: 100,
   },
   friendBtn: {
-    backgroundColor: "#b3e6ff",
+    backgroundColor: '#b3e6ff',
     borderRadius: 2,
     borderWidth: 1,
     width: 70,
-    borderColor: "black"
-  }
+    borderColor: 'black',
+  },
 })
 
+const mapStateToProps = state => {
+  console.log('STATE in MSTP is',state)
+  return{
+    user: state.user.user,
+    userFriends: state.userFriends
+  }
+}
+
 const mapDispatchToProps = dispatch => ({
-  assignItem: (id, receipient) => dispatch(assignItem(id, receipient))
-});
+  assignItem: (id, receipient) => dispatch(assignItem(id, receipient)),
+  getUserFriends: (id) => dispatch(getUserFriends(id))
+})
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
-)(ReceiptForm);
+)(ReceiptForm)

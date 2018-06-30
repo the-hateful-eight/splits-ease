@@ -50,9 +50,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logoutPress: () => {
-      dispatch(logout()).then(() => {
+      dispatch(logout())
+      .then(() => {
         ownProps.navigation.navigate('Home')
       })
+      // .then(console.log('T.S.N.S.P is',this.state.navigation.state.params))
     }
   }
 }
