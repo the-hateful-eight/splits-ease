@@ -1,33 +1,34 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Text, View, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
 import { getUserFriends } from '../store'
 import { FriendCard } from './FriendCard'
 
 class FriendsList extends React.Component{
-
   render(){
     const userFriends = this.props.friends
     return(
     <View style={styles.container}>
-      {userFriends.map(friend => {
-        return (
-          <View  key={friend.id}>
-            <FriendCard
-                        id={friend.id}
-                        name={friend.name}
-                        phone={friend.phone}
-                        email={friend.email}
-            />
-            <Button title="Edit" />
-            <Button title="Delete" />
-          </View>
-        )
-      })}
-      <View style={styles.bottomView}>
-        <Button title="Add Friend" buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')}/>
-      </View>
+      <ScrollView>
+          {userFriends.map(friend => {
+            return (
+              <View key={friend.id} >
+                <FriendCard
+                            id={friend.id}
+                            name={friend.name}
+                            phone={friend.phone}
+                            email={friend.email}
+                />
+                <Button title="Edit" />
+                <Button title="Delete" />
+              </View>
+            )
+          })}
+        <View style={styles.bottomView}>
+          <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')}/>
+        </View>
+      </ScrollView>
     </View>
     )
   }
