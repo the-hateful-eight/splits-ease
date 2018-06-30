@@ -20,7 +20,7 @@ class Home extends Component {
         />
         <Button
           title="Friends List"
-          onPress={() => this.props.navigation.navigate('FriendsList', {friends: this.props.user.userFriends})}
+          onPress={() => this.props.navigation.navigate('FriendsList')}
         />
         <Button
           title="Receipt List"

@@ -20,21 +20,27 @@ const GOT_USER = 'GOT_USER'
 const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
 const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
 const CREATED_USER = 'CREATED_USER'
+const ADD_FRIEND = 'ADD_FRIEND'
 
 //Action creators
 const gotMe = user => ({
   type: GOT_USER,
-  user,
+  user
 })
 
 const gotUserFriends = userFriends => ({
   type: GOT_USER_FRIENDS,
-  userFriends,
+  userFriends
 })
 
 const createdUser = user => ({
   type: CREATED_USER,
-  user,
+  user
+})
+
+const addedFriend = friend => ({
+  type: ADD_FRIEND,
+  friend
 })
 
 //Thunks
@@ -90,6 +96,16 @@ export const createUser = user => {
   }
 }
 
+export const addFriend = (friend, id) => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.post(`http://${ip}/api/user/${id}/friends`, friend)
+      return dispatch(addedFriend(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
 
 //Reducer
 export default function(state = initialState, action) {
@@ -113,6 +129,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         user: action.user
+      }
+    case ADD_FRIEND:
+      return {
+        ...state,
+        userFriends: [...state.userFriends, action.friend]
       }
     default:
       return state

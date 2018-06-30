@@ -12,6 +12,7 @@ import ReceiptList from './client/components/ReceiptList'
 import ReceiptPreview from './client/components/ReceiptPreview'
 import CreateUserForm from './client/components/CreateUserForm'
 import FriendsList from './client/components/FriendsList'
+import AddFriend from './client/components/AddFriend'
 
 require('./secrets')
 
@@ -77,6 +78,12 @@ const Nav = createStackNavigator(
       screen: FriendsList,
       navigationoptions: {
         headerTitle: 'FriendsList'
+      }
+    },
+    AddFriend: {
+      screen: AddFriend,
+      navigationoptions: {
+        headerTitle: 'AddFriend'
       }
     }
   },
