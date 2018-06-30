@@ -65,6 +65,26 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.post('/:id/friends', async (req, res, next) => {
+  try {
+    const friend = await Friend.findOrCreate({
+      where: {
+        name: req.body.name
+      },
+      defaults: req.body
+    })
+    if (friend[1]) {
+      res.json(friend[0])
+    } else {
+      const err = new Error('Friend already exists!')
+      err.status = 401
+      next(err)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:id/friends', async (req, res, next) => {
   try {
     const friends = await Friend.findAll({ where: { userId: req.params.id } })

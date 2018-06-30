@@ -5,12 +5,15 @@ const Friend = db.define('friend', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true
   },
   email: {
     type: Sequelize.STRING,
+    unique: true
   },
   phone: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    unique: true
   }
 })
 
