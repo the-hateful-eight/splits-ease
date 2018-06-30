@@ -63,21 +63,33 @@ export const login = userInfo => {
 //     .catch(err => console.log(err))
 // }
 
-export const getUserFriends = userId => {
+export const getUserFriends = id => {
   return async dispatch => {
-    try{
-      const { data } = await axios.get(`http://${ip}/api/user/${userId}/friends`)
-      // await console.log('DATA for FRIENDS is', data)
+  // axios
+  //   .get(`/api/user/${userId}/friends`)
+  //   .then(res => dispatch(gotUserFriends(res.data)))
+  //   .catch(err => console.log(err))
+    try {
+      const { data } = await axios.get(`http://${ip}/api/user/${id}/friends`)
+      console.log('GETTING USER FRIENDS', data)
       return dispatch(gotUserFriends(data))
-    }catch(err){
+    } catch(err) {
       console.log(err)
     }
   }
 }
-  // axios
-  //   .get(`api/user/${userId}/friends`)
-  //   .then(res => dispatch(gotUserFriends(res.data)))
-  //   .catch(err => console.log(err))
+
+export const createUser = user => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.post(`http://${ip}/api/user`, user)
+      return dispatch(gotMe(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 
 //Reducer
 export default function(state = initialState, action) {
@@ -96,6 +108,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         userFriend: action.userFriend,
+      }
+    case CREATED_USER:
+      return {
+        ...state,
+        user: action.user
       }
     default:
       return state

@@ -8,47 +8,23 @@ import {
 } from 'react-native-elements'
 import { connect } from 'react-redux'
 import assignItem from '../store/items'
-import { getUserFriends } from '../store/user'
 import ModalDropdown from 'react-native-modal-dropdown'
 
-const dummyData = [
-  {
-    item: 'burger',
-    price: '$1.50',
-  },
-  {
-    item: 'ramen',
-    price: '$13.00',
-  },
-  {
-    item: 'Mountain Dew',
-    price: '$1.50',
-  },
-  {
-    item: 'falafel',
-    price: '$6.00',
-  },
-]
-
 class ReceiptForm extends React.Component {
-  state = {
-    data: [],
-    friends: []
+  constructor(){
+    super()
+    this.state = {
+      data: []
+    }
+    this.renderFriends = this.renderFriends.bind(this)
   }
 
   renderFriends() {
-    console.log('PROPS IN RENDER ARE',this.props)
+    return this.props.userFriends.map(friend => friend.name)
   }
-
-  // UNSAFE_componentWillMount() {
-  //   console.log('PROPS USER IS',this.props.user.id)
-  //   this.props.getUserFriends(this.props.user.id)
-  // }
 
   componentDidMount() {
     this.setState({ data: this.props.navigation.state.params.data })
-    console.log('PROPS USER IS',this.props.user.id)
-    this.props.getUserFriends(this.props.user.id)
   }
 
   render() {
@@ -133,16 +109,14 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  console.log('STATE in MSTP is',state)
   return{
     user: state.user.user,
-    userFriends: state.userFriends
+    userFriends: state.user.userFriends
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  assignItem: (id, receipient) => dispatch(assignItem(id, receipient)),
-  getUserFriends: (id) => dispatch(getUserFriends(id))
+  assignItem: (id, receipient) => dispatch(assignItem(id, receipient))
 })
 
 export default connect(

@@ -1,52 +1,52 @@
-const SET_ITEMS = 'SET_ITEMS'
-const ASSOCIATE_ITEM = 'ASSOCIATE_ITEM'
-const UNASSOCIATE_ITEM = 'UNASSOCIATE_ITEM'
+const SET_ITEMS = "SET_ITEMS";
+const ASSOCIATE_ITEM = "ASSOCIATE_ITEM";
+const UNASSOCIATE_ITEM = "UNASSOCIATE_ITEM";
 
 const setReceiptItems = items => ({
   type: SET_ITEMS,
-  items,
-})
+  items
+});
 
 const associateItem = (index, recipient) => ({
   type: ASSOCIATE_ITEM,
   index,
-  recipient,
-})
+  recipient
+});
 
 const unassociateItem = index => ({
   type: UNASSOCIATE_ITEM,
-  index,
-})
+  index
+});
 
 export const setItems = items => {
   return dispatch => {
-    dispatch(setReceiptItems(items))
-  }
-}
+    dispatch(setReceiptItems(items));
+  };
+};
 
 export const assignItem = (index, recipient) => {
   return dispatch => {
-    dispatch(associateItem(index, recipient))
-  }
-}
+    dispatch(associateItem(index, recipient));
+  };
+};
 
 export const unassignItem = index => {
   return dispatch => {
-    dispatch(unassociateItem(index))
-  }
-}
+    dispatch(unassociateItem(index));
+  };
+};
 
 export default function(state = [], action) {
   switch (action.case) {
     case SET_ITEMS:
-      return action.items
+      return action.items;
     case ASSOCIATE_ITEM:
-      state[action.index].belongsTo = action.recipient
-      return state
+      state[action.index].belongsTo = action.recipient;
+      return state;
     case UNASSOCIATE_ITEM:
-      delete state[action.index].belongsTo
-      return state
+      delete state[action.index].belongsTo;
+      return state;
     default:
-      return state
+      return state;
   }
 }

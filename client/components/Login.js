@@ -39,7 +39,6 @@ class Login extends Component {
         }
     }
 
-
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -50,10 +49,10 @@ class Login extends Component {
                     />
                 </View>
                 <FormLabel>email</FormLabel>
-                <FormInput onChangeText={email => this.setState({ email })} />
+                <FormInput autoCapitalize='none' onChangeText={email => this.setState({ email })} />
                 <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
                 <FormLabel>password</FormLabel>
-                <FormInput onChangeText={password => this.setState({ password })} />
+                <FormInput autoCapitalize='none' onChangeText={password => this.setState({ password })} />
                 <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
                 <Button buttonStyle={styles.logInBtn}
                     raised
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
     },
     createAccount: {
         backgroundColor: 'blue'
-        // textAlign: 'center'
     },
     logo: {
         width: 300,
@@ -97,15 +95,12 @@ const styles = StyleSheet.create({
     }
 })
 
-
-
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         login: (user) => dispatch(login(user))
             .then((res) => {
-                if(res){ownProps.navigation.navigate('Home', this.state)}
+                if(res){ownProps.navigation.navigate('Home')}
             })
-            .then(console.log('STATE in MDTP IS', this.state))
     }
 }
 
