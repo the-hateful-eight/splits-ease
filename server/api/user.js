@@ -59,16 +59,12 @@ router.put('/login', async (req, res, next) => {
 router.get('/:id/friends', async (req, res, next) => {
   try {
     const friends = await Friend.findAll({ where: { userId: req.params.id } })
-    await console.log('FRIENDS ARE', friends)
     res.json(friends)
   } catch (err) {
     next(err)
   }
 })
 
-<<<<<<< HEAD
-router.get('/:id', async (req, res, next) => {
-=======
 router.post('/:id/friends', async (req, res, next) => {
   try {
     const friend = await Friend.findOrCreate({
@@ -84,16 +80,6 @@ router.post('/:id/friends', async (req, res, next) => {
       err.status = 401
       next(err)
     }
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.get('/:id/friends', async (req, res, next) => {
->>>>>>> master
-  try {
-    const user = await User.findById(req.params.id)
-    res.json(user)
   } catch (err) {
     next(err)
   }
