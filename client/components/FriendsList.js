@@ -13,6 +13,7 @@ class FriendsList extends React.Component{
 
   render(){
     const userFriends = this.props.friends
+    const userId = this.props.userId
     return (
     <View style={styles.container}>
       <ScrollView>
@@ -26,12 +27,12 @@ class FriendsList extends React.Component{
                             email={friend.email}
                 />
                 <Button title="Edit" />
-                <Button title="Delete" onPress={() => this.handleDelete(this.props.userId, friend.id)}/>
+                <Button title="Delete" onPress={() => this.handleDelete(userId, friend.id)} />
               </View>
             )
           })}
         <View style={styles.bottomView}>
-          <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')}/>
+          <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
         </View>
       </ScrollView>
     </View>

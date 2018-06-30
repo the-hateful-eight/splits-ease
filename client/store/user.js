@@ -50,9 +50,10 @@ const editedFriend = friend => ({
   friend
 })
 
-const deletedFriend = friendId => ({
+const deletedFriend = (id, friendId) => ({
   type: DELETE_FRIEND,
-  friendId
+  friendId,
+  id
 })
 
 //Thunks
@@ -121,7 +122,7 @@ export const addFriend = (friend, id) => {
 export const deleteFriend = (id, friendId) => {
   return async dispatch => {
     try {
-      console.log('HITTING THE DELETE THUNK!!')
+      console.log('HITTING THE DELETE THUNK!!', dispatch)
       await axios.delete((`http://${ip}/api/user/${id}/friends`, friendId))
       dispatch(deletedFriend(id, friendId))
     } catch (err) {

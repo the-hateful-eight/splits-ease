@@ -124,7 +124,6 @@ router.get('/:id/friends', async (req, res, next) => {
 
 router.delete('/:id/friends', async (req, res, next) => {
   try {
-    console.log('HITTING THE DELETE ROUTE!!')
     await Friend.destroy({
       where: {
         id: req.body.friendId
