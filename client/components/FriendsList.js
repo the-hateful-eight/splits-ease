@@ -20,19 +20,19 @@ class FriendsList extends React.Component{
           {userFriends.map(friend => {
             return (
               <View key={friend.id} style={styles.friendCards}>
+                <Button icon={{ name: 'close' }} onPress={() => this.handleDelete(userId, friend.id)} />
                 <FriendCard
                             id={friend.id}
                             name={friend.name}
                             phone={friend.phone}
                             email={friend.email}
                 />
-                <Button title="Edit" onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
+                <Button icon={{ name: 'create' }} onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
                   id: friend.id,
                   name: friend.name,
                   phone: friend.phone,
                   email: friend.email
-                } })} />
-                <Button title="Delete" onPress={() => this.handleDelete(userId, friend.id)} />
+                } })} buttonStyle={{ alignItems: 'flex-end' }}/>
               </View>
             )
           })}
@@ -64,8 +64,10 @@ const styles = StyleSheet.create({
     height: 50
   },
   friendCards: {
-    paddingTop: 10,
-    paddingBottom: 10
+    paddingTop: 12,
+    paddingBottom: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 })
 
