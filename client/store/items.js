@@ -37,7 +37,7 @@ export const unassignItem = index => {
 };
 
 export default function(state = [], action) {
-  switch (action.case) {
+  switch (action.type) {
     case SET_ITEMS:
       return action.items;
     case ASSOCIATE_ITEM:
