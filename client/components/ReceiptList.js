@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
+import { Icon } from 'react-native-elements'
 import ReceiptCard from './ReceiptCard'
 
 const dummyReceipts = [
@@ -36,6 +37,7 @@ export default class ReceiptList extends React.Component {
   }
 
   render(){
+    this.props.navigation.openDrawer()
     const { receipts } = this.state
     return receipts === 'undefined' ? <View>Loading...</View>
     : (
