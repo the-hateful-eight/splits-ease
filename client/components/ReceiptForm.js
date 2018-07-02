@@ -14,10 +14,15 @@ class ReceiptForm extends React.Component {
   constructor(){
     super()
     this.renderFriends = this.renderFriends.bind(this)
+    this.selectFriend = this.selectFriend.bind(this)
   }
 
-  selectFriend = event => {
-    console.log('PRESSED', event.target.index)
+  selectFriend = (idx, val) => {
+    this.props.assignItem(idx, val)
+  }
+
+  renderFriends() {
+    return this.props.userFriends.map(friend => friend.name)
   }
 
   render() {
@@ -34,7 +39,7 @@ class ReceiptForm extends React.Component {
                     id={item.id}
                     inputStyle={styles.input}
                   >
-                    ITEM {item.item}
+                    {item.item}
                   </FormInput>
                 </ScrollView>
                 <FormInput
@@ -43,7 +48,7 @@ class ReceiptForm extends React.Component {
                   id={item.id}
                   containerStyle={styles.input}
                 >
-                  PRICE {item.price}
+                  {item.price}
                 </FormInput>
                 <ModalDropdown
                   defaultValue="Add Friend"

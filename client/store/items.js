@@ -41,7 +41,7 @@ export default function(state = [], action) {
     case SET_ITEMS:
       return action.items
     case ASSOCIATE_ITEM:
-      state.items[action.index].belongsTo = action.recipient
+      state[action.index].belongsTo = action.recipient
       return state
     case UNASSOCIATE_ITEM:
       delete state.items[action.index].belongsTo
