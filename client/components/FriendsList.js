@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import { Button } from 'react-native-elements'
+import { Button, Icon } from 'react-native-elements'
 import { deleteFriend } from '../store/user'
 import { FriendCard } from './FriendCard'
 
@@ -20,19 +20,28 @@ class FriendsList extends React.Component{
           {userFriends.map(friend => {
             return (
               <View key={friend.id} style={styles.friendCards}>
-                <Button icon={{ name: 'close' }} onPress={() => this.handleDelete(userId, friend.id)} />
+                <Icon
+                  raised
+                  name='close'
+                  color='red'
+                  onPress={() => this.handleDelete(userId, friend.id)}
+                  />
                 <FriendCard
                             id={friend.id}
                             name={friend.name}
                             phone={friend.phone}
                             email={friend.email}
                 />
-                <Button icon={{ name: 'create' }} onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
+                <Icon
+                  raised
+                  name='create'
+                  onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
                   id: friend.id,
                   name: friend.name,
                   phone: friend.phone,
                   email: friend.email
-                } })} buttonStyle={{ alignItems: 'flex-end' }}/>
+                  }})}
+                  />
               </View>
             )
           })}
@@ -59,15 +68,17 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   addBtn: {
-    backgroundColor: 'red',
+    backgroundColor: 'blue',
     width: '100%',
     height: 50
   },
   friendCards: {
+    flex: 1,
     paddingTop: 12,
     paddingBottom: 12,
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    alignItems: 'center'
   }
 })
 
