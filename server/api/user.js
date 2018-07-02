@@ -107,30 +107,17 @@ router.delete('/:id/friends/:friendId', async (req, res, next) => {
   }
 })
 
-// router.put('/:id/friends', async (req, res, next) => {
-//   try {
-//     const friend = await Friend.destroy({
-//       where: {
-//         ...
-//       }
-//     })
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-// router.put('/:id/friends', async (req, res, next) => {
-//   try {
-//     const friend = await Friend.update(
-//       req.body,
-//       { where: {
-//         name: req.body.name
-//       },
-//       returning: true
-//     })
-//     console.log(friend)
-//     // res.json(friend)
-//   } catch(err) {
-//     console.log(err)
-//   }
-// })
+router.put('/:id/friends', async (req, res, next) => {
+  try {
+    const friend = await Friend.update(
+      req.body,
+      { where: {
+        id: req.body.id
+      },
+      returning: true
+    })
+    res.json(friend[1])
+  } catch(err) {
+    console.log(err)
+  }
+})

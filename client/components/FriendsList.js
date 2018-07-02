@@ -18,6 +18,7 @@ class FriendsList extends React.Component{
     <View style={styles.container}>
       <ScrollView>
           {userFriends.map(friend => {
+            console.log('YOUR FRIENDS ARE HERE', friend)
             return (
               <View key={friend.id} >
                 <FriendCard
@@ -26,7 +27,12 @@ class FriendsList extends React.Component{
                             phone={friend.phone}
                             email={friend.email}
                 />
-                <Button title="Edit" />
+                <Button title="Edit" onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
+                  id: friend.id,
+                  name: friend.name,
+                  phone: friend.phone,
+                  email: friend.email
+                } })} />
                 <Button title="Delete" onPress={() => this.handleDelete(userId, friend.id)} />
               </View>
             )

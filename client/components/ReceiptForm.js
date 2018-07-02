@@ -23,12 +23,16 @@ class ReceiptForm extends React.Component {
     return this.props.userFriends.map(friend => friend.name)
   }
 
-  componentDidMount() {
-    this.setState({ data: this.props.navigation.state.params.data })
-  }
+  // componentDidMount() {
+  //   this.setState({ data: this.props.navigation.state.params.data })
+  // }
 
   render() {
-    const data = this.state.data
+    const data = this.props.items
+    // console.log('DATA IS HERE!!!', data)
+    // if (!data.length){
+
+    // }
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -42,7 +46,7 @@ class ReceiptForm extends React.Component {
                     id={item.id}
                     inputStyle={styles.input}
                   >
-                    {item.item}
+                    ITEM {item.item}
                   </FormInput>
                 </ScrollView>
                 <FormInput
@@ -51,7 +55,7 @@ class ReceiptForm extends React.Component {
                   id={item.id}
                   containerStyle={styles.input}
                 >
-                  {item.price}
+                  PRICE {item.price}
                 </FormInput>
                 <ModalDropdown
                   defaultValue="Add Friend"
@@ -111,7 +115,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return{
     user: state.user.user,
-    userFriends: state.user.userFriends
+    userFriends: state.user.userFriends,
+    items: state.items
   }
 }
 
