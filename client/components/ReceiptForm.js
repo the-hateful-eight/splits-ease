@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  return{
+  return {
     user: state.user.user,
     userFriends: state.user.userFriends,
     items: state.items
