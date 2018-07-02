@@ -64,6 +64,9 @@ class ReceiptForm extends React.Component {
           <View>
             <Button style={styles.sendAllBtn} title="Send All" />
           </View>
+          <View style={styles.bottomView}>
+          <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
+        </View>
         </ScrollView>
       </View>
     )
@@ -71,6 +74,10 @@ class ReceiptForm extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  addBtn: {
+    backgroundColor: 'red',
+    width: '100%'
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
