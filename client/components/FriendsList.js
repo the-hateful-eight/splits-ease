@@ -18,9 +18,8 @@ class FriendsList extends React.Component{
     <View style={styles.container}>
       <ScrollView>
           {userFriends.map(friend => {
-            console.log('YOUR FRIENDS ARE HERE', friend)
             return (
-              <View key={friend.id} >
+              <View key={friend.id} style={styles.friendCards}>
                 <FriendCard
                             id={friend.id}
                             name={friend.name}
@@ -37,10 +36,11 @@ class FriendsList extends React.Component{
               </View>
             )
           })}
-        <View style={styles.bottomView}>
-          <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
-        </View>
       </ScrollView>
+      <View style={{ height: 60 }}/>
+      <View style={styles.bottomView}>
+          <Button title='Add Friend' icon={{ name: 'add-circle' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
+      </View>
     </View>
     )
   }
@@ -53,14 +53,19 @@ const styles = StyleSheet.create({
   bottomView: {
     bottom: 0,
     justifyContent: 'flex-end',
-    alignItems: 'flex-end',
+    alignItems: 'center',
     width: '100%',
     height: 100,
     position: 'absolute'
   },
   addBtn: {
     backgroundColor: 'red',
-    width: '100%'
+    width: '100%',
+    height: 50
+  },
+  friendCards: {
+    paddingTop: 10,
+    paddingBottom: 10
   }
 })
 

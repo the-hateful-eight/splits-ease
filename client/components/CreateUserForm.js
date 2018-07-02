@@ -18,7 +18,7 @@ class CreateUserForm extends React.Component {
 
   render () {
     return (
-    <KeyboardAvoidingView behavior='padding' style={styles.container}>
+    <KeyboardAvoidingView behavior='padding' style={styles.container} >
       <FormLabel>Name</FormLabel>
       <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={name => this.setState({ name })} />
       <FormLabel>Email</FormLabel>

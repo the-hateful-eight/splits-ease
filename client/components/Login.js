@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Image, Text, KeyboardAvoidingView } from 'react-native'
+import { ScrollView, StyleSheet, View, Image, Text, KeyboardAvoidingView } from 'react-native'
 import { SocialIcon, FormLabel, FormInput, FormValidationMessage, Button, Divider } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { login } from '../store/user'
@@ -41,7 +41,8 @@ class Login extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView behavior="padding" style={styles.container}>
+            <KeyboardAvoidingView behavior="padding" style={styles.container} >
+                <ScrollView>
                 <View style={styles.logoContainer}>
                     <Image
                         style={styles.logo}
@@ -60,13 +61,14 @@ class Login extends Component {
                     title='Login'
                     onPress={this.handleLogin}
                 />
-                <Button title="Create Account" buttonStyle={styles.createAccount} onPress={() => this.props.navigation.navigate('CreateUserForm')} />
+                <Button icon={{ name: 'account-circle' }} title="Create Account" buttonStyle={styles.createAccount} onPress={() => this.props.navigation.navigate('CreateUserForm')} />
                 <SocialIcon
                     title='Sign In With Google'
                     button
                     type='google-plus-official'
                     onPress={this.signInWithGoogleAsync.bind(this)}
                 />
+            </ScrollView>
             </KeyboardAvoidingView>
         )
     }
