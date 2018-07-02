@@ -59,16 +59,12 @@ router.put('/login', async (req, res, next) => {
 router.get('/:id/friends', async (req, res, next) => {
   try {
     const friends = await Friend.findAll({ where: { userId: req.params.id } })
-    await console.log('FRIENDS ARE', friends)
     res.json(friends)
   } catch (err) {
     next(err)
   }
 })
 
-<<<<<<< HEAD
-router.get('/:id', async (req, res, next) => {
-=======
 router.post('/:id/friends', async (req, res, next) => {
   try {
     const friend = await Friend.findOrCreate({
@@ -90,13 +86,38 @@ router.post('/:id/friends', async (req, res, next) => {
 })
 
 router.get('/:id/friends', async (req, res, next) => {
->>>>>>> master
   try {
-    const user = await User.findById(req.params.id)
-    res.json(user)
+    const friends = await Friend.findAll({ where: { userId: req.params.id } })
+    res.json(friends)
   } catch (err) {
     next(err)
   }
 })
 
+router.delete('/:id/friends/:friendId', async (req, res, next) => {
+  try {
+    await Friend.destroy({
+      where: {
+        id: req.params.friendId
+      }
+    })
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
 
+router.put('/:id/friends', async (req, res, next) => {
+  try {
+    const friend = await Friend.update(
+      req.body,
+      { where: {
+        id: req.body.id
+      },
+      returning: true
+    })
+    res.json(friend[1])
+  } catch(err) {
+    console.log(err)
+  }
+})

@@ -13,20 +13,11 @@ import ModalDropdown from 'react-native-modal-dropdown'
 class ReceiptForm extends React.Component {
   constructor(){
     super()
-    // this.state = {
-    //   selectedIndex: '',
-    //   dropdown: {}
-    // }
     this.renderFriends = this.renderFriends.bind(this)
-    // this.selectFriend = this.selectFriend.bind(this)
   }
 
   selectFriend = event => {
     console.log('PRESSED', event.target.index)
-  }
-
-  renderFriends() {
-    return this.props.userFriends.map(friend => friend.name)
   }
 
   render() {
@@ -43,7 +34,7 @@ class ReceiptForm extends React.Component {
                     id={item.id}
                     inputStyle={styles.input}
                   >
-                    {item.item}
+                    ITEM {item.item}
                   </FormInput>
                 </ScrollView>
                 <FormInput
@@ -52,7 +43,7 @@ class ReceiptForm extends React.Component {
                   id={item.id}
                   containerStyle={styles.input}
                 >
-                  {item.price}
+                  PRICE {item.price}
                 </FormInput>
                 <ModalDropdown
                   defaultValue="Add Friend"
@@ -61,7 +52,6 @@ class ReceiptForm extends React.Component {
                   dropdownStyle={{ width: 70 }}
                   options={this.renderFriends()}
                   onSelect={this.selectFriend}
-                  // defaultIndex={this.state.selectedIndex}
                 />
               </View>
             )

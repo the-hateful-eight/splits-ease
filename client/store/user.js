@@ -21,6 +21,8 @@ const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
 const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
 const CREATED_USER = 'CREATED_USER'
 const ADD_FRIEND = 'ADD_FRIEND'
+const EDIT_FRIEND = 'EDIT_FRIEND'
+const DELETE_FRIEND = 'DELETE_FRIEND'
 
 //Action creators
 const gotMe = user => ({
@@ -41,6 +43,18 @@ const createdUser = user => ({
 const addedFriend = friend => ({
   type: ADD_FRIEND,
   friend
+})
+
+const editedFriend = (friendId, friendData) => ({
+  type: EDIT_FRIEND,
+  friendId,
+  friendData
+})
+
+const deletedFriend = (id, friendId) => ({
+  type: DELETE_FRIEND,
+  friendId,
+  id
 })
 
 //Thunks
@@ -73,9 +87,8 @@ export const getUserFriends = id => {
   return async dispatch => {
     try {
       const { data } = await axios.get(`http://${ip}/api/user/${id}/friends`)
-      console.log('USER GET FRIENDS THUNK HERE!')
       return dispatch(gotUserFriends(data))
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
   }
@@ -97,6 +110,28 @@ export const addFriend = (friend, id) => {
     try {
       const { data } = await axios.post(`http://${ip}/api/user/${id}/friends`, friend)
       return dispatch(addedFriend(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export const deleteFriend = (id, friendId) => {
+  return async dispatch => {
+    try {
+      await axios.delete(`http://${ip}/api/user/${id}/friends/${friendId}`)
+      dispatch(deletedFriend(id, friendId))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export const editFriend = (id, friendData) => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.put(`http://${ip}/api/user/${id}/friends`, friendData)
+      return dispatch(editedFriend(friendData.id, data))
     } catch (err) {
       console.log(err)
     }
@@ -130,6 +165,24 @@ export default function(state = initialState, action) {
       return {
         ...state,
         userFriends: [...state.userFriends, action.friend]
+      }
+    case DELETE_FRIEND:
+      return {
+        ...state,
+        userFriends: [...state.userFriends.filter(friend => {
+          if (friend.id !== action.friendId){
+            return friend
+          }
+        })]
+      }
+    case EDIT_FRIEND:
+      return {
+        ...state,
+        userFriends: [...state.userFriends.filter(friend => {
+          if (friend.id !== action.friendId){
+            return friend
+          }
+        }), action.friendData[0]]
       }
     default:
       return state
