@@ -7,36 +7,29 @@ import {
   FormValidationMessage,
 } from 'react-native-elements'
 import { connect } from 'react-redux'
-import assignItem from '../store/items'
+import { setItems, assignItem, unassignItem } from '../store/items'
 import ModalDropdown from 'react-native-modal-dropdown'
 
 class ReceiptForm extends React.Component {
   constructor(){
     super()
-    this.state = {
-      data: []
-    }
     this.renderFriends = this.renderFriends.bind(this)
+    this.selectFriend = this.selectFriend.bind(this)
+  }
+
+  selectFriend = (idx, val) => {
+    this.props.assignItem(idx, val)
   }
 
   renderFriends() {
     return this.props.userFriends.map(friend => friend.name)
   }
 
-  // componentDidMount() {
-  //   this.setState({ data: this.props.navigation.state.params.data })
-  // }
-
   render() {
-    const data = this.props.items
-    // console.log('DATA IS HERE!!!', data)
-    // if (!data.length){
-
-    // }
     return (
       <View style={styles.container}>
         <ScrollView>
-          {data.map(item => {
+          {this.props.items.map(item => {
             return (
               <View key={item.id} style={styles.lineItem}>
                 <ScrollView horizontal={true}>
@@ -46,7 +39,7 @@ class ReceiptForm extends React.Component {
                     id={item.id}
                     inputStyle={styles.input}
                   >
-                    ITEM {item.item}
+                    {item.item}
                   </FormInput>
                 </ScrollView>
                 <FormInput
@@ -55,7 +48,7 @@ class ReceiptForm extends React.Component {
                   id={item.id}
                   containerStyle={styles.input}
                 >
-                  PRICE {item.price}
+                  {item.price}
                 </FormInput>
                 <ModalDropdown
                   defaultValue="Add Friend"
@@ -63,6 +56,7 @@ class ReceiptForm extends React.Component {
                   textStyle={{ textAlign: 'center' }}
                   dropdownStyle={{ width: 70 }}
                   options={this.renderFriends()}
+                  onSelect={this.selectFriend}
                 />
               </View>
             )
@@ -121,7 +115,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  assignItem: (id, receipient) => dispatch(assignItem(id, receipient))
+  setItems: items => dispatch(setItems(items)),
+  assignItem: (id, receipient) => dispatch(assignItem(id, receipient)),
+  unassignItem: index => dispatch(unassignItem(index))
 })
 
 export default connect(
