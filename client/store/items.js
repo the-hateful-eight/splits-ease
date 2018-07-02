@@ -20,7 +20,7 @@ const unassociateItem = index => ({
 
 export const setItems = items => {
   return dispatch => {
-    return dispatch(setReceiptItems(items))
+    dispatch(setReceiptItems(items))
   }
 }
 

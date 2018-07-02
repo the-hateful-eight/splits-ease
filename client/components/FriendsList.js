@@ -18,7 +18,6 @@ class FriendsList extends React.Component{
     <View style={styles.container}>
       <ScrollView>
           {userFriends.map(friend => {
-            console.log('YOUR FRIENDS ARE HERE', friend)
             return (
               <View key={friend.id} >
                 <FriendCard

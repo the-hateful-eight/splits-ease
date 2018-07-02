@@ -7,12 +7,10 @@ import { getUserFriends } from '../store/user'
 class Home extends Component {
 
   componentDidMount () {
-    console.log('USER CDM HERE!!!!!')
     this.props.getUserFriends(this.props.user.id)
   }
 
   render() {
-    console.log('USER RENDER HERE!!!')
     return (
       <View style={styles.container}>
         <Text>Welcome to SPLITS/ease, {this.props.user.name}</Text>
@@ -44,7 +42,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = state => {
-  console.log('USER MSTP HERE!!!!!')
   return {
     user: state.user.user,
     userFriends: state.user.userFriends
