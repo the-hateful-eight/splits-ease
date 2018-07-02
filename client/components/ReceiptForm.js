@@ -7,32 +7,33 @@ import {
   FormValidationMessage,
 } from 'react-native-elements'
 import { connect } from 'react-redux'
-import assignItem from '../store/items'
+import { setItems, assignItem, unassignItem } from '../store/items'
 import ModalDropdown from 'react-native-modal-dropdown'
 
 class ReceiptForm extends React.Component {
   constructor(){
     super()
-    this.state = {
-      data: []
-    }
+    // this.state = {
+    //   selectedIndex: '',
+    //   dropdown: {}
+    // }
     this.renderFriends = this.renderFriends.bind(this)
+    // this.selectFriend = this.selectFriend.bind(this)
+  }
+
+  selectFriend = event => {
+    console.log('PRESSED', event.target.index)
   }
 
   renderFriends() {
     return this.props.userFriends.map(friend => friend.name)
   }
 
-  componentDidMount() {
-    this.setState({ data: this.props.navigation.state.params.data })
-  }
-
   render() {
-    const data = this.state.data
     return (
       <View style={styles.container}>
         <ScrollView>
-          {data.map(item => {
+          {this.props.items.map(item => {
             return (
               <View key={item.id} style={styles.lineItem}>
                 <ScrollView horizontal={true}>
@@ -59,6 +60,8 @@ class ReceiptForm extends React.Component {
                   textStyle={{ textAlign: 'center' }}
                   dropdownStyle={{ width: 70 }}
                   options={this.renderFriends()}
+                  onSelect={this.selectFriend}
+                  // defaultIndex={this.state.selectedIndex}
                 />
               </View>
             )
@@ -111,12 +114,15 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
   return{
     user: state.user.user,
-    userFriends: state.user.userFriends
+    userFriends: state.user.userFriends,
+    items: state.items
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  assignItem: (id, receipient) => dispatch(assignItem(id, receipient))
+  setItems: items => dispatch(setItems(items)),
+  assignItem: (id, receipient) => dispatch(assignItem(id, receipient)),
+  unassignItem: index => dispatch(unassignItem(index))
 })
 
 export default connect(
