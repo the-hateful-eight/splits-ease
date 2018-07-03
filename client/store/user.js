@@ -13,6 +13,7 @@ const initialState = {
   user: {},
   userFriends: [],
   userFriend: {},
+
 }
 
 //Actions

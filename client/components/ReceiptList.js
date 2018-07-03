@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import ReceiptCard from './ReceiptCard'
+import { connect } from 'tls';
 
 const dummyReceipts = [
   {
@@ -19,7 +20,7 @@ const dummyReceipts = [
   },
 ]
 
-export default class ReceiptList extends React.Component {
+class ReceiptList extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -48,4 +49,9 @@ export default class ReceiptList extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  receipts: state
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiptList)
 
