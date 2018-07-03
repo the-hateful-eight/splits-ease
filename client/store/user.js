@@ -13,16 +13,17 @@ const initialState = {
   user: {},
   userFriends: [],
   userFriend: {},
+  userReceipts: []
 }
 
 //Actions
 const GOT_USER = 'GOT_USER'
 const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
 const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
-const CREATED_USER = 'CREATED_USER'
 const ADD_FRIEND = 'ADD_FRIEND'
 const EDIT_FRIEND = 'EDIT_FRIEND'
 const DELETE_FRIEND = 'DELETE_FRIEND'
+const GOT_USER_RECEIPTS = 'GOT_USER_RECEIPTS'
 
 //Action creators
 const gotMe = user => ({
@@ -33,11 +34,6 @@ const gotMe = user => ({
 const gotUserFriends = userFriends => ({
   type: GOT_USER_FRIENDS,
   userFriends
-})
-
-const createdUser = user => ({
-  type: CREATED_USER,
-  user
 })
 
 const addedFriend = friend => ({
@@ -55,6 +51,11 @@ const deletedFriend = (id, friendId) => ({
   type: DELETE_FRIEND,
   friendId,
   id
+})
+
+const gotUserReceipts = userReceipts => ({
+  type: GOT_USER_RECEIPTS,
+  userReceipts
 })
 
 //Thunks
@@ -138,6 +139,17 @@ export const editFriend = (id, friendData) => {
   }
 }
 
+export const getUserReceipts = id => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.get(`http://${ip}/api/receipts/${id}`)
+      return dispatch(gotUserReceipts(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 //Reducer
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -155,11 +167,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         userFriend: action.userFriend,
-      }
-    case CREATED_USER:
-      return {
-        ...state,
-        user: action.user
       }
     case ADD_FRIEND:
       return {
@@ -183,6 +190,11 @@ export default function(state = initialState, action) {
             return friend
           }
         }), action.friendData[0]]
+      }
+    case GOT_USER_RECEIPTS:
+      return{
+        ...state,
+        userReceipts: action.userReceipts
       }
     default:
       return state
