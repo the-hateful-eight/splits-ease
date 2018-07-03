@@ -16,6 +16,20 @@ const splitDrawerItem = createStackNavigator({
   ReceiptForm: {
     screen: ReceiptForm,
   }
+},
+{
+  navigationOptions: {
+      headerStyle: {
+          backgroundColor: '#3FA9F5'
+      },
+      headerTitleStyle: {
+          color: 'white'
+      },
+      headerBackTitleStyle: {
+          color: 'white'
+      },
+      headerTintColor: 'white'
+  }
 })
 
 splitDrawerItem.navigationOptions = {

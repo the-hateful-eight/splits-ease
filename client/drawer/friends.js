@@ -2,30 +2,35 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
-import FriendsList from '../components/FriendsList';
+import FriendsList from '../components/FriendsList'
 import AddFriend from '../components/AddFriend'
 import EditForm from '../components/EditForm'
 
 const friendsDrawerItem = createStackNavigator({
     FriendsList: {
-        screen: FriendsList,
-        navigationoptions: {
-            headerTitle: 'FriendsList'
-        }
+        screen: FriendsList
     },
     AddFriend: {
-        screen: AddFriend,
-        navigationoptions: {
-            headerTitle: 'AddFriend'
-        }
+        screen: AddFriend
     },
     EditForm: {
-        screen: EditForm,
-        navigationoptions: {
-            headerTitle: 'EditForm'
+        screen: EditForm
+    }
+},
+    {
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#3FA9F5'
+            },
+            headerTitleStyle: {
+                color: 'white'
+            },
+            headerBackTitleStyle: {
+                color: 'white'
+            },
+            headerTintColor: 'white'
         }
     }
-}
 );
 
 friendsDrawerItem.navigationOptions = {

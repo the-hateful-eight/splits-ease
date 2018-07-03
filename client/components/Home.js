@@ -8,14 +8,34 @@ import { getUserFriends, login } from '../store/user'
 
 class Home extends Component {
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.navigation.navigate('DrawerClose')
     this.props.getUserFriends(this.props.user.id)
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View>
+        <Header
+          backgroundColor='#3FA9F5'
+          leftComponent={
+            <Icon
+            name='menu'
+            color='#fff'
+            onPress={this.props.navigation.openDrawer}
+            underlayColor='#3FA9F5'
+            />
+          }
+          rightComponent={
+            <Icon
+            name='settings'
+            color='#fff'
+            onPress={this.props.navigation.openDrawer}
+            underlayColor='#3FA9F5'
+            />
+          }
+        />
+        <View>
           <Text>Welcome to SPLITS/ease, {this.props.user.name}</Text>
           <Button
             title="Take a picture"
@@ -30,7 +50,8 @@ class Home extends Component {
             onPress={() => this.props.navigation.navigate('Receipts')}
           />
           {/* <Button title="Logout" onClick={this.props.logoutPress} /> */}
-        {/* </View> */}
+          {/* </View> */}
+        </View>
       </View>
     )
   }
@@ -42,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 })
 
 const mapStateToProps = state => {
@@ -56,9 +77,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logoutPress: () => {
       dispatch(logout())
-      .then(() => {
-        ownProps.navigation.navigate('Home')
-      })
+        .then(() => {
+          ownProps.navigation.navigate('Home')
+        })
     },
     getUserFriends: (id) => {
       dispatch(getUserFriends(id))
