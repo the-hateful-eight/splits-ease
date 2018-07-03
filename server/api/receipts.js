@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Receipt } = require('../db')
+const { Receipt, User } = require('../db')
 const fs = require('fs')
 
 const twilio = require('twilio')
@@ -39,7 +39,7 @@ router.get(`/:id`, async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
   const buffer = Buffer.from(req.body.image, 'base64')
   try {
     const parsed = await client.documentTextDetection(buffer)
@@ -47,6 +47,8 @@ router.post('/', async (req, res, next) => {
       console.error(err)
     )
     res.json(parsed[0])
+
+    const createdReceipt = Receipt.create({receiptImage: buffer, userId: req.params.id})
   } catch (err) {
     console.error(err)
     next()

@@ -15,6 +15,11 @@ class ReceiptForm extends React.Component {
     super()
     this.renderFriends = this.renderFriends.bind(this)
     this.selectFriend = this.selectFriend.bind(this)
+    this.handleSendAll = this.handleSendAll.bind(this)
+  }
+
+  handleSendAll(){
+
   }
 
   selectFriend = (idx, val) => {
@@ -62,7 +67,7 @@ class ReceiptForm extends React.Component {
             )
           })}
           <View>
-            <Button style={styles.sendAllBtn} title="Send All" />
+            <Button style={styles.sendAllBtn} title="Send All" onPress={() => this.props.navigation.navigate('Home')}/>
           </View>
           <View style={styles.bottomView}>
           <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
