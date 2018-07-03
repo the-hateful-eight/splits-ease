@@ -41,7 +41,7 @@ const Drawer = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
     contentOptions: {
       labelStyle: {
         fontSize: 15,
