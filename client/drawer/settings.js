@@ -1,29 +1,29 @@
-// import React from 'react';
-// import { createStackNavigator } from 'react-navigation';
-// import { Icon } from 'react-native-elements';
+import React from 'react';
+import { createStackNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 
-// import Home from '../components/Home';
+import ReceiptList from '../components/ReceiptList';
 
-// const homeDrawerItem = createStackNavigator({
-//   Home: {
-//     screen: Home,
-//   },
-// });
+const settingsDrawerItem = createStackNavigator({
+  Settings: {
+    screen: ReceiptList,
+  },
+});
 
-// homeDrawerItem.navigationOptions = {
-//   drawerLabel: 'Settings',
-//   drawerIcon: ({ tintColor }) => (
-//     <Icon
-//       name="home"
-//       size={30}
-//       iconStyle={{
-//         width: 30,
-//         height: 30
-//       }}
-//       type="material"
-//       color={tintColor}
-//     />
-//   ),
-// };
+settingsDrawerItem.navigationOptions = {
+  drawerLabel: 'Settings',
+  drawerIcon: ({ tintColor }) => (
+    <Icon
+      name="settings"
+      size={30}
+      iconStyle={{
+        width: 30,
+        height: 30
+      }}
+      type="material"
+      color={tintColor}
+    />
+  ),
+};
 
-// export default homeDrawerItem;
+export default settingsDrawerItem;

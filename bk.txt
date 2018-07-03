@@ -1,1 +1,4 @@
+<<<<<<< HEAD
 {"faceAnnotations":[],"landmarkAnnotations":[],"logoAnnotations":[],"labelAnnotations":[],"textAnnotations":[],"safeSearchAnnotation":null,"imagePropertiesAnnotation":null,"error":null,"cropHintsAnnotation":null,"fullTextAnnotation":null,"webDetection":null,"context":null}
+=======
+>>>>>>> master

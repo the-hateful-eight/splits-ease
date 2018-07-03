@@ -7,29 +7,14 @@ import { Icon } from 'react-native-elements'
 import store from './client/store'
 import Login from './client/components/Login'
 import Home from './client/drawer/home'
+import Friends from './client/drawer/friends'
 import Receipts from './client/drawer/receipts'
 import Split from './client/drawer/split'
 import Settings from './client/drawer/settings'
 
-
 require('./secrets')
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
-
-// const CustomDrawer = props => (
-//   // <View style={{ flex: 1, backgroundColor: '#43484d' }}>
-//   //   <View style={{ marginTop: 40, justifyContent: 'center', alignItems: 'center' }}>
-//   //     <Image
-//   //       source={require('./src/images/logo.png')}
-//   //       style={{ width: SCREEN_WIDTH * 0.57 }}
-//   //       resizeMode="contain"
-//   //     />
-//   //   </View>
-//     <View style={{ marginLeft: 10 }}>
-//       <DrawerItems {...props} />
-//     </View>
-//   // </View>
-// );
 
 const Drawer = createDrawerNavigator(
   {
@@ -42,15 +27,18 @@ const Drawer = createDrawerNavigator(
     Home: {
       screen: Home
     },
+    Friends: {
+      screen: Friends
+    },
     Split: {
       screen: Split
     },
     Receipts: {
       screen: Receipts
     },
-    // Settings: {
-    //   screen: Settings
-    // }
+    Settings: {
+      screen: Settings
+    }
   },
   {
     initialRouteName: 'Home',

@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import React from 'react'
+import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
 import {
   Button,
   FormLabel,
@@ -7,25 +7,29 @@ import {
   FormValidationMessage,
 } from 'react-native-elements'
 import { connect } from 'react-redux'
-import assignItem from '../store/items'
-import getUserFriends from '../store/user'
+import { setItems, assignItem, unassignItem } from '../store/items'
 import ModalDropdown from 'react-native-modal-dropdown'
 
 class ReceiptForm extends React.Component {
-  state = {
-    data: [],
+  constructor(){
+    super()
+    this.renderFriends = this.renderFriends.bind(this)
+    this.selectFriend = this.selectFriend.bind(this)
   }
 
-  componentDidMount() {
-      this.setState({ data: this.props.navigation.state.params.data })
+  selectFriend = (idx, val) => {
+    this.props.assignItem(idx, val)
+  }
+
+  renderFriends() {
+    return this.props.userFriends.map(friend => friend.name)
   }
 
   render() {
-    const data = this.state.data;
     return (
       <View style={styles.container}>
         <ScrollView>
-          {data.map(item => {
+          {this.props.items.map(item => {
             return (
               <View key={item.id} style={styles.lineItem}>
                 <ScrollView horizontal={true}>
@@ -51,7 +55,8 @@ class ReceiptForm extends React.Component {
                   style={styles.friendBtn}
                   textStyle={{ textAlign: 'center' }}
                   dropdownStyle={{ width: 70 }}
-                  options={['option 1', 'option 2']}
+                  options={this.renderFriends()}
+                  onSelect={this.selectFriend}
                 />
               </View>
             )
@@ -59,29 +64,35 @@ class ReceiptForm extends React.Component {
           <View>
             <Button style={styles.sendAllBtn} title="Send All" />
           </View>
+          <View style={styles.bottomView}>
+          <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
+        </View>
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
+  addBtn: {
+    backgroundColor: 'red',
+    width: '100%'
+  },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-evenly"
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   merchantText: {
-    justifyContent: "flex-start"
+    justifyContent: 'flex-start',
   },
   lineItem: {
-    // flex: 1,
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   input: {
-    borderColor: "black",
+    borderColor: 'black',
     borderRadius: 2,
     width: 100,
     height: 30,
@@ -94,19 +105,29 @@ const styles = StyleSheet.create({
     width: 100,
   },
   friendBtn: {
-    backgroundColor: "#b3e6ff",
+    backgroundColor: '#b3e6ff',
     borderRadius: 2,
     borderWidth: 1,
     width: 70,
-    borderColor: "black"
-  }
+    borderColor: 'black',
+  },
 })
 
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+    userFriends: state.user.userFriends,
+    items: state.items
+  }
+}
+
 const mapDispatchToProps = dispatch => ({
-  assignItem: (id, receipient) => dispatch(assignItem(id, receipient))
-});
+  setItems: items => dispatch(setItems(items)),
+  assignItem: (id, receipient) => dispatch(assignItem(id, receipient)),
+  unassignItem: index => dispatch(unassignItem(index))
+})
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
-)(ReceiptForm);
+)(ReceiptForm)

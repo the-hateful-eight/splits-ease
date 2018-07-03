@@ -58,7 +58,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   addFriend: (friend, id) => dispatch(addFriend(friend, id))
     .then((res) => {
-      if (res){ownProps.navigation.navigate('FriendsList')}
+      if (res){ownProps.navigation.goBack()}
     })
 })
 

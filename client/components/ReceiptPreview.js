@@ -89,7 +89,7 @@ class ReceiptPreview extends React.Component {
           }
         });
         this.props.setItems(items);
-        this.props.navigation.navigate("ReceiptForm", { data: items });
+        this.props.navigation.navigate("ReceiptForm");
       } catch (err) {
         console.log(err);
       }

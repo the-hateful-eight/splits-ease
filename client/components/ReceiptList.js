@@ -30,6 +30,7 @@ export default class ReceiptList extends React.Component {
   }
 
   componentDidMount() {
+    this.props.navigation.navigate('DrawerClose')
     this.setState({
       ...this.state,
       receipts: dummyReceipts
@@ -37,7 +38,6 @@ export default class ReceiptList extends React.Component {
   }
 
   render(){
-    this.props.navigation.openDrawer()
     const { receipts } = this.state
     return receipts === 'undefined' ? <View>Loading...</View>
     : (
