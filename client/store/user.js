@@ -15,43 +15,43 @@ const initialState = {
   userFriend: {},
 }
 
-//Actions
-const GOT_USER = 'GOT_USER'
-const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
-const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
-const CREATED_USER = 'CREATED_USER'
-const ADD_FRIEND = 'ADD_FRIEND'
-const EDIT_FRIEND = 'EDIT_FRIEND'
-const DELETE_FRIEND = 'DELETE_FRIEND'
+//Action types
+export const GOT_USER = 'GOT_USER'
+export const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
+export const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
+export const CREATED_USER = 'CREATED_USER'
+export const ADD_FRIEND = 'ADD_FRIEND'
+export const EDIT_FRIEND = 'EDIT_FRIEND'
+export const DELETE_FRIEND = 'DELETE_FRIEND'
 
 //Action creators
-const gotMe = user => ({
+export const gotMe = user => ({
   type: GOT_USER,
   user
 })
 
-const gotUserFriends = userFriends => ({
+export const gotUserFriends = userFriends => ({
   type: GOT_USER_FRIENDS,
   userFriends
 })
 
-const createdUser = user => ({
+export const createdUser = user => ({
   type: CREATED_USER,
   user
 })
 
-const addedFriend = friend => ({
+export const addedFriend = friend => ({
   type: ADD_FRIEND,
   friend
 })
 
-const editedFriend = (friendId, friendData) => ({
+export const editedFriend = (friendId, friendData) => ({
   type: EDIT_FRIEND,
   friendId,
   friendData
 })
 
-const deletedFriend = (id, friendId) => ({
+export const deletedFriend = (id, friendId) => ({
   type: DELETE_FRIEND,
   friendId,
   id
