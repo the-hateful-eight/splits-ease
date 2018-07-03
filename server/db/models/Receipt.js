@@ -4,12 +4,15 @@ const Sequelize = require('sequelize')
 const Receipt = db.define('receipt', {
   vendor: {
     type: Sequelize.STRING,
-    allowNull: false,
+    // allowNull: false,
   },
   venderAddress: {
     type: Sequelize.Sequelize.STRING,
-    allowNull: true,
+    // allowNull: true,
   },
+  receiptImage: {
+    type: Sequelize.TEXT
+  }
 })
 
 module.exports = Receipt
