@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 import { deleteFriend } from '../store/user'
 import { FriendCard } from './FriendCard'
@@ -8,7 +8,13 @@ import { FriendCard } from './FriendCard'
 class FriendsList extends React.Component{
 
   handleDelete = (userId, friendId) => {
-    this.props.deleteFriend(userId, friendId)
+    Alert.alert(
+      'Delete Friend',
+      'Are you sure?',
+      [ {text: 'Cancel', onPress: () => console.log('Cancel pressed'), style: 'cancel'},
+        {text: 'Yes', onPress: () => this.props.deleteFriend(userId, friendId)}
+      ]
+    )
   }
 
   render(){
