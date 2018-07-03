@@ -13,16 +13,17 @@ const initialState = {
   user: {},
   userFriends: [],
   userFriend: {},
+  userReceipts: []
 }
 
-//Action types
+//Actions
 export const GOT_USER = 'GOT_USER'
 export const GOT_USER_FRIENDS = 'GOT_USER_FRIENDS'
 export const GOT_USER_FRIEND = 'GOT_USER_FRIEND'
-export const CREATED_USER = 'CREATED_USER'
 export const ADD_FRIEND = 'ADD_FRIEND'
 export const EDIT_FRIEND = 'EDIT_FRIEND'
 export const DELETE_FRIEND = 'DELETE_FRIEND'
+export const GOT_USER_RECEIPTS = 'GOT_USER_RECEIPTS'
 
 //Action creators
 export const gotMe = user => ({
@@ -33,11 +34,6 @@ export const gotMe = user => ({
 export const gotUserFriends = userFriends => ({
   type: GOT_USER_FRIENDS,
   userFriends
-})
-
-export const createdUser = user => ({
-  type: CREATED_USER,
-  user
 })
 
 export const addedFriend = friend => ({
@@ -55,6 +51,11 @@ export const deletedFriend = (id, friendId) => ({
   type: DELETE_FRIEND,
   friendId,
   id
+})
+
+const gotUserReceipts = userReceipts => ({
+  type: GOT_USER_RECEIPTS,
+  userReceipts
 })
 
 //Thunks
@@ -138,6 +139,17 @@ export const editFriend = (id, friendData) => {
   }
 }
 
+export const getUserReceipts = id => {
+  return async dispatch => {
+    try {
+      const { data } = await axios.get(`http://${ip}/api/receipts/${id}`)
+      return dispatch(gotUserReceipts(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 //Reducer
 export default function(state = initialState, action) {
   switch (action.type) {
@@ -155,11 +167,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         userFriend: action.userFriend,
-      }
-    case CREATED_USER:
-      return {
-        ...state,
-        user: action.user
       }
     case ADD_FRIEND:
       return {
@@ -183,6 +190,11 @@ export default function(state = initialState, action) {
             return friend
           }
         }), action.friendData[0]]
+      }
+    case GOT_USER_RECEIPTS:
+      return{
+        ...state,
+        userReceipts: action.userReceipts
       }
     default:
       return state
