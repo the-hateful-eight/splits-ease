@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
+import { Icon } from 'react-native-elements'
 import ReceiptCard from './ReceiptCard'
 
 const dummyReceipts = [
@@ -29,6 +30,7 @@ export default class ReceiptList extends React.Component {
   }
 
   componentDidMount() {
+    this.props.navigation.navigate('DrawerClose')
     this.setState({
       ...this.state,
       receipts: dummyReceipts

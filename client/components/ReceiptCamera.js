@@ -17,6 +17,7 @@ class ReceiptCamera extends React.Component {
   }
 
   UNSAFE_componentDidMount() {
+    this.props.navigation.navigate('DrawerClose')
     FileSystem.makeDirectoryAsync(
       FileSystem.documentDirectory + 'photos'
     ).catch(e => {

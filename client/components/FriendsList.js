@@ -7,6 +7,10 @@ import { FriendCard } from './FriendCard'
 
 class FriendsList extends React.Component{
 
+  componentDidMount() {
+    this.props.navigation.navigate('DrawerClose')
+  }
+
   handleDelete = (userId, friendId) => {
     Alert.alert(
       'Delete Friend',
