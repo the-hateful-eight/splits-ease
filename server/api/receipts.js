@@ -30,6 +30,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get(`/:id`, async (req, res, next) => {
+  try{
+    const receipts = await Receipt.findAll({where: { userId: req.params.id } })
+    res.json(receipts)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   const buffer = Buffer.from(req.body.image, 'base64')
   try {
