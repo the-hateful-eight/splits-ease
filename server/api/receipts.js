@@ -53,9 +53,8 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.post('/send', async (req, res, next) => {
+router.post('/send', (req, res, next) => {
   const items = req.body.items
-  console.log(items)
   let recipients = {}
   items.map(item => {
     if (item.belongsTo) {
@@ -65,7 +64,6 @@ router.post('/send', async (req, res, next) => {
         : (recipients[recipient] = [item])
     }
   })
-  console.log(recipients)
   try {
     Object.keys(recipients).map(recipient => {
       let friend = JSON.parse(recipient)
@@ -77,7 +75,6 @@ router.post('/send', async (req, res, next) => {
       })
       message += `Total: ${total}`
       if (friend.email) {
-        //do email stuff
         transporter.sendMail(
           {
             from: process.env.SPLITS_EASE_EMAIL_NAME,
