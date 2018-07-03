@@ -8,7 +8,21 @@ const settingsDrawerItem = createStackNavigator({
   Settings: {
     screen: ReceiptList,
   },
-});
+},
+{
+  navigationOptions: {
+      headerStyle: {
+          backgroundColor: '#3FA9F5'
+      },
+      headerTitleStyle: {
+          color: 'white'
+      },
+      headerBackTitleStyle: {
+          color: 'white'
+      },
+      headerTintColor: 'white'
+  }
+})
 
 settingsDrawerItem.navigationOptions = {
   drawerLabel: 'Settings',
