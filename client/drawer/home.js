@@ -4,15 +4,44 @@ import { Icon } from 'react-native-elements';
 
 import Home from '../components/Home';
 
-const homeDrawerItem = createStackNavigator(
-    {
-        Home: {
-          screen: Home
-      }
-    },
-    { 
-      navigationOptions: { header: null}
+const homeDrawerItem = createStackNavigator({
+    Home: {
+      screen: Home,
     }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      title: 'Home',
+      headerLeft: (
+        <Icon
+          iconStyle={{ paddingLeft: 10 }}
+          name='menu'
+          color='white'
+          onPress={() => navigation.openDrawer()}
+          underlayColor='#3FA9F5'
+        />
+      ),
+      headerRight: (
+        <Icon
+          iconStyle={{ paddingRight: 10 }}
+          name='add-a-photo'
+          color='white'
+          onPress={() => navigation.navigate('Split')}
+          underlayColor='#3FA9F5'
+        />
+      ),
+      headerStyle: {
+        backgroundColor: '#3FA9F5'
+      },
+      headerTitleStyle: {
+        color: 'white'
+      },
+      headerBackTitleStyle: {
+        color: 'white'
+      },
+      headerTintColor: 'white'
+    })
+  }
 );
 
 homeDrawerItem.navigationOptions = {

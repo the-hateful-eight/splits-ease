@@ -8,7 +8,18 @@ import ReceiptForm from '../components/ReceiptForm';
 
 const splitDrawerItem = createStackNavigator({
   Camera: {
-    screen: ReceiptCamera
+    screen: ReceiptCamera,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: (
+          <Icon
+            iconStyle={{ paddingLeft: 10 }}
+            name='menu'
+            color='white'
+            onPress={() => navigation.openDrawer()}
+            underlayColor='#3FA9F5'
+          />
+        ),
+      })
   },
   ReceiptPreview: {
     screen: ReceiptPreview
@@ -18,25 +29,34 @@ const splitDrawerItem = createStackNavigator({
   }
 },
 {
-  navigationOptions: {
-      headerStyle: {
-          backgroundColor: '#3FA9F5'
-      },
-      headerTitleStyle: {
-          color: 'white'
-      },
-      headerBackTitleStyle: {
-          color: 'white'
-      },
-      headerTintColor: 'white'
-  }
+  navigationOptions: ({ navigation }) => ({
+    headerRight: (
+      <Icon
+        iconStyle={{ paddingRight: 10 }}
+        name='home'
+        color='white'
+        onPress={() => navigation.navigate('Home')}
+        underlayColor='#3FA9F5'
+      />
+    ),
+    headerStyle: {
+      backgroundColor: '#3FA9F5'
+    },
+    headerTitleStyle: {
+      color: 'white'
+    },
+    headerBackTitleStyle: {
+      color: 'white'
+    },
+    headerTintColor: 'white'
+  })
 })
 
 splitDrawerItem.navigationOptions = {
-  drawerLabel: 'Split!',
+  drawerLabel: 'Capture Receipt',
   drawerIcon: ({ tintColor }) => (
     <Icon
-      name="camera"
+      name="add-a-photo"
       size={30}
       iconStyle={{
         width: 30,
