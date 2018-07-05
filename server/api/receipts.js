@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const { Receipt } = require("../db");
-const fs = require("fs");
 const {createInvoice } = require('./paypal')
 
 const twilio = require('twilio')
@@ -44,11 +43,7 @@ router.post('/:id', async (req, res, next) => {
   const buffer = Buffer.from(req.body.image, 'base64')
   try {
     const parsed = await client.documentTextDetection(buffer)
-    fs.writeFile('bk.txt', JSON.stringify(parsed[0]), 'utf8', err =>
-      console.error(err)
-    )
     res.json(parsed[0])
-
     const createdReceipt = Receipt.create({receiptImage: buffer, userId: req.params.id})
   } catch (err) {
     console.error(err)
