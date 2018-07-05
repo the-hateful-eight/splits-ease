@@ -1,10 +1,11 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation'
 import { Icon } from 'react-native-elements'
+import ReceiptCamera from '../components/ReceiptCamera';
+import ReceiptPreview from '../components/ReceiptPreview';
+import ReceiptForm from '../components/ReceiptForm';
+import AddFriend from '../components/AddFriend';
 
-import ReceiptCamera from '../components/ReceiptCamera'
-import ReceiptPreview from '../components/ReceiptPreview'
-import ReceiptForm from '../components/ReceiptForm'
 
 const splitDrawerItem = createStackNavigator(
   {
@@ -20,7 +21,31 @@ const splitDrawerItem = createStackNavigator(
             underlayColor="#3FA9F5"
           />
         ),
-      }),
+      })
+  },
+  ReceiptPreview: {
+    screen: ReceiptPreview
+  },
+  ReceiptForm: {
+    screen: ReceiptForm,
+  },
+  AddFriend: {
+    screen: AddFriend
+  }
+},
+{
+  navigationOptions: ({ navigation }) => ({
+    headerRight: (
+      <Icon
+        iconStyle={{ paddingRight: 10 }}
+        name='home'
+        color='white'
+        onPress={() => navigation.navigate('Home')}
+        underlayColor='#3FA9F5'
+      />
+    ),
+    headerStyle: {
+      backgroundColor: '#3FA9F5'
     },
     ReceiptPreview: {
       screen: ReceiptPreview,
@@ -131,4 +156,4 @@ splitDrawerItem.navigationOptions = {
 //     ),
 //   };
 
-export default splitDrawerItem
+export default splitDrawerItem;
