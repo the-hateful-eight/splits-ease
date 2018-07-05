@@ -14,6 +14,10 @@ const Friend = db.define('friend', {
   phone: {
     type: Sequelize.STRING,
     unique: true
+  },
+  avatar: {
+    TYPE: Sequelize.STRING,
+    unique: true
   }
 })
 
