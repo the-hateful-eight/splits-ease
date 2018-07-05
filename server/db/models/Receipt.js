@@ -8,9 +8,9 @@ const Receipt = db.define('receipt', {
   vendorAddress: {
     type: Sequelize.Sequelize.STRING,
   },
-  receiptImage: {
-    type: Sequelize.TEXT,
-  }
+  // receiptImage: {
+  //   type: Sequelize.TEXT,
+  // }
 })
 
 module.exports = Receipt
