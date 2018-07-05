@@ -1,38 +1,99 @@
-import React from 'react';
-import { createStackNavigator } from 'react-navigation';
-import { Icon } from 'react-native-elements';
-
+import React from 'react'
+import { createStackNavigator } from 'react-navigation'
+import { Icon } from 'react-native-elements'
 import ReceiptCamera from '../components/ReceiptCamera';
 import ReceiptPreview from '../components/ReceiptPreview';
-import ReceiptForm from '../components/ReceiptForm'; 
+import ReceiptForm from '../components/ReceiptForm';
+import AddFriend from '../components/AddFriend';
 
-const splitDrawerItem = createStackNavigator({
-  Camera: {
-    screen: ReceiptCamera
+
+const splitDrawerItem = createStackNavigator(
+  {
+    Camera: {
+      screen: ReceiptCamera,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: (
+          <Icon
+            iconStyle={{ paddingLeft: 10 }}
+            name="menu"
+            color="white"
+            onPress={() => navigation.openDrawer()}
+            underlayColor="#3FA9F5"
+          />
+        ),
+      })
   },
   ReceiptPreview: {
     screen: ReceiptPreview
   },
   ReceiptForm: {
     screen: ReceiptForm,
+  },
+  AddFriend: {
+    screen: AddFriend
   }
-})
+},
+{
+  navigationOptions: ({ navigation }) => ({
+    headerRight: (
+      <Icon
+        iconStyle={{ paddingRight: 10 }}
+        name='home'
+        color='white'
+        onPress={() => navigation.navigate('Home')}
+        underlayColor='#3FA9F5'
+      />
+    ),
+    headerStyle: {
+      backgroundColor: '#3FA9F5'
+    },
+    ReceiptPreview: {
+      screen: ReceiptPreview,
+    },
+    ReceiptForm: {
+      screen: ReceiptForm,
+    },
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      headerRight: (
+        <Icon
+          iconStyle={{ paddingRight: 10 }}
+          name="home"
+          color="white"
+          onPress={() => navigation.navigate('Home')}
+          underlayColor="#3FA9F5"
+        />
+      ),
+      headerStyle: {
+        backgroundColor: '#3FA9F5',
+      },
+      headerTitleStyle: {
+        color: 'white',
+      },
+      headerBackTitleStyle: {
+        color: 'white',
+      },
+      headerTintColor: 'white',
+    }),
+  }
+)
 
 splitDrawerItem.navigationOptions = {
-  drawerLabel: 'Split!',
+  drawerLabel: 'Capture Receipt',
   drawerIcon: ({ tintColor }) => (
     <Icon
-      name="camera"
+      name="add-a-photo"
       size={30}
       iconStyle={{
         width: 30,
-        height: 30
+        height: 30,
       }}
       type="material"
       color={tintColor}
     />
   ),
-};
+}
 
 // const splitDrawerItem = createBottomTabNavigator({
 //     Camera: {
@@ -78,7 +139,7 @@ splitDrawerItem.navigationOptions = {
 //         },
 //     }
 //   })
-  
+
 //   splitDrawerItem.navigationOptions = {
 //     drawerLabel: 'Split!',
 //     drawerIcon: ({ tintColor }) => (

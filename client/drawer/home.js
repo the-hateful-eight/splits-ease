@@ -3,20 +3,45 @@ import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import Home from '../components/Home';
-import ReceiptCamera from '../components/ReceiptCamera'
-import ReceiptForm from '../components/ReceiptForm'
-import ReceiptList from '../components/ReceiptList'
-import ReceiptPreview from '../components/ReceiptPreview'
-import CreateUserForm from '../components/CreateUserForm'
-import FriendsList from '../components/FriendsList'
-import AddFriend from '../components/AddFriend'
 
-const homeDrawerItem = createStackNavigator(
-    {
-        Home: {
-          screen: Home
-      }
+const homeDrawerItem = createStackNavigator({
+    Home: {
+      screen: Home,
     }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      title: 'Home',
+      headerLeft: (
+        <Icon
+          iconStyle={{ paddingLeft: 10 }}
+          name='menu'
+          color='white'
+          onPress={() => navigation.openDrawer()}
+          underlayColor='#3FA9F5'
+        />
+      ),
+      headerRight: (
+        <Icon
+          iconStyle={{ paddingRight: 10 }}
+          name='add-a-photo'
+          color='white'
+          onPress={() => navigation.navigate('Split')}
+          underlayColor='#3FA9F5'
+        />
+      ),
+      headerStyle: {
+        backgroundColor: '#3FA9F5'
+      },
+      headerTitleStyle: {
+        color: 'white'
+      },
+      headerBackTitleStyle: {
+        color: 'white'
+      },
+      headerTintColor: 'white'
+    })
+  }
 );
 
 homeDrawerItem.navigationOptions = {

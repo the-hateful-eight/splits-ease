@@ -3,13 +3,13 @@ import { View, Text } from 'react-native'
 
 export default class ReceiptCard extends React.Component{
     render() {
-        const { merchantName, address, phone, date } = this.props.receipt
+        const { vendor, vendorAddress, createdAt, updatedAt } = this.props.receipt
         return (
             <View>
-                <Text>{merchantName}</Text>
-                <Text>{address}</Text>
-                <Text>{phone}</Text>
-                <Text>{date}</Text>
+                <Text>{'Vendor: ' + vendor}</Text>
+                <Text>{vendorAddress ? ('Address: ' + vendorAddress) : 'Address: none'}</Text>
+                <Text>{('Created: ' + createdAt)}</Text>
+                <Text>{('Updated: ' + updatedAt)}</Text>
             </View>
         )
     }

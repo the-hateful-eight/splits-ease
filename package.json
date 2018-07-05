@@ -14,7 +14,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
     "seed": "node server/scripts/seed.js"
   },
   "jest": {
@@ -23,6 +24,8 @@
   "dependencies": {
     "@google-cloud/vision": "^0.20.0",
     "axios": "^0.18.0",
+    "axios-mock-adapter": "^1.15.0",
+    "chai": "^4.1.2",
     "expo": "^27.0.1",
     "express": "^4.16.3",
     "nodemailer": "^4.6.7",
@@ -38,6 +41,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^4.38.0",
+    "supertest": "^3.1.0",
     "twilio": "^3.17.4"
   }
 }

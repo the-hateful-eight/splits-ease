@@ -19,9 +19,6 @@ router.post('/', async (req, res, next) => {
       err.status = 401
       next(err)
     }
-  // try {
-  //   const user = await User.create(req.body)
-  //   res.json(user)
   } catch (err) {
     next(err)
   }
@@ -44,7 +41,6 @@ router.put('/login', async (req, res, next) => {
         password: req.body.password,
       },
     })
-    console.log('here')
     if (user) {
       res.send(user)
     } else {

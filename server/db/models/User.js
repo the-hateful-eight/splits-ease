@@ -15,7 +15,7 @@ const User = db.define('user', {
   },
   phone: {
     type: Sequelize.STRING,
-    unique: true,
+    // unique: true,
   },
   password: {
     type: Sequelize.STRING,
@@ -23,6 +23,9 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('password')
     }
+  },
+  avatar: {
+    type: Sequelize.STRING,
   },
   salt: {
     type: Sequelize.STRING,

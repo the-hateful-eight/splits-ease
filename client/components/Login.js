@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { ScrollView, StyleSheet, View, Image, Text, KeyboardAvoidingView } from 'react-native'
-import { SocialIcon, FormLabel, FormInput, FormValidationMessage, Button, Divider } from 'react-native-elements'
+import { SocialIcon, FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements'
 import { connect } from 'react-redux'
+import { Video } from 'expo'
 import { login } from '../store/user'
 
 class Login extends Component {
@@ -50,7 +51,16 @@ console.log('ip: ', ip)
     render() {
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container} >
-                <ScrollView>
+                <Video
+                    source={require('../../assets/Pink_Mood_NYC.mp4')}
+                    rate={1.0}
+                    volume={1.0}
+                    isMuted={true}
+                    resizeMode="cover"
+                    shouldPlay
+                    isLooping
+                    style={styles.video}
+                />
                 <View style={styles.logoContainer}>
                     <Image
                         style={styles.logo}
@@ -76,7 +86,6 @@ console.log('ip: ', ip)
                     type='google-plus-official'
                     onPress={this.signInWithGoogleAsync.bind(this)}
                 />
-            </ScrollView>
             </KeyboardAvoidingView>
         )
     }
@@ -101,7 +110,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: 80,
-        paddingBottom: 20
+        paddingBottom: 20,
+    },
+    video: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0
     }
 })
 
@@ -109,7 +125,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         login: (user) => dispatch(login(user))
             .then((res) => {
-                if(res){ownProps.navigation.navigate('Home')}
+                if (res) { ownProps.navigation.navigate('Home') }
             })
     }
 }
