@@ -3,11 +3,12 @@ import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import Home from '../components/Home';
+import FriendsList from '../components/FriendsList';
 
 const homeDrawerItem = createStackNavigator({
     Home: {
       screen: Home,
-    }
+    },
   },
   {
     navigationOptions: ({ navigation }) => ({

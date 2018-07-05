@@ -2,11 +2,11 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
-import ReceiptList from '../components/ReceiptList';
+import Settings from '../components/Settings';
 
 const settingsDrawerItem = createStackNavigator({
   Settings: {
-    screen: ReceiptList,
+    screen: Settings,
     navigationOptions: ({ navigation }) => ({
       headerLeft: (
           <Icon
