@@ -59,10 +59,10 @@ class Login extends Component {
                         source={require('../../assets/splits-ease-logo.png')}
                     />
                 </View>
-                <FormLabel>email</FormLabel>
+                <FormLabel styles={styles.input}>email</FormLabel>
                 <FormInput autoCapitalize='none' onChangeText={email => this.setState({ email })} />
                 <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
-                <FormLabel>password</FormLabel>
+                <FormLabel styles={styles.input}>password</FormLabel>
                 <FormInput autoCapitalize='none' onChangeText={password => this.setState({ password })} />
                 <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
                 <Button buttonStyle={styles.logInBtn}
@@ -84,6 +84,9 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
+    input: {
+        color: 'white'
+    },
     logInBtn: {
         backgroundColor: 'gray'
     },
