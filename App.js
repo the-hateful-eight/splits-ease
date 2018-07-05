@@ -21,7 +21,20 @@ const Drawer = createDrawerNavigator(
     Login: {
       screen: Login,
       navigationOptions: {
-        drawerLockMode: 'locked-closed'
+        drawerLockMode: 'locked-closed',
+        drawerLabel: 'Logout',
+        drawerIcon: ({ tintColor }) => (
+            <Icon
+                name="account-box"
+                size={30}
+                iconStyle={{
+                    width: 30,
+                    height: 30
+                }}
+                type="material"
+                color={tintColor}
+            />
+        ),
       }
     },
     Home: {
@@ -41,7 +54,7 @@ const Drawer = createDrawerNavigator(
     }
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
     contentOptions: {
       labelStyle: {
         fontSize: 15,
@@ -49,6 +62,9 @@ const Drawer = createDrawerNavigator(
       },
     },
     drawerWidth: SCREEN_WIDTH * 0.8,
+    drawerOpenRoute: 'DrawerOpen',
+    drawerCloseRoute: 'DrawerClose',
+    drawerToggleRoute: 'DrawerToggle',
   }
 );
 

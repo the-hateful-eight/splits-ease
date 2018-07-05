@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator, Header } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import FriendsList from '../components/FriendsList'
@@ -8,7 +8,18 @@ import EditForm from '../components/EditForm'
 
 const friendsDrawerItem = createStackNavigator({
     FriendsList: {
-        screen: FriendsList
+        screen: FriendsList,
+        navigationOptions: ({ navigation }) => ({
+            headerLeft: (
+                <Icon
+                  iconStyle={{ paddingLeft: 10 }}
+                  name='menu'
+                  color='white'
+                  onPress={() => navigation.openDrawer()}
+                  underlayColor='#3FA9F5'
+                />
+              ),
+            })
     },
     AddFriend: {
         screen: AddFriend
@@ -18,18 +29,27 @@ const friendsDrawerItem = createStackNavigator({
     }
 },
     {
-        navigationOptions: {
+        navigationOptions: ({ navigation }) => ({
+            headerRight: (
+              <Icon
+                iconStyle={{ paddingRight: 10 }}
+                name='home'
+                color='white'
+                onPress={() => navigation.navigate('Home')}
+                underlayColor='#3FA9F5'
+              />
+            ),
             headerStyle: {
-                backgroundColor: '#3FA9F5'
+              backgroundColor: '#3FA9F5'
             },
             headerTitleStyle: {
-                color: 'white'
+              color: 'white'
             },
             headerBackTitleStyle: {
-                color: 'white'
+              color: 'white'
             },
             headerTintColor: 'white'
-        }
+          })
     }
 );
 

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import { Header } from 'react-native-elements'
+import { Header, Icon } from 'react-native-elements'
 import { logout } from '../store'
-import { Icon } from 'react-native-elements'
 import { getUserFriends, login } from '../store/user'
 
 class Home extends Component {
@@ -15,26 +14,6 @@ class Home extends Component {
 
   render() {
     return (
-      <View>
-        <Header
-          backgroundColor='#3FA9F5'
-          leftComponent={
-            <Icon
-            name='menu'
-            color='#fff'
-            onPress={this.props.navigation.openDrawer}
-            underlayColor='#3FA9F5'
-            />
-          }
-          rightComponent={
-            <Icon
-            name='settings'
-            color='#fff'
-            onPress={this.props.navigation.openDrawer}
-            underlayColor='#3FA9F5'
-            />
-          }
-        />
         <View>
           <Text>Welcome to SPLITS/ease, {this.props.user.name}</Text>
           <Button
@@ -52,7 +31,6 @@ class Home extends Component {
           {/* <Button title="Logout" onClick={this.props.logoutPress} /> */}
           {/* </View> */}
         </View>
-      </View>
     )
   }
 }
@@ -63,6 +41,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  header: {
+    height: 200
   }
 })
 
