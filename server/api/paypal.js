@@ -80,14 +80,12 @@ const createInvoice = (code, list, recipient) => {
                       } else {
                         console.log("invoice sent!");
                         console.log(receipt);
-                        setTimeout(() => {
-                          paypal.invoice.send(receipt.id, (sendErr, rv) => {
-                            console.log(sendErr ? sendErr : rv);
-                          });
-                        }, 5000);
+                        paypal.invoice.send(receipt.id, (sendErr, rv) => {
+                          console.log(sendErr ? sendErr : rv);
+                        });
                       }
                     }
-                  );
+                  )
                 }
               }
             );
