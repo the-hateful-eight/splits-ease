@@ -6,6 +6,7 @@ import { Icon } from 'react-native-elements'
 
 import store from './client/store'
 import Login from './client/components/Login'
+import CreateUserForm from './client/components/CreateUserForm'
 import Home from './client/drawer/home'
 import Friends from './client/drawer/friends'
 import Receipts from './client/drawer/receipts'

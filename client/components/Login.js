@@ -14,13 +14,13 @@ class Login extends Component {
         }
         this.handleLogin = this.handleLogin.bind(this)
         const { manifest } = Expo.Constants
-const ip = manifest.packagerOpts.dev
-  ? manifest.debuggerHost
-      .split(`:`)
-      .shift()
-      .concat(`:1337`)
-  : `localhost:1337`
-console.log('ip: ', ip)
+        const ip = manifest.packagerOpts.dev
+            ? manifest.debuggerHost
+                .split(`:`)
+                .shift()
+                .concat(`:1337`)
+            : `localhost:1337`
+        console.log('ip: ', ip)
     }
 
     handleLogin() {
@@ -52,7 +52,7 @@ console.log('ip: ', ip)
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container} >
                 <Video
-                    source={require('../../assets/Pink_Mood_NYC.mp4')}
+                    source={require('../../assets/login.mp4')}
                     rate={1.0}
                     volume={1.0}
                     isMuted={true}
@@ -67,25 +67,25 @@ console.log('ip: ', ip)
                         source={require('../../assets/splits-ease-logo.png')}
                     />
                 </View>
-                <FormLabel>email</FormLabel>
-                <FormInput autoCapitalize='none' onChangeText={email => this.setState({ email })} />
-                <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
-                <FormLabel>password</FormLabel>
-                <FormInput autoCapitalize='none' secureTextEntry={true} onChangeText={password => this.setState({ password })} />
-                <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
-                <Button buttonStyle={styles.logInBtn}
+                <FormLabel labelStyle={{ color: 'darkslategrey' }}>email</FormLabel>
+                <FormInput inputStyle={{ color: 'black' }} autoCapitalize='none' onChangeText={email => this.setState({ email })} />
+                <FormLabel labelStyle={{ color: 'darkslategrey' }}>password</FormLabel>
+                <FormInput inputStyle={{ color: 'black' }} autoCapitalize='none' secureTextEntry={true} onChangeText={password => this.setState({ password })} />
+                <View style={styles.buttonsContainer}>
+                <Button
+                    buttonStyle={styles.logInBtn}
                     raised
                     icon={{ name: 'cached' }}
                     title='Login'
                     onPress={this.handleLogin}
                 />
-                <Button icon={{ name: 'account-circle' }} title="Create Account" buttonStyle={styles.createAccount} onPress={() => this.props.navigation.navigate('CreateUserForm')} />
-                <SocialIcon
-                    title='Sign In With Google'
-                    button
-                    type='google-plus-official'
-                    onPress={this.signInWithGoogleAsync.bind(this)}
-                />
+                <Button 
+                    raised
+                    icon={{ name: 'account-circle' }}
+                    title="Create Account"
+                    buttonStyle={styles.createAccount}
+                    onPress={() => this.props.navigation.navigate('CreateUserForm')} />
+                </View>
             </KeyboardAvoidingView>
         )
     }
@@ -93,14 +93,19 @@ console.log('ip: ', ip)
 
 const styles = StyleSheet.create({
     logInBtn: {
-        backgroundColor: 'gray'
+        backgroundColor: '#3FA9F5',
+        paddingTop: 15
     },
     container: {
         flex: 1,
         backgroundColor: 'white'
     },
+    buttonsContainer: {
+        padding: 30
+    },
     createAccount: {
-        backgroundColor: 'blue'
+        backgroundColor: 'darkgrey',
+        paddingTop: 15
     },
     logo: {
         width: 300,
