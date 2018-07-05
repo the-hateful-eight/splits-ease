@@ -82,19 +82,23 @@ const friends = [
 const receipts = [
   {
     vendor: 'CVS',
-    vendorAddress: '123 Main St.'
+    vendorAddress: '123 Main St.',
+    userId: 0,
   },
   {
     vendor: 'Wendys',
-    vendorAddress: '555 Food Ave.'
+    vendorAddress: '555 Food Ave.',
+    userId: 1,
   },
   {
     vendor: 'Barry\'s Bodega',
-    vendorAddress: '1010 Neghborhood Ave.'
+    vendorAddress: '1010 Neghborhood Ave.',
+    userId: 2,
   },
   {
     vendor: 'J-Crew',
-    vendorAddress: '450 Park Pl.'
+    vendorAddress: '450 Park Pl.',
+    userId: 3,
   }
 
 ]
@@ -186,11 +190,6 @@ async function seed() {
   const mattFriends = await Friend.bulkCreate(friends, { returning: true, userId: 4 })
   const createdReceipts = await Receipt.bulkCreate(receipts, { returning: true })
   const createdItems = await Item.bulkCreate(items, {returning: true})
-
-  await Promise.all([
-    createdReceipts[0].setUser(createdUsers[0]),
-    createdReceipts[1].setUser(createdUsers[1])
-  ])
 
   await Promise.all([
     createdUsers,
