@@ -10,6 +10,7 @@ const friendsDrawerItem = createStackNavigator({
     FriendsList: {
         screen: FriendsList,
         navigationOptions: ({ navigation }) => ({
+            title: 'Friends List',
             headerLeft: (
                 <Icon
                   iconStyle={{ paddingLeft: 10 }}
@@ -22,10 +23,16 @@ const friendsDrawerItem = createStackNavigator({
             })
     },
     AddFriend: {
-        screen: AddFriend
+        screen: AddFriend,
+        navigationOptions: {
+            headerTitle: 'Add Friends'
+        }
     },
     EditForm: {
-        screen: EditForm
+        screen: EditForm,
+        navigationOptions: {
+            headerTitle: 'Edit Friend'
+        }
     }
 },
     {
