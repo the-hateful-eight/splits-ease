@@ -3,13 +3,14 @@ import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import ReceiptList from '../components/ReceiptList';
+import ReceiptPreview from '../components/ReceiptPreview';
 
 const receiptsDrawerItem = createStackNavigator({
   Receipts: {
     screen: ReceiptList,
     navigationOptions: ({ navigation }) => ({
       headerLeft: (
-          <Icon 
+          <Icon
             iconStyle={{ paddingLeft: 10 }}
             name='menu'
             color='white'
@@ -19,6 +20,9 @@ const receiptsDrawerItem = createStackNavigator({
         ),
       })
   },
+  ReceiptPreview: {
+    screen: ReceiptPreview
+  }
 },
 {
   navigationOptions: ({ navigation }) => ({

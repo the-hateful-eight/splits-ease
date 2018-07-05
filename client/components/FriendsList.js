@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
-import { Button, Icon } from 'react-native-elements'
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Button, Card, Icon } from 'react-native-elements'
 import { deleteFriend } from '../store/user'
 import { FriendCard } from './FriendCard'
 
@@ -29,30 +29,38 @@ class FriendsList extends React.Component{
       <ScrollView>
           {userFriends.map(friend => {
             return (
-              <View key={friend.id} style={styles.friendCards}>
-                <Icon
-                  raised
-                  name='close'
-                  color='red'
-                  onPress={() => this.handleDelete(userId, friend.id)}
+              <Card key={friend.id} title={friend.name} >
+                <Image
+                  source={{ uri: 'https://cdn3.iconfinder.com/data/icons/yumminky-pc/100/yumminky-pc-43-512.png'}}
+                  style={styles.avatar}
                   />
+                <View style={styles.friendCards}>
                 <FriendCard
                             id={friend.id}
                             name={friend.name}
                             phone={friend.phone}
                             email={friend.email}
                 />
-                <Icon
-                  raised
-                  name='create'
-                  onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
-                  id: friend.id,
-                  name: friend.name,
-                  phone: friend.phone,
-                  email: friend.email
-                  }})}
-                  />
-              </View>
+                <View style={styles.icons}>
+                  <Icon
+                    raised
+                    name='close'
+                    // color='red'
+                    onPress={() => this.handleDelete(userId, friend.id)}
+                    />
+                  <Icon
+                    raised
+                    name='create'
+                    onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
+                    id: friend.id,
+                    name: friend.name,
+                    phone: friend.phone,
+                    email: friend.email
+                    }})}
+                    />
+                </View>
+                </View>
+              </Card>
             )
           })}
       </ScrollView>
@@ -78,17 +86,28 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   addBtn: {
-    backgroundColor: 'blue',
+    backgroundColor: '#3FA9F5',
     width: '100%',
-    height: 50
+    height: 50,
+    borderRadius: 5,
+    borderColor: 'black',
+    borderWidth: 2
   },
   friendCards: {
     flex: 1,
-    paddingTop: 12,
-    paddingBottom: 12,
+    // paddingTop: 12,
+    // paddingBottom: 12,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  icons: {
+    flexDirection: 'row',
+    // justifyContent: 'space-evenly'
+  },
+  avatar: {
+    width: '100%',
+    height: 200
   }
 })
 
