@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const { User, Friend } = require('../db')
+const {paypal} = require('./paypal')
 
 module.exports = router
 
@@ -117,3 +118,13 @@ router.put('/:id/friends', async (req, res, next) => {
     console.log(err)
   }
 })
+
+router.get('/authorizePaypal', (req, res, next) => {
+  try {
+      const url = paypal.openid_connect.authorizeUrl({scope: 'openid https://uri.paypal.com/services/invoicing email'})
+      res.json(url)
+  } catch (err) {
+      next(err)
+  }
+})
+

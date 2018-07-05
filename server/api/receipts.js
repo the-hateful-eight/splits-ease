@@ -1,6 +1,6 @@
-const router = require('express').Router()
-const { Receipt, User } = require('../db')
-const fs = require('fs')
+const router = require("express").Router();
+const { Receipt } = require("../db");
+const {createInvoice } = require('./paypal')
 
 const twilio = require('twilio')
 const twilioClient = new twilio(
@@ -43,11 +43,7 @@ router.post('/:id', async (req, res, next) => {
   const buffer = Buffer.from(req.body.image, 'base64')
   try {
     const parsed = await client.documentTextDetection(buffer)
-    fs.writeFile('bk.txt', JSON.stringify(parsed[0]), 'utf8', err =>
-      console.error(err)
-    )
     res.json(parsed[0])
-
     const createdReceipt = Receipt.create({receiptImage: buffer, userId: req.params.id})
   } catch (err) {
     console.error(err)
@@ -55,9 +51,10 @@ router.post('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/send', (req, res, next) => {
-  const items = req.body.items
-  let recipients = {}
+router.post("/send", (req, res, next) => {
+  const items = req.body.items;
+  console.log(req.body.code);
+  let recipients = {};
   items.map(item => {
     if (item.belongsTo) {
       let recipient = JSON.stringify(item.belongsTo)
@@ -65,7 +62,17 @@ router.post('/send', (req, res, next) => {
         ? recipients[recipient].push(item)
         : (recipients[recipient] = [item])
     }
-  })
+  });
+
+  //testing
+        // createInvoice(req.body.code, items, {
+        //   email: 'mcontract27@gmail.com',
+        //   phone: 9147870089,
+        //   name: 'Matthew Contract'
+        // })
+  //testing
+
+  console.log(recipients);
   try {
     Object.keys(recipients).map(recipient => {
       let friend = JSON.parse(recipient)
@@ -77,17 +84,15 @@ router.post('/send', (req, res, next) => {
       })
       message += `Total: ${total}`
       if (friend.email) {
-        transporter.sendMail(
-          {
-            from: process.env.SPLITS_EASE_EMAIL_NAME,
-            to: friend.email,
-            subject: 'Splits-ease receipt',
-            html: message,
-          },
-          (err, info) => {
-            console.log(err ? err : info)
-          }
-        )
+        if (req.body.code) createInvoice(req.body.code, list, friend)
+        transporter.sendMail({
+          from: process.env.SPLITS_EASE_EMAIL_NAME,
+          to: friend.email,
+          subject: 'Splits-ease receipt',
+          html: message
+        }, (err, info) => {
+          console.log(err ? err : info)
+        })
       }
       if (friend.phone) {
         let number = friend.phone.replace(/\(\)-\s/g, '')
