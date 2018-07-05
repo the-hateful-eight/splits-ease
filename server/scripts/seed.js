@@ -9,78 +9,177 @@ const {
 
 const users = [
   {
-    name: 'Cody',
-    email: 'cody@email.com',
+    name: 'Reese',
+    email: 'reese@email.com',
     phone: '123-456-7890',
-    password: '123'
+    password: '123',
+    avatar: 'assets/reese_avatar'
   },
   {
-    name: 'Jason',
-    email: 'jason@email.com',
-    password: '456'
+    name: 'Sean',
+    email: 'sean@email.com',
+    phone: '234-567-8910',
+    password: '456',
+    avatar: 'assets/sean_avatar'
   },
+  {
+    name: 'Patrick',
+    email: 'patrick@email.com',
+    phone: '555-123-4567',
+    password: '789',
+    avatar: 'assets/patrick_avatar'
+  },
+  {
+    name: 'Kevin',
+    email: 'kevin@email.com',
+    phone: '444-567-8910',
+    password: '999',
+    avatar: 'assets/kevin_avatar'
+  },
+  {
+    name: 'Matt',
+    email: 'matt@email.com',
+    phone: '555-555-0987',
+    password: '000',
+    avatar: 'assets/matt_avatar'
+  }
 ]
 
 const friends = [
   {
-    name: 'Bob',
-    email: 'bob@email.com',
-    phone: null
+    name: 'Reese',
+    email: 'reese@email.com',
+    phone: '123-456-7890',
+    password: '123',
+    avatar: 'assets/reese_avatar'
   },
   {
-    name: 'Jim',
-    email: null,
-    phone: '555-555-1234'
+    name: 'Sean',
+    email: 'sean@email.com',
+    phone: '234-567-8910',
+    password: '456',
+    avatar: 'assets/sean_avatar'
   },
   {
-    name: 'Sarah',
-    email: 'sarah@email.com',
-    phone: '555-555-6789'
+    name: 'Patrick',
+    email: 'patrick@email.com',
+    phone: '555-123-4567',
+    password: '789',
+    avatar: 'assets/patrick_avatar'
   },
+  {
+    name: 'Kevin',
+    email: 'kevin@email.com',
+    phone: '444-567-8910',
+    password: '999',
+    avatar: 'assets/kevin_avatar'
+  },
+  {
+    name: 'Matt',
+    email: 'matt@email.com',
+    phone: '555-555-0987',
+    password: '000',
+    avatar: 'assets/matt_avatar'
+  }
 ]
 
 const receipts = [
   {
     vendor: 'CVS',
-    vendorAddress: '123 Main St.'
+    vendorAddress: '123 Main St.',
+    // userId: 0,
   },
   {
     vendor: 'Wendys',
-    vendorAddress: '555 Food Ave.'
+    vendorAddress: '555 Food Ave.',
+    // userId: 0,
+  },
+  {
+    vendor: 'Barry\'s Bodega',
+    vendorAddress: '1010 Neghborhood Ave.',
+    // userId: 1,
+  },
+  {
+    vendor: 'J-Crew',
+    vendorAddress: '450 Park Pl.',
+    // userId: 1,
   }
+
 ]
 
 const items = [
   {
     name: 'Doritos',
     price: 4.97,
-    quantity: 2
+    quantity: 2,
+    // receiptId: 0,
   },
   {
     name: 'No. 2 pencils',
     price: 7.89,
-    quantity: 1
+    quantity: 1,
+    // receiptId: 0,
   },
   {
     name: 'Asprin',
     price: 8.19,
-    quantity: 1
+    quantity: 1,
+    // receiptId: 0,
   },
   {
     name: 'Baconator',
     price: 7.89,
-    quantity: 1
+    quantity: 1,
+    // receiptId: 1,
   },
   {
     name: '12 oz. drink',
     price: 2.78,
-    quantity: 1
+    quantity: 1,
+    // receiptId: 1,
   },
   {
     name: 'fries',
     price: 3.19,
-    quantity: 1
-  }
+    quantity: 1,
+    // receiptId: 1,
+  },
+  {
+    name: 'cigarettes',
+    price: 14.10,
+    quantity: 1,
+    // receiptId: 2,
+  },
+  {
+    name: 'deoderant',
+    price: 5.29,
+    quantity: 1,
+    // receiptId: 2,
+  },
+  {
+    name: 'peanut butter crackers',
+    price: 1.59,
+    quantity: 3,
+    // receiptId: 2,
+  },
+  {
+    name: 'jeans',
+    price: 58.94,
+    quantity: 1,
+    // receiptId: 3,
+  },
+  {
+    name: 'button-down blue',
+    price: 48.57,
+    quantity: 1,
+    // receiptId: 3,
+  },
+  {
+    name: 'fancy socks',
+    price: 6.74,
+    quantity: 3,
+    // receiptId: 3,
+  },
 ]
 
 async function seed() {
@@ -88,19 +187,29 @@ async function seed() {
   console.log('db synced!')
 
   const createdUsers = await User.bulkCreate(users, { returning: true })
-  const createdFriends = await Friend.bulkCreate(friends, { returning: true })
+  const reeseFriends = await Friend.bulkCreate(friends, { returning: true })
+  const seanFriends = await Friend.bulkCreate(friends, { returning: true })
   const createdReceipts = await Receipt.bulkCreate(receipts, { returning: true })
   const createdItems = await Item.bulkCreate(items, {returning: true})
 
   await Promise.all([
-    createdFriends[0].setUser(createdUsers[0]),
-    createdFriends[1].setUser(createdUsers[1]),
-    createdFriends[2].setUser(createdUsers[0]),
+    reeseFriends[0].setUser(createdUsers[0]),
+    reeseFriends[1].setUser(createdUsers[0]),
+    reeseFriends[2].setUser(createdUsers[0]),
+    reeseFriends[3].setUser(createdUsers[0]),
+    reeseFriends[4].setUser(createdUsers[0]),
+    seanFriends[0].setUser(createdUsers[1]),
+    seanFriends[1].setUser(createdUsers[1]),
+    seanFriends[2].setUser(createdUsers[1]),
+    seanFriends[3].setUser(createdUsers[1]),
+    seanFriends[4].setUser(createdUsers[1]),
   ])
 
   await Promise.all([
     createdReceipts[0].setUser(createdUsers[0]),
-    createdReceipts[1].setUser(createdUsers[1])
+    createdReceipts[1].setUser(createdUsers[0]),
+    createdReceipts[2].setUser(createdUsers[1]),
+    createdReceipts[3].setUser(createdUsers[1]),
   ])
 
   await Promise.all([
@@ -110,11 +219,18 @@ async function seed() {
     createdItems[3].setReceipt(createdReceipts[1]),
     createdItems[4].setReceipt(createdReceipts[1]),
     createdItems[5].setReceipt(createdReceipts[1]),
+    createdItems[6].setReceipt(createdReceipts[2]),
+    createdItems[7].setReceipt(createdReceipts[2]),
+    createdItems[8].setReceipt(createdReceipts[2]),
+    createdItems[9].setReceipt(createdReceipts[3]),
+    createdItems[10].setReceipt(createdReceipts[3]),
+    createdItems[11].setReceipt(createdReceipts[3]),
   ])
 
   await Promise.all([
     createdUsers,
-    createdFriends,
+    reeseFriends,
+    seanFriends,
     createdReceipts,
     createdItems
   ])

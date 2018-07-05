@@ -28,8 +28,6 @@ class Home extends Component {
             title="Receipt List"
             onPress={() => this.props.navigation.navigate('Receipts')}
           />
-          {/* <Button title="Logout" onClick={this.props.logoutPress} /> */}
-          {/* </View> */}
         </View>
     )
   }
@@ -41,6 +39,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    color: 'white'
+
   },
   header: {
     height: 200
