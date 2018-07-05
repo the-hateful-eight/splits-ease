@@ -71,7 +71,7 @@ console.log('ip: ', ip)
                 <FormInput autoCapitalize='none' onChangeText={email => this.setState({ email })} />
                 <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
                 <FormLabel>password</FormLabel>
-                <FormInput autoCapitalize='none' onChangeText={password => this.setState({ password })} />
+                <FormInput autoCapitalize='none' secureTextEntry={true} onChangeText={password => this.setState({ password })} />
                 <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
                 <Button buttonStyle={styles.logInBtn}
                     raised
