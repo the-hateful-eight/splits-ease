@@ -24,6 +24,10 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
+  avatar: {
+    type: Sequelize.STRING,
+    unique: true
+  },
   salt: {
     type: Sequelize.STRING,
     get () {
