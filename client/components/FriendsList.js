@@ -45,12 +45,15 @@ class FriendsList extends React.Component{
                   <Icon
                     raised
                     name='close'
-                    // color='red'
+                    color='white'
+                    containerStyle={{backgroundColor: 'red'}}
                     onPress={() => this.handleDelete(userId, friend.id)}
                     />
                   <Icon
                     raised
                     name='create'
+                    color='white'
+                    containerStyle={{backgroundColor: '#3FA9F5'}}
                     onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
                     id: friend.id,
                     name: friend.name,
@@ -64,9 +67,15 @@ class FriendsList extends React.Component{
             )
           })}
       </ScrollView>
-      <View style={{ height: 60 }}/>
+      <View style={{ height: 75 }}/>
       <View style={styles.bottomView}>
-          <Button title='Add Friend' icon={{ name: 'add-circle' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
+          <Button
+            raised
+            title='Add Friend'
+            icon={{ name: 'add-circle' }}
+            buttonStyle={styles.addBtn}
+            onPress={() => this.props.navigation.navigate('AddFriend')} />
+            <View style={{ height: 20 }} />
       </View>
     </View>
     )
@@ -87,23 +96,18 @@ const styles = StyleSheet.create({
   },
   addBtn: {
     backgroundColor: '#3FA9F5',
-    width: '100%',
+    width: '90%',
     height: 50,
-    borderRadius: 5,
-    borderColor: 'black',
-    borderWidth: 2
+    borderRadius: 5
   },
   friendCards: {
     flex: 1,
-    // paddingTop: 12,
-    // paddingBottom: 12,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
   icons: {
-    flexDirection: 'row',
-    // justifyContent: 'space-evenly'
+    flexDirection: 'row'
   },
   avatar: {
     width: '100%',

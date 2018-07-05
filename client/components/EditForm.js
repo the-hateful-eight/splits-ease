@@ -37,7 +37,11 @@ class EditForm extends React.Component {
         <FormLabel>Phone</FormLabel>
         <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={phone => this.setState({ phone })} value={this.state.phone} />
         <View style={styles.bottomView}>
-          <Button buttonStyle={styles.submitBtn} title='Submit' onPress={() => this.handleSubmit(friendData.id)} />
+          <Button
+            raised
+            buttonStyle={styles.submitBtn}
+            title='Submit'
+            onPress={() => this.handleSubmit(friendData.id)} />
         </View>
       </KeyboardAvoidingView>
     )
@@ -49,7 +53,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   submitBtn: {
-    backgroundColor: 'red',
+    borderRadius: 5,
+    backgroundColor: '#3FA9F5',
     width: '100%'
   },
   bottomView: {
