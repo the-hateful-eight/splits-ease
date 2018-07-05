@@ -39,12 +39,6 @@ class Home extends Component {
           <Text style={{ marginBottom: 10, marginTop: 10 }}>
             Welcome to Splits/Ease!
           </Text>
-          <Button
-            icon={<Icon name='code' color='#ffffff' />}
-            backgroundColor='#03A9F4'
-            fontFamily='Lato'
-            title='Split Bill!'
-            onPress={() => this.navigation.navigate('Split')} />
         </Card>
         <Card title='Your Friends'>
           {
@@ -59,7 +53,7 @@ class Home extends Component {
                     key={i}
                     roundAvatar
                     title={u.name}
-                    rightIcon={{ name: 'person' }}
+                    rightIcon={{ name: 'message' }}
                   // avatar={{ uri: u.avatar }}
                   />
                 );
