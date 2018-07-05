@@ -19,17 +19,7 @@ const transporter = require("nodemailer").createTransport({
   }
 });
 
-router.post('/:id', async (req, res, next) => {
-  const buffer = Buffer.from(req.body.image, 'base64')
-  try {
-    const parsed = await client.documentTextDetection(buffer)
-    res.json(parsed[0])
-    // const createdReceipt = Receipt.create({receiptImage: buffer, userId: req.params.id})
-  } catch (err) {
-    console.error(err)
-    next()
-  }
-})
+module.exports = router;
 
 router.post("/send", (req, res, next) => {
   const items = req.body.items;
