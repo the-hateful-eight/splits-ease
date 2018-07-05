@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
-import { Button, Icon } from 'react-native-elements'
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Button, Card, Icon } from 'react-native-elements'
 import { deleteFriend } from '../store/user'
 import { FriendCard } from './FriendCard'
 
@@ -29,36 +29,51 @@ class FriendsList extends React.Component{
       <ScrollView>
           {userFriends.map(friend => {
             return (
-              <View key={friend.id} style={styles.friendCards}>
-                <Icon
-                  raised
-                  name='close'
-                  color='red'
-                  onPress={() => this.handleDelete(userId, friend.id)}
+              <Card key={friend.id} title={friend.name}>
+                <Image
+                  source={{ uri: 'https://cdn3.iconfinder.com/data/icons/yumminky-pc/100/yumminky-pc-43-512.png'}}
+                  style={styles.avatar}
                   />
+                <View style={styles.friendCards}>
                 <FriendCard
                             id={friend.id}
                             name={friend.name}
                             phone={friend.phone}
                             email={friend.email}
                 />
-                <Icon
-                  raised
-                  name='create'
-                  onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
-                  id: friend.id,
-                  name: friend.name,
-                  phone: friend.phone,
-                  email: friend.email
-                  }})}
+                <View style={styles.icons}>
+                  <Button
+                    title='Delete'
+                    raised
+                    onPress={() => this.handleDelete(userId, friend.id)}
+                    buttonStyle={styles.cardDeleteBtn}
                   />
-              </View>
+                  <Button
+                    title='Edit'
+                    raised
+                    onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
+                      id: friend.id,
+                      name: friend.name,
+                      phone: friend.phone,
+                      email: friend.email
+                      }})}
+                    buttonStyle={styles.cardEditBtn}
+                  />
+                </View>
+                </View>
+              </Card>
             )
           })}
       </ScrollView>
-      <View style={{ height: 60 }}/>
+      <View style={{ height: 75 }}/>
       <View style={styles.bottomView}>
-          <Button title='Add Friend' icon={{ name: 'add-circle' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
+          <Button
+            raised
+            title='Add Friend'
+            icon={{ name: 'add-circle' }}
+            buttonStyle={styles.addBtn}
+            onPress={() => this.props.navigation.navigate('AddFriend')} />
+            <View style={{ height: 20 }} />
       </View>
     </View>
     )
@@ -78,17 +93,34 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   addBtn: {
-    backgroundColor: 'blue',
-    width: '100%',
-    height: 50
+    backgroundColor: '#3FA9F5',
+    width: '90%',
+    height: 50,
+    borderRadius: 5
   },
   friendCards: {
     flex: 1,
-    paddingTop: 12,
-    paddingBottom: 12,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  icons: {
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    paddingTop: 12
+  },
+  avatar: {
+    width: '100%',
+    height: 200
+  },
+  cardDeleteBtn: {
+    backgroundColor: 'red',
+    borderRadius: 5
+  },
+  cardEditBtn: {
+    backgroundColor: '#3FA9F5',
+    borderRadius: 5,
+    width: 75
   }
 })
 

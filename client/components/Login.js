@@ -67,6 +67,7 @@ console.log('ip: ', ip)
                         source={require('../../assets/splits-ease-logo.png')}
                     />
                 </View>
+                <ScrollView>
                 <FormLabel>email</FormLabel>
                 <FormInput autoCapitalize='none' onChangeText={email => this.setState({ email })} />
                 <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
@@ -86,6 +87,7 @@ console.log('ip: ', ip)
                     type='google-plus-official'
                     onPress={this.signInWithGoogleAsync.bind(this)}
                 />
+                </ScrollView>
             </KeyboardAvoidingView>
         )
     }
