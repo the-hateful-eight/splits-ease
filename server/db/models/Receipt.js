@@ -5,7 +5,7 @@ const Receipt = db.define('receipt', {
   vendor: {
     type: Sequelize.STRING,
   },
-  venderAddress: {
+  vendorAddress: {
     type: Sequelize.Sequelize.STRING,
   },
   receiptImage: {
