@@ -70,7 +70,7 @@ class ReceiptForm extends React.Component {
             <Button style={styles.sendAllBtn} title="Send All" onPress={() => this.props.navigation.navigate('Home')}/>
           </View>
           <View style={styles.bottomView}>
-          <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend', { key: this.props.navigation.state.key})} />
+          <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
         </View>
         </ScrollView>
       </View>
