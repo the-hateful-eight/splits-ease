@@ -7,7 +7,7 @@ import {
   FormValidationMessage,
 } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { setItems, assignItem, unassignItem } from '../store/items'
+import { setItems, assignItem, unassignItem, addItem, removeItem } from '../store/items'
 import ModalDropdown from 'react-native-modal-dropdown'
 
 class ReceiptForm extends React.Component {
@@ -129,7 +129,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   setItems: items => dispatch(setItems(items)),
   assignItem: (id, receipient) => dispatch(assignItem(id, receipient)),
-  unassignItem: index => dispatch(unassignItem(index))
+  unassignItem: index => dispatch(unassignItem(index)),
+  addItem: item => dispatch(addItem(item)),
+  removeItem: item => dispatch(removeItem(item))
 })
 
 export default connect(
