@@ -1,5 +1,6 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, View, Linking } from 'react-native'
+import Expo from 'expo'
 import {
   Button,
   FormLabel,
@@ -9,6 +10,7 @@ import {
 import { connect } from 'react-redux'
 import { setItems, assignItem, unassignItem } from '../store/items'
 import ModalDropdown from 'react-native-modal-dropdown'
+import { getPaypalAuth, sendReceipt } from '../store/user'
 
 class ReceiptForm extends React.Component {
   constructor(){
@@ -24,6 +26,23 @@ class ReceiptForm extends React.Component {
 
   selectFriend = (idx, val) => {
     this.props.assignItem(idx, val)
+  }
+
+  componentDidMount = () => {
+    Linking.addEventListener('url', (event) => {
+      Expo.WebBrowser.dismissBrowser()
+      console.log('event listener', event)
+      let url = Expo.Linking.parse(event.url)
+      console.log(url)
+      if (url.queryParams.code){
+        console.log(url.path)
+        sendReceipt(this.props.items, url.queryParams.code)
+      }
+    })
+  }
+
+  sendWithoutPayPal = () => {
+    sendReceipt(this.props.items)
   }
 
   renderFriends() {
@@ -67,7 +86,8 @@ class ReceiptForm extends React.Component {
             )
           })}
           <View>
-            <Button style={styles.sendAllBtn} title="Send All" onPress={() => this.props.navigation.navigate('Home')}/>
+            <Button style={styles.sendAllBtn} title="Send All" onPress={getPaypalAuth} />
+            <Button style={styles.sendAllBtn} title="Send Without Paypal" onPress={this.sendWithoutPayPal} />
           </View>
           <View style={styles.bottomView}>
           <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />

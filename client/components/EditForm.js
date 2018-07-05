@@ -31,11 +31,11 @@ class EditForm extends React.Component {
     return (
       <KeyboardAvoidingView style={styles.container}>
         <FormLabel>Name</FormLabel>
-        <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={name => this.setState({ name })} value={friendData.name} />
+        <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={name => this.setState({ name })} value={this.state.name} />
         <FormLabel>Email</FormLabel>
-        <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={email => this.setState({ email })} value={friendData.email} />
+        <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={email => this.setState({ email })} value={this.state.email} />
         <FormLabel>Phone</FormLabel>
-        <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={phone => this.setState({ phone })} value={friendData.phone} />
+        <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={phone => this.setState({ phone })} value={this.state.phone} />
         <View style={styles.bottomView}>
           <Button buttonStyle={styles.submitBtn} title='Submit' onPress={() => this.handleSubmit(friendData.id)} />
         </View>

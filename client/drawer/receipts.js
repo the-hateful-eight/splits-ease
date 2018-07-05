@@ -8,6 +8,7 @@ const receiptsDrawerItem = createStackNavigator({
   Receipts: {
     screen: ReceiptList,
     navigationOptions: ({ navigation }) => ({
+      title: 'Receipts',
       headerLeft: (
           <Icon 
             iconStyle={{ paddingLeft: 10 }}
