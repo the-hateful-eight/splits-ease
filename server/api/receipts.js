@@ -44,7 +44,7 @@ router.post('/:id', async (req, res, next) => {
   try {
     const parsed = await client.documentTextDetection(buffer)
     res.json(parsed[0])
-    const createdReceipt = Receipt.create({receiptImage: buffer, userId: req.params.id})
+    // const createdReceipt = Receipt.create({receiptImage: buffer, userId: req.params.id})
   } catch (err) {
     console.error(err)
     next()
