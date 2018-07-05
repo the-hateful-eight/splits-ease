@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   icons: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    // justifyContent: 'space-between',
     paddingTop: 12
   },
   avatar: {
@@ -119,7 +119,8 @@ const styles = StyleSheet.create({
   },
   cardEditBtn: {
     backgroundColor: '#3FA9F5',
-    borderRadius: 5
+    borderRadius: 5,
+    width: 75
   }
 })
 
