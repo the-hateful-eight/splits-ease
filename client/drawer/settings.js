@@ -8,6 +8,7 @@ const settingsDrawerItem = createStackNavigator({
   Settings: {
     screen: Settings,
     navigationOptions: ({ navigation }) => ({
+      title: 'Settings',
       headerLeft: (
           <Icon
             iconStyle={{ paddingLeft: 10 }}
