@@ -29,7 +29,7 @@ class FriendsList extends React.Component{
       <ScrollView>
           {userFriends.map(friend => {
             return (
-              <Card key={friend.id} title={friend.name} >
+              <Card key={friend.id} title={friend.name}>
                 <Image
                   source={{ uri: 'https://cdn3.iconfinder.com/data/icons/yumminky-pc/100/yumminky-pc-43-512.png'}}
                   style={styles.avatar}
@@ -42,25 +42,23 @@ class FriendsList extends React.Component{
                             email={friend.email}
                 />
                 <View style={styles.icons}>
-                  <Icon
+                  <Button
+                    title='Delete'
                     raised
-                    name='close'
-                    color='white'
-                    containerStyle={{backgroundColor: 'red'}}
                     onPress={() => this.handleDelete(userId, friend.id)}
-                    />
-                  <Icon
+                    buttonStyle={styles.cardDeleteBtn}
+                  />
+                  <Button
+                    title='Edit'
                     raised
-                    name='create'
-                    color='white'
-                    containerStyle={{backgroundColor: '#3FA9F5'}}
                     onPress={() => this.props.navigation.navigate('EditForm', { friendData: {
-                    id: friend.id,
-                    name: friend.name,
-                    phone: friend.phone,
-                    email: friend.email
-                    }})}
-                    />
+                      id: friend.id,
+                      name: friend.name,
+                      phone: friend.phone,
+                      email: friend.email
+                      }})}
+                    buttonStyle={styles.cardEditBtn}
+                  />
                 </View>
                 </View>
               </Card>
@@ -107,11 +105,21 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   icons: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingTop: 12
   },
   avatar: {
     width: '100%',
     height: 200
+  },
+  cardDeleteBtn: {
+    backgroundColor: 'red',
+    borderRadius: 5
+  },
+  cardEditBtn: {
+    backgroundColor: '#3FA9F5',
+    borderRadius: 5
   }
 })
 
