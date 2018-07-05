@@ -13,6 +13,14 @@ class Login extends Component {
             password: ''
         }
         this.handleLogin = this.handleLogin.bind(this)
+        const { manifest } = Expo.Constants
+const ip = manifest.packagerOpts.dev
+  ? manifest.debuggerHost
+      .split(`:`)
+      .shift()
+      .concat(`:1337`)
+  : `localhost:1337`
+console.log('ip: ', ip)
     }
 
     handleLogin() {
@@ -63,7 +71,7 @@ class Login extends Component {
                 <FormInput autoCapitalize='none' onChangeText={email => this.setState({ email })} />
                 <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
                 <FormLabel>password</FormLabel>
-                <FormInput autoCapitalize='none' onChangeText={password => this.setState({ password })} />
+                <FormInput autoCapitalize='none' secureTextEntry={true} onChangeText={password => this.setState({ password })} />
                 <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
                 <Button buttonStyle={styles.logInBtn}
                     raised

@@ -36,6 +36,7 @@ class Home extends Component {
             source={require('../../assets/home.jpg')}
             style={{ width: '100%', resizeMode: 'cover' }}
           />
+<<<<<<< HEAD
           <Text style={{ marginBottom: 10, marginTop: 10 }}>
             Welcome to Splits/Ease!
           </Text>
@@ -61,6 +62,17 @@ class Home extends Component {
           }
         </Card>
       </View>
+=======
+          <Button
+            title="Friends List"
+            onPress={() => this.props.navigation.navigate('FriendsList')}
+          />
+          <Button
+            title="Receipt List"
+            onPress={() => this.props.navigation.navigate('Receipts')}
+          />
+        </View>
+>>>>>>> master
     )
   }
 }
@@ -71,6 +83,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    color: 'white'
+
   },
   header: {
     height: 200
