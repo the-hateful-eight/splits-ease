@@ -4,3 +4,4 @@ module.exports = router
 router.use('/receipts', require('./receipts'))
 router.use('/items', require('./items'))
 router.use('/user', require('./user'))
+router.use('/paypal', require('./paypal'))

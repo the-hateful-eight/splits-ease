@@ -12,6 +12,14 @@ class Login extends Component {
             password: ''
         }
         this.handleLogin = this.handleLogin.bind(this)
+        const { manifest } = Expo.Constants
+const ip = manifest.packagerOpts.dev
+  ? manifest.debuggerHost
+      .split(`:`)
+      .shift()
+      .concat(`:1337`)
+  : `localhost:1337`
+console.log('ip: ', ip)
     }
 
     handleLogin() {

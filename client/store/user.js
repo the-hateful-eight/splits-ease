@@ -76,12 +76,18 @@ export const login = userInfo => {
   }
 }
 
-// export const logout = () => dispatch => {
-//   return axios
-//     .delete('/auth/logout')
-//     .then(() => dispatch(gotMe(initialState.user)))
-//     .catch(err => console.log(err))
-// }
+export const getPaypalAuth = async () => {
+  try {
+    const url = await axios.get(`http://${ip}/api/paypal`).then(res => res.data)
+    Expo.WebBrowser.openBrowserAsync(url)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const sendReceipt = async (code, items) => {
+  await axios.post(`http://${ip}/api/receipts/send`, {code, items})
+}
 
 export const getUserFriends = id => {
   return async dispatch => {

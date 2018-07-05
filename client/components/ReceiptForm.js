@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TextInput, View, Linking } from 'react-native'
 import {
   Button,
   FormLabel,
@@ -9,6 +9,7 @@ import {
 import { connect } from 'react-redux'
 import { setItems, assignItem, unassignItem } from '../store/items'
 import ModalDropdown from 'react-native-modal-dropdown'
+import { getPaypalAuth, sendReceipt } from '../store/user'
 
 class ReceiptForm extends React.Component {
   constructor(){
@@ -19,6 +20,17 @@ class ReceiptForm extends React.Component {
 
   selectFriend = (idx, val) => {
     this.props.assignItem(idx, val)
+  }
+
+  componentDidMount = () => {
+    Linking.addEventListener('url', (event) => {
+      console.log('event listener', event)
+      let url = Linking.parse(event)
+      console.log(url)
+      if (url.queryParams.code){
+        sendReceipt(url.queryParams.code, this.props.items)
+      }
+    })
   }
 
   renderFriends() {
@@ -62,7 +74,7 @@ class ReceiptForm extends React.Component {
             )
           })}
           <View>
-            <Button style={styles.sendAllBtn} title="Send All" />
+            <Button style={styles.sendAllBtn} title="Send All" onPress={getPaypalAuth} />
           </View>
           <View style={styles.bottomView}>
           <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
