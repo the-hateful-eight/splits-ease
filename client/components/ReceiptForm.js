@@ -13,29 +13,16 @@ import ModalDropdown from 'react-native-modal-dropdown'
 import { getPaypalAuth, sendReceipt } from '../store/user'
 
 class ReceiptForm extends React.Component {
-  constructor(){
-    super()
-    this.renderFriends = this.renderFriends.bind(this)
-    this.selectFriend = this.selectFriend.bind(this)
-    this.handleSendAll = this.handleSendAll.bind(this)
-  }
 
-  handleSendAll(){
-
-  }
-
-  selectFriend = (idx, val) => {
-    this.props.assignItem(idx, val)
+  selectFriend = (itemIdx, friendIdx) => {
+    this.props.assignItem(itemIdx, this.props.userFriends[friendIdx])
   }
 
   componentDidMount = () => {
     Linking.addEventListener('url', (event) => {
       Expo.WebBrowser.dismissBrowser()
-      console.log('event listener', event)
       let url = Expo.Linking.parse(event.url)
-      console.log(url)
       if (url.queryParams.code){
-        console.log(url.path)
         sendReceipt(this.props.items, url.queryParams.code)
       }
     })
@@ -45,7 +32,7 @@ class ReceiptForm extends React.Component {
     sendReceipt(this.props.items)
   }
 
-  renderFriends() {
+  renderFriends = () => {
     return this.props.userFriends.map(friend => friend.name)
   }
 
@@ -80,7 +67,9 @@ class ReceiptForm extends React.Component {
                   textStyle={{ textAlign: 'center' }}
                   dropdownStyle={{ width: 70 }}
                   options={this.renderFriends()}
-                  onSelect={this.selectFriend}
+                  onSelect={(idx, val) => {
+                    this.selectFriend(item.id, idx)
+                  }}
                 />
               </View>
             )

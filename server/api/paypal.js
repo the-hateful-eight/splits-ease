@@ -1,6 +1,6 @@
 const paypal = require("paypal-rest-sdk");
 paypal.configure({
-  mode: "sandbox",
+  mode: "live",
   client_id: process.env.PAYPAL_CLIENT_ID,
   client_secret: process.env.PAYPAL_CLIENT_SECRET,
   openid_client_id: process.env.PAYPAL_CLIENT_ID,
@@ -24,7 +24,6 @@ paypal.configure({
 // };
 
 const createInvoice = (code, list, recipient) => {
-    console.log(list)
   paypal.openid_connect.tokeninfo.create(code, (error1, token) => {
     if (error1) {
       console.log(error1);
@@ -51,15 +50,15 @@ const createInvoice = (code, list, recipient) => {
                       }
                     ],
                     items: list.map(item => ({
-                        name: item.item,
-                        quantity: 1,
-                        unit_price: {
-                            currency: 'USD',
-                            value: Number(item.price.trim())
-                        }
+                      name: item.item,
+                      quantity: 1,
+                      unit_price: {
+                        currency: "USD",
+                        value: Number(item.price.trim())
+                      }
                     })),
                     shipping_info: {},
-                    tax_inclusive: true,
+                    tax_inclusive: true
                   };
                   if (recipient.phone) {
                     invoice.shipping_info.phone = {
@@ -81,6 +80,11 @@ const createInvoice = (code, list, recipient) => {
                       } else {
                         console.log("invoice sent!");
                         console.log(receipt);
+                        setTimeout(() => {
+                          paypal.invoice.send(receipt.id, (sendErr, rv) => {
+                            console.log(sendErr ? sendErr : rv);
+                          });
+                        }, 5000);
                       }
                     }
                   );
