@@ -78,14 +78,14 @@ export const login = userInfo => {
 
 export const getPaypalAuth = async () => {
   try {
-    const url = await axios.get(`http://${ip}/api/paypal`).then(res => res.data)
+    const url = await axios.get(`http://${ip}/api/user/authorizePaypal`).then(res => res.data)
     Expo.WebBrowser.openBrowserAsync(url)
   } catch (err) {
     console.log(err)
   }
 }
 
-export const sendReceipt = async (code, items) => {
+export const sendReceipt = async (items, code = null) => {
   await axios.post(`http://${ip}/api/receipts/send`, {code, items})
 }
 

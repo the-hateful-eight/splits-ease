@@ -1,48 +1,97 @@
-const router = require('express').Router()
-const paypal = require('paypal-rest-sdk')
+const paypal = require("paypal-rest-sdk");
 paypal.configure({
-    mode: 'sandbox',
-    client_id: process.env.PAYPAL_CLIENT_ID,
-    client_secret: process.env.PAYPAL_CLIENT_SECRET,
-    openid_client_id: process.env.PAYPAL_CLIENT_ID,
-    openid_secret: process.env.PAYPAL_CLIENT_SECRET,
-    openid_redirect_uri: 'http://192.168.1.3:1337/paypal'    
-    // openid_redirect_uri: 'http://localhost:1337/paypal'
-})
+  mode: "sandbox",
+  client_id: process.env.PAYPAL_CLIENT_ID,
+  client_secret: process.env.PAYPAL_CLIENT_SECRET,
+  openid_client_id: process.env.PAYPAL_CLIENT_ID,
+  openid_secret: process.env.PAYPAL_CLIENT_SECRET,
+  openid_redirect_uri: "http://172.16.23.251:1337/paypal"
+});
 
-
-// const scope = ['ACCESS_BASIC_PERSONAL_DATA', 'INVOICING']
-
-// console.log(paypal.openid_connect.authorizeUrl({scope: 'openid https://uri.paypal.com/services/invoicing email'}))
-// console.log(paypal.openid_connect)
-// paypal.openid_connect.tokeninfo.create('C21AAG89q8ynchlmzRdnLScYbow_rykM4pxGLWutmmcQPoQ8_9h__hhi7_nV5PqgYQde_XVjZn8hNKd2B2HrqMk2HO_iseHHA', (err, token) => {
-//     console.log(token)
-// })
-
-// paypal.openIdConnect.tokeninfo.refresh('R23AAHnsWu1rboG8HJ6oGPFyF4JvJJB-3kiVVzQejm6Vvg9O7aXB7uo3NnWx7mezQofoztJpQNShPhZYZClldeYqAlEZNGYyocpXG-rDmjO4dCWEIPMdfFD1caHRHhRAz4_sBQIBXSCqPQ5jNSXzQ', function (error, tokeninfo) {
+// const getRefreshToken = code => {
+//   let refreshToken = "";
+//   paypal.openid_connect.tokeninfo.create(code, (error, userToken) => {
 //     if (error) {
-//         console.log(error);
+//       console.log(error);
 //     } else {
-//         paypal.openIdConnect.userinfo.get(tokeninfo.access_token, function (error, userinfo) {
-//             console.log(userinfo)
-//         })
-//     }})
+//       console.log("getrefresh");
+//       console.log(userToken);
+//       refreshToken = userToken.refresh_token;
+//     }
+//   });
+//   console.log(refreshToken);
+//   return refreshToken;
+// };
 
-router.get('/', async (req, res, next) => {
-    try {
-        const url = paypal.openid_connect.authorizeUrl({scope: 'openid https://uri.paypal.com/services/invoicing email'})
-        res.json(url)
-    } catch (err) {
-        next(err)
+const createInvoice = (code, list, recipient) => {
+    console.log(list)
+  paypal.openid_connect.tokeninfo.create(code, (error1, token) => {
+    if (error1) {
+      console.log(error1);
+    } else {
+      paypal.openid_connect.tokeninfo.refresh(
+        token.refresh_token,
+        (error2, userToken) => {
+          if (error2) {
+            console.log(error2);
+          } else {
+            paypal.openIdConnect.userinfo.get(
+              userToken.access_token,
+              (error3, user) => {
+                if (error3) {
+                  console.log(error3);
+                } else {
+                  const invoice = {
+                    merchant_info: {
+                      email: user.email
+                    },
+                    billing_info: [
+                      {
+                        email: recipient.email
+                      }
+                    ],
+                    items: list.map(item => ({
+                        name: item.item,
+                        quantity: 1,
+                        unit_price: {
+                            currency: 'USD',
+                            value: Number(item.price.trim())
+                        }
+                    })),
+                    shipping_info: {},
+                    tax_inclusive: true,
+                  };
+                  if (recipient.phone) {
+                    invoice.shipping_info.phone = {
+                      country_code: "001",
+                      national_number: recipient.phone
+                    };
+                  }
+                  if (recipient.name) {
+                    const [first, last] = recipient.name.split(" ");
+                    invoice.shipping_info.first_name = first;
+                    invoice.shipping_info.last_name = last;
+                  }
+                  paypal.invoice.create(
+                    invoice,
+                    { refresh_token: token.refresh_token },
+                    (err, receipt) => {
+                      if (err) {
+                        console.log(err.response);
+                      } else {
+                        console.log("invoice sent!");
+                        console.log(receipt);
+                      }
+                    }
+                  );
+                }
+              }
+            );
+          }
+        }
+      );
     }
-})
+  });
+};
 
-router.get('/test', async (req, res, next) => {
-    const token = req.query.code
-    paypal.openid_connect.tokeninfo.create(token, (err, usertoken) => {
-        if (err) next(err)
-        res.json(usertoken)
-    })
-})
-
-module.exports = router
+module.exports = { paypal, createInvoice };

@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollView, StyleSheet, Text, TextInput, View, Linking } from 'react-native'
+import Expo from 'expo'
 import {
   Button,
   FormLabel,
@@ -24,13 +25,19 @@ class ReceiptForm extends React.Component {
 
   componentDidMount = () => {
     Linking.addEventListener('url', (event) => {
+      Expo.WebBrowser.dismissBrowser()
       console.log('event listener', event)
-      let url = Linking.parse(event)
+      let url = Expo.Linking.parse(event.url)
       console.log(url)
       if (url.queryParams.code){
-        sendReceipt(url.queryParams.code, this.props.items)
+        console.log(url.path)
+        sendReceipt(this.props.items, url.queryParams.code)
       }
     })
+  }
+
+  sendWithoutPayPal = () => {
+    sendReceipt(this.props.items)
   }
 
   renderFriends() {
@@ -75,6 +82,7 @@ class ReceiptForm extends React.Component {
           })}
           <View>
             <Button style={styles.sendAllBtn} title="Send All" onPress={getPaypalAuth} />
+            <Button style={styles.sendAllBtn} title="Send Without Paypal" onPress={this.sendWithoutPayPal} />
           </View>
           <View style={styles.bottomView}>
           <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
