@@ -86,12 +86,8 @@ class ReceiptForm extends React.Component {
             )
           })}
           <View>
-<<<<<<< HEAD
             <Button style={styles.sendAllBtn} title="Send All" onPress={getPaypalAuth} />
             <Button style={styles.sendAllBtn} title="Send Without Paypal" onPress={this.sendWithoutPayPal} />
-=======
-            <Button style={styles.sendAllBtn} title="Send All" onPress={() => this.props.navigation.navigate('Home')}/>
->>>>>>> bf1d287209d7886c18b946f11b3512fde0dd78e1
           </View>
           <View style={styles.bottomView}>
           <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
