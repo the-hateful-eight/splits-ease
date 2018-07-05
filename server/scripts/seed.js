@@ -88,17 +88,17 @@ const receipts = [
   {
     vendor: 'Wendys',
     vendorAddress: '555 Food Ave.',
-    userId: 1,
+    userId: 0,
   },
   {
     vendor: 'Barry\'s Bodega',
     vendorAddress: '1010 Neghborhood Ave.',
-    userId: 2,
+    userId: 1,
   },
   {
     vendor: 'J-Crew',
     vendorAddress: '450 Park Pl.',
-    userId: 3,
+    userId: 1,
   }
 
 ]
