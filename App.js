@@ -6,12 +6,10 @@ import { Icon } from 'react-native-elements'
 
 import store from './client/store'
 import Login from './client/components/Login'
-import CreateUserForm from './client/components/CreateUserForm'
 import Home from './client/drawer/home'
 import Friends from './client/drawer/friends'
 import Receipts from './client/drawer/receipts'
 import Split from './client/drawer/split'
-import Settings from './client/drawer/settings'
 
 require('./secrets')
 
@@ -49,9 +47,6 @@ const Drawer = createDrawerNavigator(
     },
     Receipts: {
       screen: Receipts
-    },
-    Settings: {
-      screen: Settings
     }
   },
   {
