@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { Button } from 'react-native-elements'
 import Expo, { Camera, Permissions, FileSystem } from 'expo'
 import { setItems } from '../store/items'
 import { connect } from 'react-redux'
@@ -73,8 +74,9 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   captureBtn: {
-    backgroundColor: 'blue',
-    width: '100%'
+    backgroundColor: '#3FA9F5',
+    // width: '90%',
+    borderRadius: 5
   }
 })
 

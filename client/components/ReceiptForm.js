@@ -79,12 +79,13 @@ class ReceiptForm extends React.Component {
               </View>
             )
           })}
-          <View>
-            <Button style={styles.sendAllBtn} title="Send All" onPress={getPaypalAuth} />
-            <Button style={styles.sendAllBtn} title="Send Without Paypal" onPress={this.sendWithoutPayPal} />
+          <View style={{ height: 10 }}/>
+          <View style={{justifyContent: 'center'}}>
+            <Button raised title='New Friend' icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
           </View>
           <View style={styles.bottomView}>
-          <Button title='Add Friend' icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
+            <Button raised buttonStyle={styles.sendAllBtn} title="Send With Paypal" onPress={getPaypalAuth} />
+            <Button raised buttonStyle={styles.sendWithoutBtn} title="Send Without Paypal" onPress={this.sendWithoutPayPal} />
         </View>
         </ScrollView>
       </View>
@@ -94,8 +95,8 @@ class ReceiptForm extends React.Component {
 
 const styles = StyleSheet.create({
   addBtn: {
-    backgroundColor: 'red',
-    width: '100%'
+    backgroundColor: '#3FA9F5',
+    borderRadius: 5
   },
   container: {
     flex: 1,
@@ -117,11 +118,18 @@ const styles = StyleSheet.create({
     height: 30,
   },
   addItemBtn: {
-    width: 100,
+    width: 120,
     justifyContent: 'flex-end',
   },
   sendAllBtn: {
-    width: 100,
+    width: 150,
+    borderRadius: 5,
+    backgroundColor: '#0144af'
+  },
+  sendWithoutBtn: {
+    width: 150,
+    borderRadius: 5,
+    backgroundColor: '#59af26'
   },
   friendBtn: {
     backgroundColor: '#3FA9F5',
@@ -130,6 +138,14 @@ const styles = StyleSheet.create({
     width: 70,
     borderColor: 'black',
   },
+  bottomView: {
+    flexDirection: 'row',
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 100
+  }
 })
 
 const mapStateToProps = state => {
