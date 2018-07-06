@@ -44,7 +44,7 @@ export default function(state = [], action) {
       state[action.index].belongsTo = action.recipient
       return state
     case UNASSOCIATE_ITEM:
-      delete state.items[action.index].belongsTo
+      delete state[action.index].belongsTo
       return state
     default:
       return state

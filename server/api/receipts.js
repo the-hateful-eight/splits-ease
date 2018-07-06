@@ -34,14 +34,6 @@ router.post("/send", (req, res, next) => {
     }
   });
 
-  //testing
-  // createInvoice(req.body.code, items, {
-  //   email: 'mcontract27@gmail.com',
-  //   phone: 9147870089,
-  //   name: 'Matthew Contract'
-  // })
-  //testing
-
   console.log(recipients);
   try {
     Object.keys(recipients).map(recipient => {

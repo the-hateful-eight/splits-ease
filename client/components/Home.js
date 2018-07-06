@@ -55,6 +55,7 @@ class Home extends Component {
                     key={i}
                     roundAvatar
                     title={u.name}
+                    leftIcon={{ name: 'person-outline'}}
                     rightIcon={{ name: 'message' }}
                   // avatar={{ uri: u.avatar }}
                   />
