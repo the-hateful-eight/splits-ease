@@ -33,7 +33,6 @@ class ReceiptPreview extends React.Component {
             image: photo,
           })
           .then(res => res.data)
-        console.log('Photo! ', parsed.textAnnotations[0].description)
         const positions = parsed.textAnnotations.slice(1)
         let lines = {}
         let bottomLeft, bottomRight, left, lineDetected, text, box
@@ -67,7 +66,6 @@ class ReceiptPreview extends React.Component {
             }
           })
           if (!lineDetected) lines[left] = [text]
-          console.log(left, text)
         }
         let items = []
         let i = 0
@@ -81,7 +79,6 @@ class ReceiptPreview extends React.Component {
               .replace(/[^.\w\s]/g, '')
               .trim()
             item = item.split(/(\d+\.\d\d(?:[^\d%]|$))/)
-            console.log(item)
             if (item.length > 1) {
               if (item[0]) {
                 items.push({ id: i++, item: item[0], price: item[1] })
@@ -128,7 +125,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#3FA9F5',
     width: '100%',
   },
   img: {

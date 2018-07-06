@@ -31,7 +31,6 @@ class ReceiptCamera extends React.Component {
         quality: 0.4,
         base64: true,
       })
-      console.log('PHOTO CAPTURED!!!')
       this.setState({ photo })
       this.props.navigation.navigate('ReceiptPreview', {image: this.state.photo.base64})
     }
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   captureBtn: {
-    backgroundColor: 'blue',
+    backgroundColor: '#3FA9F5',
     width: '100%'
   }
 })

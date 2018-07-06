@@ -14,13 +14,13 @@ class Login extends Component {
         }
         this.handleLogin = this.handleLogin.bind(this)
         const { manifest } = Expo.Constants
-const ip = manifest.packagerOpts.dev
-  ? manifest.debuggerHost
-      .split(`:`)
-      .shift()
-      .concat(`:1337`)
-  : `localhost:1337`
-console.log('ip: ', ip)
+        const ip = manifest.packagerOpts.dev
+            ? manifest.debuggerHost
+                .split(`:`)
+                .shift()
+                .concat(`:1337`)
+            : `localhost:1337`
+        console.log('ip: ', ip)
     }
 
     handleLogin() {
@@ -52,7 +52,7 @@ console.log('ip: ', ip)
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container} >
                 <Video
-                    source={require('../../assets/Pink_Mood_NYC.mp4')}
+                    source={require('../../assets/login.mp4')}
                     rate={1.0}
                     volume={1.0}
                     isMuted={true}
@@ -61,33 +61,37 @@ console.log('ip: ', ip)
                     isLooping
                     style={styles.video}
                 />
-                <View style={styles.logoContainer}>
-                    <Image
-                        style={styles.logo}
-                        source={require('../../assets/splits-ease-logo.png')}
-                    />
+                <View style={styles.logoPaddingContainer}>
+                    <View style={styles.logoContainer}>
+                        <Image
+                            style={styles.logo}
+                            source={require('../../assets/splits-ease-logo.png')}
+                        />
+                    </View>
                 </View>
-                <ScrollView>
-                <FormLabel>email</FormLabel>
-                <FormInput autoCapitalize='none' onChangeText={email => this.setState({ email })} />
-                <FormValidationMessage>{'Please enter a valid email'}</FormValidationMessage>
-                <FormLabel>password</FormLabel>
-                <FormInput autoCapitalize='none' secureTextEntry={true} onChangeText={password => this.setState({ password })} />
-                <FormValidationMessage>{'Please enter a valid password'}</FormValidationMessage>
-                <Button buttonStyle={styles.logInBtn}
-                    raised
-                    icon={{ name: 'cached' }}
-                    title='Login'
-                    onPress={this.handleLogin}
-                />
-                <Button icon={{ name: 'account-circle' }} title="Create Account" buttonStyle={styles.createAccount} onPress={() => this.props.navigation.navigate('CreateUserForm')} />
-                <SocialIcon
-                    title='Sign In With Google'
-                    button
-                    type='google-plus-official'
-                    onPress={this.signInWithGoogleAsync.bind(this)}
-                />
-                </ScrollView>
+                <View style={styles.paddingContainer}>
+                    <View style={styles.formContainer}>
+                        <FormLabel labelStyle={{ color: 'darkslategrey' }}>email</FormLabel>
+                        <FormInput inputStyle={{ color: 'grey' }} autoCapitalize='none' onChangeText={email => this.setState({ email })} />
+                        <FormLabel labelStyle={{ color: 'darkslategrey' }}>password</FormLabel>
+                        <FormInput inputStyle={{ color: 'grey' }} autoCapitalize='none' secureTextEntry={true} onChangeText={password => this.setState({ password })} />
+                        <View style={styles.buttonsContainer}>
+                            <Button
+                                buttonStyle={styles.logInBtn}
+                                raised
+                                icon={{ name: 'cached' }}
+                                title='Login'
+                                onPress={this.handleLogin}
+                            />
+                            <Button
+                                raised
+                                icon={{ name: 'account-circle' }}
+                                title="Create Account"
+                                buttonStyle={styles.createAccount}
+                                onPress={() => this.props.navigation.navigate('CreateUserForm')} />
+                        </View>
+                    </View>
+                </View>
             </KeyboardAvoidingView>
         )
     }
@@ -95,24 +99,37 @@ console.log('ip: ', ip)
 
 const styles = StyleSheet.create({
     logInBtn: {
-        backgroundColor: 'gray'
+        backgroundColor: '#3FA9F5'    
     },
     container: {
         flex: 1,
         backgroundColor: 'white'
     },
+    paddingContainer: {
+        padding: 50
+    },
+    logoPaddingContainer: {
+        paddingTop: 100,
+        paddingRight: 130,
+        paddingLeft: 130
+    },
+    formContainer: {
+        backgroundColor: 'rgba(255,255,255,0.9)'
+    },
+    buttonsContainer: {
+        padding: 40
+    },
     createAccount: {
-        backgroundColor: 'blue'
+        backgroundColor: 'darkgrey'
     },
     logo: {
-        width: 300,
-        height: 120
+        height: 200,
+        width: 500
     },
     logoContainer: {
         alignItems: 'center',
+        paddingTop: 30,
         justifyContent: 'center',
-        paddingTop: 80,
-        paddingBottom: 20,
     },
     video: {
         position: 'absolute',

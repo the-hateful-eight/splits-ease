@@ -3,7 +3,9 @@ import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
 import Home from '../components/Home';
-import FriendsList from '../components/FriendsList';
+import Login from '../components/Login';
+import CreateUser from '../components/CreateUserForm';
+
 
 const homeDrawerItem = createStackNavigator({
     Home: {

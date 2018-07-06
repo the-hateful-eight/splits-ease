@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Button, Platform, StatusBar, Image } from 'react-native'
+import { ScrollView,StyleSheet, Text, View, Button, Platform, StatusBar, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { Header, Icon, ListItem, Card } from 'react-native-elements'
 import { logout } from '../store'
@@ -28,7 +28,9 @@ class Home extends Component {
   render() {
     const friends = this.props.userFriends
     return (
+
       <View>
+        <ScrollView>
         <Card
           title={`${this.getTimeOfDay()}, ${this.props.user.name}`}
         >
@@ -53,6 +55,7 @@ class Home extends Component {
                     key={i}
                     roundAvatar
                     title={u.name}
+                    leftIcon={{ name: 'person-outline'}}
                     rightIcon={{ name: 'message' }}
                   // avatar={{ uri: u.avatar }}
                   />
@@ -60,6 +63,7 @@ class Home extends Component {
               })
           }
         </Card>
+        </ScrollView>
       </View>
     )
   }
