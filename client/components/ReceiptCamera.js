@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     position: 'absolute'
   },
   captureBtn: {
-    backgroundColor: 'blue',
+    backgroundColor: '#3FA9F5',
     width: '100%'
   }
 })

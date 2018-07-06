@@ -10,35 +10,35 @@ const {
 const users = [
   {
     name: 'Reese',
-    email: 'reese@email.com',
+    email: 'reese@gmail.com',
     phone: '123-456-7890',
     password: '123',
     avatar: 'assets/reese_avatar'
   },
   {
     name: 'Sean',
-    email: 'sean@email.com',
+    email: 'sean@gmail.com',
     phone: '234-567-8910',
     password: '456',
     avatar: 'assets/sean_avatar'
   },
   {
     name: 'Patrick',
-    email: 'patrick@email.com',
+    email: 'patrick@gmail.com',
     phone: '555-123-4567',
     password: '789',
     avatar: 'assets/patrick_avatar'
   },
   {
     name: 'Kevin',
-    email: 'kevin@email.com',
+    email: 'kevin@gmail.com',
     phone: '444-567-8910',
     password: '999',
     avatar: 'assets/kevin_avatar'
   },
   {
     name: 'Matt',
-    email: 'matt@email.com',
+    email: 'matt@gmail.com',
     phone: '555-555-0987',
     password: '000',
     avatar: 'assets/matt_avatar'
@@ -48,35 +48,35 @@ const users = [
 const friends = [
   {
     name: 'Reese',
-    email: 'reese@email.com',
+    email: 'reese@gmail.com',
     phone: '123-456-7890',
     password: '123',
     avatar: 'assets/reese_avatar'
   },
   {
     name: 'Sean',
-    email: 'sean@email.com',
+    email: 'sean@gmail.com',
     phone: '234-567-8910',
     password: '456',
     avatar: 'assets/sean_avatar'
   },
   {
     name: 'Patrick',
-    email: 'patrick@email.com',
+    email: 'patrick@gmail.com',
     phone: '555-123-4567',
     password: '789',
     avatar: 'assets/patrick_avatar'
   },
   {
     name: 'Kevin',
-    email: 'kevin@email.com',
+    email: 'kevin@gmail.com',
     phone: '444-567-8910',
     password: '999',
     avatar: 'assets/kevin_avatar'
   },
   {
     name: 'Matt',
-    email: 'matt@email.com',
+    email: 'matt@gmail.com',
     phone: '555-555-0987',
     password: '000',
     avatar: 'assets/matt_avatar'

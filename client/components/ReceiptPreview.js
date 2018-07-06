@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: '#3FA9F5',
     width: '100%',
   },
   img: {

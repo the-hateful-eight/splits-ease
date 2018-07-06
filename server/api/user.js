@@ -127,4 +127,3 @@ router.get('/authorizePaypal', (req, res, next) => {
       next(err)
   }
 })
-

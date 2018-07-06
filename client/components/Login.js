@@ -61,30 +61,36 @@ class Login extends Component {
                     isLooping
                     style={styles.video}
                 />
-                <View style={styles.logoContainer}>
-                    <Image
-                        style={styles.logo}
-                        source={require('../../assets/splits-ease-logo.png')}
-                    />
+                <View style={styles.logoPaddingContainer}>
+                    <View style={styles.logoContainer}>
+                        <Image
+                            style={styles.logo}
+                            source={require('../../assets/splits-ease-logo.png')}
+                        />
+                    </View>
                 </View>
-                <FormLabel labelStyle={{ color: 'darkslategrey' }}>email</FormLabel>
-                <FormInput inputStyle={{ color: 'black' }} autoCapitalize='none' onChangeText={email => this.setState({ email })} />
-                <FormLabel labelStyle={{ color: 'darkslategrey' }}>password</FormLabel>
-                <FormInput inputStyle={{ color: 'black' }} autoCapitalize='none' secureTextEntry={true} onChangeText={password => this.setState({ password })} />
-                <View style={styles.buttonsContainer}>
-                <Button
-                    buttonStyle={styles.logInBtn}
-                    raised
-                    icon={{ name: 'cached' }}
-                    title='Login'
-                    onPress={this.handleLogin}
-                />
-                <Button 
-                    raised
-                    icon={{ name: 'account-circle' }}
-                    title="Create Account"
-                    buttonStyle={styles.createAccount}
-                    onPress={() => this.props.navigation.navigate('CreateUserForm')} />
+                <View style={styles.paddingContainer}>
+                    <View style={styles.formContainer}>
+                        <FormLabel labelStyle={{ color: 'darkslategrey' }}>email</FormLabel>
+                        <FormInput inputStyle={{ color: 'grey' }} autoCapitalize='none' onChangeText={email => this.setState({ email })} />
+                        <FormLabel labelStyle={{ color: 'darkslategrey' }}>password</FormLabel>
+                        <FormInput inputStyle={{ color: 'grey' }} autoCapitalize='none' secureTextEntry={true} onChangeText={password => this.setState({ password })} />
+                        <View style={styles.buttonsContainer}>
+                            <Button
+                                buttonStyle={styles.logInBtn}
+                                raised
+                                icon={{ name: 'cached' }}
+                                title='Login'
+                                onPress={this.handleLogin}
+                            />
+                            <Button
+                                raised
+                                icon={{ name: 'account-circle' }}
+                                title="Create Account"
+                                buttonStyle={styles.createAccount}
+                                onPress={() => this.props.navigation.navigate('CreateUserForm')} />
+                        </View>
+                    </View>
                 </View>
             </KeyboardAvoidingView>
         )
@@ -93,29 +99,37 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
     logInBtn: {
-        backgroundColor: '#3FA9F5',
-        paddingTop: 15
+        backgroundColor: '#3FA9F5'    
     },
     container: {
         flex: 1,
         backgroundColor: 'white'
     },
+    paddingContainer: {
+        padding: 50
+    },
+    logoPaddingContainer: {
+        paddingTop: 100,
+        paddingRight: 130,
+        paddingLeft: 130
+    },
+    formContainer: {
+        backgroundColor: 'rgba(255,255,255,0.9)'
+    },
     buttonsContainer: {
-        padding: 30
+        padding: 40
     },
     createAccount: {
-        backgroundColor: 'darkgrey',
-        paddingTop: 15
+        backgroundColor: 'darkgrey'
     },
     logo: {
-        width: 300,
-        height: 120
+        height: 200,
+        width: 500
     },
     logoContainer: {
         alignItems: 'center',
+        paddingTop: 30,
         justifyContent: 'center',
-        paddingTop: 80,
-        paddingBottom: 20,
     },
     video: {
         position: 'absolute',
