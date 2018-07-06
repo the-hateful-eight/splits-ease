@@ -14,8 +14,13 @@ import { getPaypalAuth, sendReceipt } from '../store/user'
 
 class ReceiptForm extends React.Component {
 
-  selectFriend = (itemIdx, friendIdx) => {
+  selectFriend = (itemIdx, friendIdx, val) => {
+    if (val === 'Choose'){
+      this.props.unassignItem(itemIdx)
+    } else {
     this.props.assignItem(itemIdx, this.props.userFriends[friendIdx])
+    }
+    console.log('ITEMS ARE HERE', this.props.items)
   }
 
   componentDidMount = () => {
@@ -66,9 +71,9 @@ class ReceiptForm extends React.Component {
                   style={styles.friendBtn}
                   textStyle={{ textAlign: 'center' }}
                   dropdownStyle={{ width: 70 }}
-                  options={this.renderFriends()}
+                  options={[ 'Choose',...this.renderFriends()]}
                   onSelect={(idx, val) => {
-                    this.selectFriend(item.id, idx)
+                    this.selectFriend(item.id, idx-1, val)
                   }}
                 />
               </View>
@@ -119,7 +124,7 @@ const styles = StyleSheet.create({
     width: 100,
   },
   friendBtn: {
-    backgroundColor: '#b3e6ff',
+    backgroundColor: '#3FA9F5',
     borderRadius: 2,
     borderWidth: 1,
     width: 70,
