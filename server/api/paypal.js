@@ -8,21 +8,6 @@ paypal.configure({
   openid_redirect_uri: "http://172.16.23.251:1337/paypal"
 });
 
-// const getRefreshToken = code => {
-//   let refreshToken = "";
-//   paypal.openid_connect.tokeninfo.create(code, (error, userToken) => {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       console.log("getrefresh");
-//       console.log(userToken);
-//       refreshToken = userToken.refresh_token;
-//     }
-//   });
-//   console.log(refreshToken);
-//   return refreshToken;
-// };
-
 const createInvoice = (code, list, recipient) => {
   paypal.openid_connect.tokeninfo.create(code, (error1, token) => {
     if (error1) {

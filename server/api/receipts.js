@@ -34,14 +34,6 @@ router.post("/send", (req, res, next) => {
     }
   });
 
-  //testing
-  // createInvoice(req.body.code, items, {
-  //   email: 'mcontract27@gmail.com',
-  //   phone: 9147870089,
-  //   name: 'Matthew Contract'
-  // })
-  //testing
-
   console.log(recipients);
   try {
     Object.keys(recipients).map(recipient => {
@@ -70,17 +62,17 @@ router.post("/send", (req, res, next) => {
           );
         }
       }
-      // if (friend.phone) {
-      //   let number = friend.phone.replace(/\(\)-\s/g, "");
-      //   if (!number.startsWith("+1")) number = "+1" + number;
-      //   twilioClient.messages
-      //     .create({
-      //       body: message,
-      //       to: number,
-      //       from: process.env.TWILIO_SERVICE_SID
-      //     })
-      //     .then(messageRes => console.log(messageRes.sid));
-      // }
+      if (friend.phone) {
+        let number = friend.phone.replace(/\(\)-\s/g, "");
+        if (!number.startsWith("+1")) number = "+1" + number;
+        twilioClient.messages
+          .create({
+            body: message,
+            to: number,
+            from: process.env.TWILIO_SERVICE_SID
+          })
+          .then(messageRes => console.log(messageRes.sid));
+      }
     });
     res.send();
   } catch (err) {
