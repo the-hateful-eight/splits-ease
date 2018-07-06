@@ -44,11 +44,7 @@ const createInvoice = (code, list, recipient) => {
                     merchant_info: {
                       email: user.email
                     },
-                    billing_info: [
-                      {
-                        email: recipient.email
-                      }
-                    ],
+                    billing_info: [{}],
                     items: list.map(item => ({
                       name: item.item,
                       quantity: 1,
@@ -60,16 +56,21 @@ const createInvoice = (code, list, recipient) => {
                     shipping_info: {},
                     tax_inclusive: true
                   };
+                  if (recipient.email) {
+                    invoice.billing_info[0].email = recipient.email
+                  }
                   if (recipient.phone) {
-                    invoice.shipping_info.phone = {
+                    const phone = {
                       country_code: "001",
                       national_number: recipient.phone
-                    };
+                    }
+                    invoice.billing_info[0].phone = phone
+                    invoice.shipping_info.phone = phone;
                   }
                   if (recipient.name) {
                     const [first, last] = recipient.name.split(" ");
                     invoice.shipping_info.first_name = first;
-                    invoice.shipping_info.last_name = last;
+                    if (last) invoice.shipping_info.last_name = last;
                   }
                   paypal.invoice.create(
                     invoice,
