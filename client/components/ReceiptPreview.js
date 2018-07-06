@@ -102,6 +102,7 @@ class ReceiptPreview extends React.Component {
         <Image source={src} style={styles.img} resizeMode="center" />
         <View style={styles.bottomView}>
           <Button
+            raised
             buttonStyle={styles.button}
             title="Analyze"
             onPress={() => this.analyze()}
@@ -126,7 +127,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#3FA9F5',
-    width: '100%',
+    borderRadius: 5,
+    width: 110
   },
   img: {
     height: 530,
