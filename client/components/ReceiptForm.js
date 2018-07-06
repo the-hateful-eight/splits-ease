@@ -97,7 +97,7 @@ class ReceiptForm extends React.Component {
             <Button style={styles.sendAllBtn} title="Send Without Paypal" onPress={this.sendWithoutPayPal} />
           </View>
           <View style={styles.bottomView}>
-          <Button icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
+          <Button title='Add Friend' icon={{ name: 'add' }} buttonStyle={styles.addBtn} onPress={() => this.props.navigation.navigate('AddFriend')} />
         </View>
         </ScrollView>
       </View>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   addItemBtn: {
-    width: 50,
+    width: 100,
     justifyContent: 'flex-end',
   },
   sendAllBtn: {
