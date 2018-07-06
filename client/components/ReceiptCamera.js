@@ -35,7 +35,7 @@ class ReceiptCamera extends React.Component {
       this.setState({ photo })
       this.props.navigation.navigate('ReceiptPreview', {image: this.state.photo.base64})
     }
-  }
+  };
 
   render() {
     const { hasCameraPermission } = this.state

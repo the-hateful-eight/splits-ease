@@ -99,14 +99,14 @@ class Login extends Component {
 
 const styles = StyleSheet.create({
     logInBtn: {
-        backgroundColor: '#3FA9F5'    
+        backgroundColor: '#3FA9F5'
     },
     container: {
         flex: 1,
         backgroundColor: 'white'
     },
     paddingContainer: {
-        padding: 50
+        padding: 30
     },
     logoPaddingContainer: {
         paddingTop: 100,
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'darkgrey'
     },
     logo: {
-        height: 200,
-        width: 500
+        height: 100,
+        width: 250
     },
     logoContainer: {
         alignItems: 'center',
