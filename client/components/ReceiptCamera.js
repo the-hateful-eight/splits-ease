@@ -31,7 +31,6 @@ class ReceiptCamera extends React.Component {
         quality: 0.4,
         base64: true,
       })
-      console.log('PHOTO CAPTURED!!!')
       this.setState({ photo })
       this.props.navigation.navigate('ReceiptPreview', {image: this.state.photo.base64})
     }
