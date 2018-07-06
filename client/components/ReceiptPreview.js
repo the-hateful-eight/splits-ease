@@ -53,7 +53,7 @@ class ReceiptPreview extends React.Component {
               positions[i + 2].description
             i += 2
           } else {
-            ;[bottomRight, bottomLeft] = box.boundingPoly.vertices.slice(2)
+            [bottomRight, bottomLeft] = box.boundingPoly.vertices.slice(2)
             text = box.description
           }
           left =

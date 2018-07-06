@@ -80,7 +80,7 @@ const createInvoice = (code, list, recipient) => {
                       } else {
                         console.log("invoice sent!");
                         console.log(receipt);
-                        paypal.invoice.send(receipt.id, (sendErr, rv) => {
+                        paypal.invoice.send(receipt.id, { refresh_token: token.refresh_token }, (sendErr, rv) => {
                           console.log(sendErr ? sendErr : rv);
                         });
                       }
