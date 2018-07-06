@@ -1,6 +1,6 @@
 import React from 'react'
 import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
-import { Button, FormLabel, FormInput } from 'react-native-elements'
+import { Button, Card, FormLabel, FormInput } from 'react-native-elements'
 import { connect } from 'react-redux';
 import { editFriend } from '../store/user'
 
@@ -30,6 +30,7 @@ class EditForm extends React.Component {
     const friendData = this.props.navigation.state.params.friendData
     return (
       <KeyboardAvoidingView style={styles.container}>
+        <Card>
         <FormLabel>Name</FormLabel>
         <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={name => this.setState({ name })} value={this.state.name} />
         <FormLabel>Email</FormLabel>
@@ -37,8 +38,14 @@ class EditForm extends React.Component {
         <FormLabel>Phone</FormLabel>
         <FormInput autoCapitalize='none' autoCorrect={false} onChangeText={phone => this.setState({ phone })} value={this.state.phone} />
         <View style={styles.bottomView}>
-          <Button buttonStyle={styles.submitBtn} title='Submit' onPress={() => this.handleSubmit(friendData.id)} />
         </View>
+        </Card>
+        <View style={{height: 15}}/>
+        <Button
+            raised
+            buttonStyle={styles.submitBtn}
+            title='Submit'
+            onPress={() => this.handleSubmit(friendData.id)} />
       </KeyboardAvoidingView>
     )
   }
@@ -49,7 +56,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   submitBtn: {
-    backgroundColor: 'red',
+    borderRadius: 5,
+    backgroundColor: '#3FA9F5',
     width: '100%'
   },
   bottomView: {

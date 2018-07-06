@@ -17,7 +17,8 @@ class ReceiptList extends React.Component {
     ) : (
       <View>
         {receipts.map(receipt => (
-          <ReceiptCard key={receipt.id} receipt={receipt} />
+          <ReceiptCard key={receipt.id} receipt={receipt}
+          />
         ))}
       </View>
     )

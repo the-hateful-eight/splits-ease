@@ -9,6 +9,7 @@ const splitDrawerItem = createStackNavigator({
   Camera: {
     screen: ReceiptCamera,
     navigationOptions: ({ navigation }) => ({
+      title: 'Camera',
       headerLeft: (
           <Icon
             iconStyle={{ paddingLeft: 10 }}
@@ -21,13 +22,22 @@ const splitDrawerItem = createStackNavigator({
       })
   },
   ReceiptPreview: {
-    screen: ReceiptPreview
+    screen: ReceiptPreview,
+    navigationOptions: {
+      headerTitle: 'Receipt Preview'
+  }
   },
   ReceiptForm: {
     screen: ReceiptForm,
+    navigationOptions: {
+      headerTitle: 'Receipt Form'
+  }
   },
   AddFriend: {
     screen: AddFriend,
+    navigationOptions: {
+      headerTitle: 'Add Friends'
+  }
   }
 },
 {
@@ -68,4 +78,5 @@ splitDrawerItem.navigationOptions = {
     />
   ),
 };
+
 export default splitDrawerItem;
