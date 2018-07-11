@@ -1,10 +1,6 @@
-<p align="center">
-  <a href="https://github.com/the-hateful-eight/splits-ease">
-    <img alt="SPLITS/EASE" src="./assets/splits-ease-logo.png" width="450">
-  </a>
-</p>
+### CourtDude
 
-A bill-splitting mobile app for iOS and Android
+CourtDude! Find and join courts in your area!
 
 ## Built With
 
@@ -16,25 +12,21 @@ A bill-splitting mobile app for iOS and Android
 * [Sequelize](http://docs.sequelizejs.com/) - ORM
 * [Expo](https://expo.io/) - React-Native toolchain
 * [Create React Native App](https://github.com/react-community/create-react-native-app) - React-Native boilermaker
-* [React Native Elements](https://react-native-training.github.io/react-native-elements/) - UI Toolkit
-* [Twilio](https://www.twilio.com/docs/usage/api) -API for SMS
-* [Nodemailer](https://nodemailer.com/about/) -Module for sending emails
-* [Google Cloud Vision API](https://cloud.google.com/vision/docs/) -OCR
-* [PayPal API](https://cloud.google.com/vision/docs/) -PayPal RESTful APIs using OAuth 2.0
+* [React Native Maps](https://github.com/react-community/react-native-maps) - MapView component
+* [NYC Directory of Basketball Courts](https://data.cityofnewyork.us/Recreation/Directory-of-Basketball-Courts/b937-zdky) - JSON of courts in NY metro area
 
 ## Authors
 
 * **Sean Lee** - [https://github.com/seanslee92](https://github.com/seanslee92)
-* **Kevin Delvo** - [https://github.com/DevDelvo](https://github.com/DevDelvo)
-* **Matt Contract** - [https://github.com/mcontract27](https://github.com/mcontract27)
-* **Patrick Ng** - [https://github.com/PJLN7](https://github.com/PJLN7)
-* **Reese Eifler** - [https://github.com/ReeseEifler](https://github.com/ReeseEifler)
+* **Daniel Kim** - [https://github.com/danielkjm](https://github.com/danielkjm)
 
 ## Acknowledgments
 
 * [Fullstack Academy](https://www.fullstackacademy.com/) 2018
-* Capstone Project by "The Hateful Eight"
+* Stackathon Project by the "Fullstack Ballerz"
 * FSA-1804 NYC <3
+
+##
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
