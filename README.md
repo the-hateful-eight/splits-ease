@@ -1,3 +1,41 @@
+<p align="center">
+  <a href="https://github.com/the-hateful-eight/splits-ease">
+    <img alt="SPLITS/EASE" src="./assets/splits-ease-logo.png" width="450">
+  </a>
+</p>
+
+A bill-splitting mobile app for iOS and Android
+
+## Built With
+
+* [React](https://reactjs.org/) - Front-end library
+* [React-Native](https://facebook.github.io/react-native/) - Framework for mobile development
+* [Redux](https://redux.js.org/) - State Management
+* [Express](https://expressjs.com/) -Routing/backend
+* [PostgreSQL](https://www.postgresql.org/) - Database
+* [Sequelize](http://docs.sequelizejs.com/) - ORM
+* [Expo](https://expo.io/) - React-Native toolchain
+* [Create React Native App](https://github.com/react-community/create-react-native-app) - React-Native boilermaker
+* [React Native Elements](https://react-native-training.github.io/react-native-elements/) - UI Toolkit
+* [Twilio](https://www.twilio.com/docs/usage/api) -API for SMS
+* [Nodemailer](https://nodemailer.com/about/) -Module for sending emails
+* [Google Cloud Vision API](https://cloud.google.com/vision/docs/) -OCR
+* [PayPal API](https://cloud.google.com/vision/docs/) -PayPal RESTful APIs using OAuth 2.0
+
+## Authors
+
+* **Sean Lee** - [https://github.com/seanslee92](https://github.com/seanslee92)
+* **Kevin Delvo** - [https://github.com/DevDelvo](https://github.com/DevDelvo)
+* **Matt Contract** - [https://github.com/mcontract27](https://github.com/mcontract27)
+* **Patrick Ng** - [https://github.com/PJLN7](https://github.com/PJLN7)
+* **Reese Eifler** - [https://github.com/ReeseEifler](https://github.com/ReeseEifler)
+
+## Acknowledgments
+
+* [Fullstack Academy](https://www.fullstackacademy.com/) 2018
+* Capstone Project by "The Hateful Eight"
+* FSA-1804 NYC <3
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
